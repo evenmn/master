@@ -4,7 +4,7 @@
 \usepackage{verbatim} %for å inkludere filer med tegn LaTeX ikke liker
 \usepackage{tabularx} %for tabeller
 %\usepackage{booktabs} %for flott utforming av tabeller
-%\usepackage{amsmath}  %for mattetegn
+\usepackage{amsmath}  %for mattetegn
 %\usepackage{float}    %for a lase objekt
 %\usepackage{listings} %Implementere kode i PDF
 \usepackage{hyperref} %for URL referanse
@@ -23,7 +23,39 @@
 \end{itemize}
 
 \section{Introduction}
+The aim of this project is to study Hartree-Fock restricted and unrestricted. Many-particle system, the system is defined by the total wave function $|\Phi\rangle=|\phi_1\phi_2\cdot\cdot\cdot\phi_N\rangle$ where $\phi_i$ is a single particle function (SPF). Electrons
 
+\section{Theory}
+Write down some general formulas here, Wave functions for restricted and unrestricted HF ex. 
+\subsection{Energy expression}
+The Hamiltonian of the system is assumed to on the form
+\begin{equation}
+\hat{H}=\hat{h}(i) + \hat{w}(i,j)
+\end{equation}
+where $\hat{h}$ is the kinetic energy operator and $\hat{w}$ is the potential energy. We want to find the total energy of the system, which is given by $\langle \Phi|\hat{H}|\Phi\rangle$. If we consider the kinetic energy, we can easily see that the kinetic energy of particle $i$ is given by $T_i=\langle\phi_i|\hat{h}|\phi_i\rangle$. For the potential it gets more complicated, since we have interaction between all the particles. We also need to make sure that the braket is anti-symmetric as we look at a system of fermions (electrons). For one electron pair $i$ and $j$ we therefore get the potential 
+\begin{equation*}
+V_{i,j}=\frac{1}{2}\langle\phi_i\phi_j|\hat{w}|\phi_i\phi_j-\phi_j\phi_i\rangle
+\end{equation*}
+with negative sign in the ket to get an anti-symmetric braket. Consider now a system of $N+1$ electrons, the total energy is given by
+\begin{equation*}
+\begin{split}
+E=\langle\Phi|(\hat{h}(i) + \hat{w}(i,j))|\Phi\rangle
+=\sum_{i=0}^N\langle\phi_i|\hat{h}|\phi_i\rangle+\frac{1}{2}\sum_{i=0}^N\sum_{\substack{j=0\\j\neq i}}^N\langle\phi_i\phi_j|\hat{w}|\phi_i\phi_j-\phi_j\phi_i\rangle.
+\end{split}
+\end{equation*}
+We can apply this formula to find an expression for the UHF-energy. By plugging in the general for the UHF wave function from above, we obtain
+\begin{align}
+E_{UHF}&=\langle \Phi_{UHF}|\hat{H}|\Phi_{UHF}\rangle\\
+&=\sum_{i,\sigma}\langle\phi_i^{\sigma}|\hat{h}|\phi_i^{\sigma}\rangle+\frac{1}{2}\sum_{i,j,\sigma,\tau}\langle\phi_i^{\sigma}\phi_j^{\tau}|\hat{w}|\phi_i^{\sigma}\phi_j^{\tau}-\phi_j^{\tau}\phi_i^{\sigma}\rangle\\
+&=\sum_{i,\sigma}\langle\phi_i^{\sigma}|\hat{h}|\phi_i^{\sigma}\rangle+\frac{1}{2}\sum_{i,j,\sigma,\tau}\langle\phi_i^{\sigma}\phi_j^{\tau}|\hat{w}|\phi_i^{\sigma}\phi_j^{\tau}\rangle-\frac{1}{2}\sum_{i,j,\sigma}\langle\phi_i^{\sigma}\phi_j^{\sigma}|\hat{w}|\phi_j^{\sigma}\phi_i^{\sigma}\rangle.
+\end{align}
+Note that we do not have a sum over $\tau$ in the last term, but both $\tau$s are replaced by $\sigma$s. This is because the last term represents the exchange energy, and only particles with the same spin can exchange energy. Here we can also see why the anti-symmetric bra needs to have negative sign: fermions cause repulsive "exchange force", and with the standard positive force direction the exchange energy should be negative for fermions. 
+
+\subsection{UHF equations}
+...
+
+\subsection{section3}
+\subsection{Restricted Hartree-Fock}
 
 %\begin{figure}[ht] 
 %  \label{numvsclas} 
