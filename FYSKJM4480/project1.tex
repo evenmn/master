@@ -19,13 +19,31 @@
 
 \begin{itemize}
 \item For the Github repository containing programs and results, follow this link: 
-\url{https://github.com/UiO-INF5620/INF5620-evenmn/tree/master/assignment_3}
+\url{https://github.com/evenmn/master/tree/master/FYSKJM4480/Project1}
 \end{itemize}
 
 \section{Introduction}
-The aim of this project is to study Hartree-Fock restricted and unrestricted. Many-particle system, the system is defined by the total wave function $|\Phi\rangle=|\phi_1\phi_2\cdot\cdot\cdot\phi_N\rangle$ where $\phi_i$ is a single particle function (SPF). Electrons
+The aim of this project is to study Hartree-Fock restricted and unrestricted. Many-particle system, the system is defined by the total Slater determinant $|\Phi\rangle=|\phi_1\phi_2\cdot\cdot\cdot\phi_N\rangle$ where $\phi_i$ is a single particle function (SPF). Electrons
 
 \section{Theory}
+For both RHF and UHF we can split up the wave function in a spin part and a position part:
+
+\begin{equation}
+\phi_{p,\sigma}(x)=\varphi_p(\vec{r})\chi_{\sigma}(s)
+\end{equation}
+where each orbit $\varphi$ is double occupied.
+\begin{equation}
+|\Phi_{RHF}\rangle=|\phi_{1\uparrow}\phi_{1\downarrow}\cdot\cdot\cdot\phi_{N\uparrow}\phi_{N\downarrow}\rangle=|\varphi_1\cdot\cdot\cdot\varphi_N\bar{\varphi}_1\cdot\cdot\cdot\bar{\varphi}_N\rangle
+\end{equation}
+
+\begin{equation}
+\phi_{p,\sigma}(x)=\varphi_p^{\sigma}(\vec{r})\chi_{\sigma}(s)
+\end{equation}
+Total Slater determinant:
+\begin{equation}
+|\Phi_{RHF}\rangle=|\varphi_1^{\uparrow}\cdot\cdot\cdot\varphi_{N\uparrow}^{\uparrow}\bar{\varphi}_1^{\downarrow}\cdot\cdot\cdot\bar{\varphi}_{N\downarrow}^{\downarrow}\rangle
+\end{equation}
+
 Write down some general formulas here, Wave functions for restricted and unrestricted HF ex. 
 \subsection{Energy expression}
 The Hamiltonian of the system is assumed to on the form
@@ -43,19 +61,29 @@ E=\langle\Phi|(\hat{h}(i) + \hat{w}(i,j))|\Phi\rangle
 =\sum_{i=0}^N\langle\phi_i|\hat{h}|\phi_i\rangle+\frac{1}{2}\sum_{i=0}^N\sum_{\substack{j=0\\j\neq i}}^N\langle\phi_i\phi_j|\hat{w}|\phi_i\phi_j-\phi_j\phi_i\rangle.
 \end{split}
 \end{equation*}
-We can apply this formula to find an expression for the UHF-energy. By plugging in the general for the UHF wave function from above, we obtain
+We can apply this formula to find an expression for the UHF-energy. By plugging in the general UHF wave function from above, we obtain
 \begin{align}
 E_{UHF}&=\langle \Phi_{UHF}|\hat{H}|\Phi_{UHF}\rangle\\
-&=\sum_{i,\sigma}\langle\phi_i^{\sigma}|\hat{h}|\phi_i^{\sigma}\rangle+\frac{1}{2}\sum_{i,j,\sigma,\tau}\langle\phi_i^{\sigma}\phi_j^{\tau}|\hat{w}|\phi_i^{\sigma}\phi_j^{\tau}-\phi_j^{\tau}\phi_i^{\sigma}\rangle\\
-&=\sum_{i,\sigma}\langle\phi_i^{\sigma}|\hat{h}|\phi_i^{\sigma}\rangle+\frac{1}{2}\sum_{i,j,\sigma,\tau}\langle\phi_i^{\sigma}\phi_j^{\tau}|\hat{w}|\phi_i^{\sigma}\phi_j^{\tau}\rangle-\frac{1}{2}\sum_{i,j,\sigma}\langle\phi_i^{\sigma}\phi_j^{\sigma}|\hat{w}|\phi_j^{\sigma}\phi_i^{\sigma}\rangle.
+&=\sum_{i,\sigma}\langle\varphi_i^{\sigma}|\hat{h}|\varphi_i^{\sigma}\rangle+\frac{1}{2}\sum_{i,j,\sigma,\tau}\langle\varphi_i^{\sigma}\varphi_j^{\tau}|\hat{w}|\varphi_i^{\sigma}\varphi_j^{\tau}-\varphi_j^{\tau}\varphi_i^{\sigma}\rangle\\
+&=\sum_{i,\sigma}\langle\varphi_i^{\sigma}|\hat{h}|\varphi_i^{\sigma}\rangle+\frac{1}{2}\sum_{i,j,\sigma,\tau}\langle\varphi_i^{\sigma}\varphi_j^{\tau}|\hat{w}|\varphi_i^{\sigma}\varphi_j^{\tau}\rangle-\frac{1}{2}\sum_{i,j,\sigma}\langle\varphi_i^{\sigma}\varphi_j^{\sigma}|\hat{w}|\varphi_j^{\sigma}\varphi_i^{\sigma}\rangle.
 \end{align}
 Note that we do not have a sum over $\tau$ in the last term, but both $\tau$s are replaced by $\sigma$s. This is because the last term represents the exchange energy, and only particles with the same spin can exchange energy. Here we can also see why the anti-symmetric bra needs to have negative sign: fermions cause repulsive "exchange force", and with the standard positive force direction the exchange energy should be negative for fermions. 
 
 \subsection{UHF equations}
 ...
 
-\subsection{section3}
+\subsection{Roothan-Hall equations}
 \subsection{Restricted Hartree-Fock}
+With the restrictions $U=U^{\uparrow}=U^{\downarrow}$ and $N=N^{\uparrow}=N^{\downarrow}$ the UHF equations are still valid. The Roothan-Hall equation for RHF is
+\begin{equation}
+F(D)U=SU\epsilon
+\end{equation}
+where the Fock-operator is $F=h+J(D)-1/2K(D)$ and the density matrix reads $D=2U_{occ}U_{occ}^H$.
+Similarly for UHF we have the Roothan-Hall equation
+\begin{equation}
+F^{\sigma}(D^{\uparrow},D^{\downarrow})U^{\sigma}=SU^{\sigma}\epsilon^{\sigma}
+\end{equation}
+with $F=h+J(D^{\uparrow}+D^{\downarrow})-K(D^{\sigma})$ and $D=U_{occ}^{\uparrow}(U_{occ}^{\uparrow})^H+U_{occ}^{\downarrow}(U_{occ}^{\downarrow})^H$. As we can see, RHF is like a more general version of UHF with $D^{\uparrow}=D^{\downarrow}=D$ and $U_{occ}^{\uparrow}=U_{occ}^{\downarrow}=U$, and a solution of RHF Roothan-Hall equations will therefore also be a solution of the UHF Roothan-Hall equations. 
 
 %\begin{figure}[ht] 
 %  \label{numvsclas} 
