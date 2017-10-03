@@ -63,14 +63,21 @@ E=\langle\Phi|(\hat{h}(i) + \hat{w}(i,j))|\Phi\rangle
 \end{equation*}
 We can apply this formula to find an expression for the UHF-energy. By plugging in the general UHF wave function from above, we obtain
 \begin{align}
-E_{UHF}&=\langle \Phi_{UHF}|\hat{H}|\Phi_{UHF}\rangle\\
-&=\sum_{i,\sigma}\langle\varphi_i^{\sigma}|\hat{h}|\varphi_i^{\sigma}\rangle+\frac{1}{2}\sum_{i,j,\sigma,\tau}\langle\varphi_i^{\sigma}\varphi_j^{\tau}|\hat{w}|\varphi_i^{\sigma}\varphi_j^{\tau}-\varphi_j^{\tau}\varphi_i^{\sigma}\rangle\\
+E_{UHF}&=\langle \Phi_{UHF}|\hat{H}|\Phi_{UHF}\rangle\notag\\
+&=\sum_{i,\sigma}\langle\varphi_i^{\sigma}|\hat{h}|\varphi_i^{\sigma}\rangle+\frac{1}{2}\sum_{i,j,\sigma,\tau}\langle\varphi_i^{\sigma}\varphi_j^{\tau}|\hat{w}|\varphi_i^{\sigma}\varphi_j^{\tau}-\varphi_j^{\tau}\varphi_i^{\sigma}\rangle\notag\\
 &=\sum_{i,\sigma}\langle\varphi_i^{\sigma}|\hat{h}|\varphi_i^{\sigma}\rangle+\frac{1}{2}\sum_{i,j,\sigma,\tau}\langle\varphi_i^{\sigma}\varphi_j^{\tau}|\hat{w}|\varphi_i^{\sigma}\varphi_j^{\tau}\rangle-\frac{1}{2}\sum_{i,j,\sigma}\langle\varphi_i^{\sigma}\varphi_j^{\sigma}|\hat{w}|\varphi_j^{\sigma}\varphi_i^{\sigma}\rangle.
+\label{eq:Euhf}
 \end{align}
 Note that we do not have a sum over $\tau$ in the last term, but both $\tau$s are replaced by $\sigma$s. This is because the last term represents the exchange energy, and only particles with the same spin can exchange energy. Here we can also see why the anti-symmetric bra needs to have negative sign: fermions cause repulsive "exchange force", and with the standard positive force direction the exchange energy should be negative for fermions. 
 
 \subsection{UHF equations}
-...
+NEED TO DO 2A
+
+Recall the UHF energy from equation (\ref{eq:Euhf}) and write out $\delta E_{UHF}$:
+\begin{align}
+\delta E_{UHF} &=\sum_{i,\sigma}\langle\delta\varphi_i^{\sigma}|\hat{h}|\varphi_i^{\sigma}\rangle+\frac{1}{2}\sum_{i,j,\sigma,\tau}\langle\delta\varphi_i^{\sigma}\varphi_j^{\tau}|\hat{w}|\varphi_i^{\sigma}\varphi_j^{\tau}\rangle\\
+&-\frac{1}{2}\sum_{i,j,\sigma}\langle\delta\varphi_i^{\sigma}\varphi_j^{\sigma}|\hat{w}|\varphi_j^{\sigma}\varphi_i^{\sigma}\rangle\notag.
+\end{align}
 
 \subsection{Roothan-Hall equations}
 \subsection{Restricted Hartree-Fock}
