@@ -47,10 +47,8 @@ def call_psi4(mol_spec, extra_opts = {}):
     Enuc = mol.nuclear_repulsion_energy()
 
     # We're done, return.
-    return SCF_E_psi4, Enuc, H,W,S, nbf, nalpha, nbeta
+    return SCF_E_psi4, Enuc, H, W, S, nbf, nalpha, nbeta
 
-
-# === UHF ===
 
 def density_matrix(U, N, noise=False):
     '''
@@ -75,11 +73,21 @@ def J_matrix(D, W):
 def K_matrix(D, W):
     '''K(D)_pq = sum_rs (ps|rq) D_sr     Using Mulliken notation'''
     return np.einsum('psrq, sr->pq', W, D)
+
+def plot_energy_spectrum(e):
+    '''Plots a horizontal energy spectrum for the molecule'''
+    for e_ in e:
+        plt.axhline(e_, linewidth=0.5)
+    plt.title('Energy spectrum for $H_2O$')
+    plt.ylabel('Energy, [Hartree]')
+    plt.show()
     
+
+# === UHF ===    
     
-def uhf_fock_matrices(H, W, D_up, D_dn):
+def UHF_Fock_matrices(H, W, D_up, D_dn):
     '''
-    Constructing the fock operators
+    Constructing the fock matrices
     F_up = h + J(D_up + D_dn) - K(D_up),
     F_dn = h + J(D_up + D_dn) - K(D_dn)
     given the Hamiltonian H, the matrix
@@ -90,42 +98,15 @@ def uhf_fock_matrices(H, W, D_up, D_dn):
     K_up = K_matrix(D_up, W)
     K_dn = K_matrix(D_dn, W)
     
-    F_up = H + J + K_up
-    F_dn = H + J + K_dn
+    F_up = H + J - K_up
+    F_dn = H + J - K_dn
     return F_up, F_dn
-    
-    
-def UHF_SCF_solver(mol_geo, plot=False):
-    SCF_E_psi4, Enuc, H, W, S, nbf, n_up, n_dn = \
-    call_psi4(mol_geo, extra_opts = {}) 
-    
-    # Need to find U by solving the generalized eigenvalue problem He=uSe
-    e, u = eigh(H, S)
-    D_up = density_matrix(u, n_up)
-    D_dn = density_matrix(u, n_dn)
-    F_up, F_dn = uhf_fock_matrices(H, W, D_up, D_dn)
-
-    # Again we have generalized eigenvalue problem 
-    epsilon_up = eigh(F_up, S, eigvals_only=True)
-    epsilon_dn = eigh(F_dn, S, eigvals_only=True)
-    
-    # Energy calculations 
-    print('Calculated UHF_energy:   ', UHF_energy(D_up, D_dn, H, W))
-    print('Exact UHF_energy (Psi4): ', SCF_E_psi4)
-    
-    # Plots the eigenvalues as a energy spectrum
-    if plot:
-        plot_energy_spectrum(epsilon_up, epsilon_dn)
-    
-    return None
 
 
 def UHF_energy(D_up, D_dn, H, W):
     '''
     Use theory from section 2.1
     E_UHF = Fock_energy (E_F) + Hartree_energy (E_H) - Exchange_energy (E_EX)
-    J(D)_{pq} = sum_{rs}(pq|rs)D_{sr}
-    K(D)_{pq} = sum_{rs}(ps|rq)D_{sr}
     '''
     J_up = J_matrix(D_up, W)
     J_dn = J_matrix(D_dn, W)
@@ -151,22 +132,101 @@ def UHF_energy(D_up, D_dn, H, W):
               + np.einsum('pq, qp->', K_dn, D_dn))
               
     return E_F + E_H - E_EX
+   
     
     
-def plot_energy_spectrum(e_up, e_dn):
-    '''Plots a horizontal energy spectrum for mol_geo'''
-    for e in e_up:
-        plt.axhline(e, linewidth=0.5)
-    plt.title('Energy spectrum for $H_2O$')
-    plt.ylabel('Energy, [Hartree]')
-    plt.show()
+def UHF_SCF_solver(mol_spec, plot=False):
+    SCF_E_psi4, Enuc, H, W, S, nbf, n_up, n_dn = \
+    call_psi4(mol_spec, extra_opts = {}) 
+    
+    # Need to find U by solving the generalized eigenvalue problem He=uSe
+    e, u = eigh(H, S)
+    D_up = density_matrix(u, n_up, noise=False)
+    D_dn = density_matrix(u, n_dn, noise=False)
+    F_up, F_dn = UHF_Fock_matrices(H, W, D_up, D_dn)
+
+    # Again we have a generalized eigenvalue problem, namely Fu=Su epsilon
+    epsilon_up = eigh(F_up, S, eigvals_only=True)
+    epsilon_dn = eigh(F_dn, S, eigvals_only=True)
+    
+    # Energy calculations 
+    print('\nCalculated UHF_energy:   ', UHF_energy(D_up, D_dn, H, W) + Enuc)
+    print('Exact UHF_energy (Psi4): ', SCF_E_psi4)
+    
+    # Plots the eigenvalues as a energy spectrum
+    if plot:
+        plot_energy_spectrum(epsilon_up)
+
+
+# === RHF ===
+
+def RHF_Fock_matrix(H, W, D):
+    '''
+    Constructing the fock matrix
+    F = h + J(D) - 1/2 K(D),
+    given the Hamiltonian H, the matrix
+    W, and the density matrix D
+    '''
+    J = J_matrix(D, W)
+    K = K_matrix(D, W)
+    
+    F = H + J - 0.5 * K
+    return F
+    
+    
+def RHF_energy(H, W, D):
+    '''
+    Use theory from section 2.1
+    E_RHF = Fock_energy (E_F) + Hartree_energy (E_H) - Exchange_energy (E_EX)
+    '''
+    J = J_matrix(D, W)
+    K = K_matrix(D, W)
+    
+    # F = h + J(D) - 1/2 K(D)
+    F = H + J_matrix(D, W) - 0.5 * K
+    
+    # E_F = sum_{i,s}(phi_i^s|h|phi_i^s)
+    E_F =   np.einsum('pq, qp->', F, D) #\
+          #+ np.einsum('pq, qp->', F, D)
+    
+    # E_H = 1/2 sum (ii|jj) - Sum over all possible combinations of J, D
+    E_H =  0.5*(np.einsum('pq, qp->', J, D))#\
+              #+ np.einsum('pq, qp->', J, D)\
+              #+ np.einsum('pq, qp->', J, D)\
+              #+ np.einsum('pq, qp->', J, D))
+
+    # E_H = 1/2 sum (ii|jj) - Sum over all possible combinations of J^s, D^s
+    E_EX = 0.5*(np.einsum('pq, qp->', K, D))#\
+              #+ np.einsum('pq, qp->', K, D))
+              
+    return E_F + E_H - E_EX
+
+def RHF_SCF_solver(mol_spec, plot=False):
+    SCF_E_psi4, Enuc, H, W, S, nbf, n_up, n_dn = \
+    call_psi4(mol_spec, extra_opts = {}) 
+    
+    # Need to find U by solving the generalized eigenvalue problem He=uSe
+    e, u = eigh(H, S)
+    D = density_matrix(u, nbf, noise=False)
+    F = RHF_Fock_matrix(H, W, D)
+
+    # Again we have a generalized eigenvalue problem, namely Fu=Su epsilon
+    epsilon = eigh(F, S, eigvals_only=True)
+    
+    # Energy calculations 
+    print('\nCalculated RHF_energy:   ', RHF_energy(H, W, D) + Enuc)
+    print('Exact RHF_energy (Psi4): ', SCF_E_psi4)
+    
+    # Plots the eigenvalues as a energy spectrum
+    if plot:
+        plot_energy_spectrum(epsilon_up, epsilon_dn)    
     
 if __name__ == '__main__':
     pass
 
 # Water
-r_h2o = 1.809
-theta_h2o = 104.59
+r_h2o = 1.84
+theta_h2o = 104.5
 
 h2o = """
         O
@@ -187,4 +247,4 @@ h2 = """
     units bohr
 """ .format(r_h2)
 
-UHF_SCF_solver(h2o, plot=True)
+RHF_SCF_solver(h2o)
