@@ -49,6 +49,57 @@ def call_psi4(mol_spec, extra_opts = {}):
     # We're done, return.
     return SCF_E_psi4, Enuc, H,W,S, nbf, nalpha, nbeta
 
+
+def density(U, N):
+    '''
+    Density matrix where U is 
+    occupied and N is the number of 
+    occupied states
+    '''
+    U = np.matrix(U[:,:N])
+    D = np.dot(U, U.H)
+    return D
+    
+    
+def fock_operator(H, W, D_up, D_dn):
+    '''
+    Constructing the fock operators
+    F_up = h + J(D_up + D_dn) - K(D_up),
+    F_dn = h + J(D_up + D_dn) - K(D_dn)
+    given the Hamiltonian H, the matrix
+    W, and the density matrices D_up
+    and D_down
+    '''
+    # J(D)_pq = sum_rs (pq|rs) D_sr     Using Mulliken notation
+    J = np.einsum('pqrs, sr->pq', W, D_up + D_dn)
+    
+    # K(D)_pq = sum_rs (ps|rq) D_sr     Using Mulliken notation
+    K_up = np.einsum('psrq, sr->pq', W, D_up)
+    K_dn = np.einsum('psrq, sr->pq', W, D_dn)
+    
+    F_up = H + J + K_up
+    F_dn = H + J + K_dn
+    return F_up, F_dn
+    
+    
+def UHF_solver(mol_geo):
+    SCF_E_psi4, Enuc, H, W, S, nbf, n_up, n_dn = \
+    call_psi4(mol_geo, extra_opts = {}) 
+    
+    # Need to find U by solving the generalized eigenvalue problem He=uSe
+    e, u = eigh(H, S)
+    D_up = density(u, n_up)
+    D_dn = density(u, n_dn)
+    F_up, F_dn = fock_operator(H, W, D_up, D_dn)
+
+    # Again we have generalized eigenvalue problem 
+    epsilon_up, u_up = eigh(F_up, S)
+    epsilon_dn, u_dn = eigh(F_dn, S)
+    return SCF_E_psi4, epsilon_up, epsilon_dn
+
+if __name__ == '__main__':
+    pass
+
 # Water
 r_h2o = 1.809
 theta_h2o = 104.59
@@ -72,44 +123,5 @@ h2 = """
     units bohr
 """ .format(r_h2)
 
-SCF_E_psi4, Enuc, H, W, S, nbf, n_up, n_dn = call_psi4(h2o, extra_opts = {})
-
-def density(U, N):
-    '''
-    Density matrix where U is 
-    occupied and N is the number of 
-    occupied states
-    '''
-    U = np.matrix(U[:,:N])
-    D = np.dot(U, U.H)
-    return D
-    
-def fock_operator(H, W, D_up, D_dn):
-    '''
-    Constructing the fock operators
-    F_up = h + J(D_up + D_dn) - K(D_up),
-    F_dn = h + J(D_up + D_dn) - K(D_dn)
-    given the Hamiltonian H, the matrix
-    W, and the density matrices D_up
-    and D_down
-    '''
-    # J(D)_pq = sum_rs (pq|rs) D_sr     Using Mulliken notation
-    J = np.einsum('pqrs, sr->pq', W, D_up + D_dn)
-    
-    # K(D)_pq = sum_rs (ps|rq) D_sr     Using Mulliken notation
-    K_up = np.einsum('psrq, sr->pq', W, D_up)
-    K_dn = np.einsum('psrq, sr->pq', W, D_dn)
-    
-    F_up = H + J + K_up
-    F_dn = H + J + K_dn
-    return F_up, F_dn
-    
-# Need to find U by solving the generalized eigenvalue problem He=uSe
-e, u = eigh(H, S)
-D_up = density(u, n_up)
-D_dn = density(u, n_dn)
-F_up, F_dn = fock_operator(H, W, D_up, D_dn)
-
-# Need to find 
-epsilon_up, u_up = eigh(F_up, S)
-epsilon_dn, u_dn = eigh(F_dn, S)
+psi4_energy, e_up, e_dn = UHF_solver(h2o)
+print(psi4_energy)
