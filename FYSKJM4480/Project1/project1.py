@@ -58,6 +58,8 @@ def density_matrix(U, N, noise=False):
     '''
     U = np.matrix(U[:,:N])
     D = np.dot(U, U.H)      # D is a symmetric matrix
+    
+    # Random Hermitian noise
     if noise:
         X = np.random.rand(len(U), len(U[0]))
         X = X + np.transpose(X)
@@ -127,27 +129,31 @@ def UHF_energy(D_up, D_dn, H, W):
               + np.einsum('pq, qp->', J_dn, D_up)\
               + np.einsum('pq, qp->', J_dn, D_dn))
 
-    # E_H = 1/2 sum (ii|jj) - Sum over all possible combinations of J^s, D^s
+    # E_H = 1/2 sum (ii|jj) - Sum over all possible combinations of K^s, D^s
     E_EX = 0.5*(np.einsum('pq, qp->', K_up, D_up)\
               + np.einsum('pq, qp->', K_dn, D_dn))
               
     return E_F + E_H - E_EX
-   
+
     
     
-def UHF_SCF_solver(mol_spec, plot=False):
+def UHF_SCF_solver(mol_spec, tol=1e-1, theta = 0.5, plot=False):
     SCF_E_psi4, Enuc, H, W, S, nbf, n_up, n_dn = \
-    call_psi4(mol_spec, extra_opts = {}) 
+    call_psi4(mol_spec, {'reference' : 'uhf'}) 
     
     # Need to find U by solving the generalized eigenvalue problem He=uSe
     e, u = eigh(H, S)
+    
     D_up = density_matrix(u, n_up, noise=False)
     D_dn = density_matrix(u, n_dn, noise=False)
     F_up, F_dn = UHF_Fock_matrices(H, W, D_up, D_dn)
 
     # Again we have a generalized eigenvalue problem, namely Fu=Su epsilon
-    epsilon_up = eigh(F_up, S, eigvals_only=True)
-    epsilon_dn = eigh(F_dn, S, eigvals_only=True)
+    e_up = eigh(F_up, S, eigvals_only=True)
+    e_dn = eigh(F_dn, S, eigvals_only=True)
+    
+    # Self-Consistent Field (SCF) iterations
+    
     
     # Energy calculations 
     print('\nCalculated UHF_energy:   ', UHF_energy(D_up, D_dn, H, W) + Enuc)
@@ -186,32 +192,30 @@ def RHF_energy(H, W, D):
     F = H + J_matrix(D, W) - 0.5 * K
     
     # E_F = sum_{i,s}(phi_i^s|h|phi_i^s)
-    E_F =   np.einsum('pq, qp->', F, D) #\
-          #+ np.einsum('pq, qp->', F, D)
+    E_F =   np.einsum('pq, qp->', F, D)
     
     # E_H = 1/2 sum (ii|jj) - Sum over all possible combinations of J, D
-    E_H =  0.5*(np.einsum('pq, qp->', J, D))#\
-              #+ np.einsum('pq, qp->', J, D)\
-              #+ np.einsum('pq, qp->', J, D)\
-              #+ np.einsum('pq, qp->', J, D))
+    E_H =  0.5*np.einsum('pq, qp->', J, D)
 
     # E_H = 1/2 sum (ii|jj) - Sum over all possible combinations of J^s, D^s
-    E_EX = 0.5*(np.einsum('pq, qp->', K, D))#\
-              #+ np.einsum('pq, qp->', K, D))
+    E_EX = 0.5*np.einsum('pq, qp->', K, D)
               
     return E_F + E_H - E_EX
 
 def RHF_SCF_solver(mol_spec, plot=False):
     SCF_E_psi4, Enuc, H, W, S, nbf, n_up, n_dn = \
-    call_psi4(mol_spec, extra_opts = {}) 
+    call_psi4(mol_spec, {'reference' : 'rhf'}) 
     
     # Need to find U by solving the generalized eigenvalue problem He=uSe
     e, u = eigh(H, S)
-    D = density_matrix(u, nbf, noise=False)
+    D = density_matrix(u, n_up, noise=False)
     F = RHF_Fock_matrix(H, W, D)
 
     # Again we have a generalized eigenvalue problem, namely Fu=Su epsilon
     epsilon = eigh(F, S, eigvals_only=True)
+    
+    # Self-Consistent field iterations
+    
     
     # Energy calculations 
     print('\nCalculated RHF_energy:   ', RHF_energy(H, W, D) + Enuc)
@@ -226,7 +230,7 @@ if __name__ == '__main__':
 
 # Water
 r_h2o = 1.84
-theta_h2o = 104.5
+angle_h2o = 104
 
 h2o = """
         O
@@ -234,10 +238,10 @@ h2o = """
         H 1 {0} 2 {1}
         symmetry c1
         units bohr
-""" .format(r_h2o, theta_h2o)
+""" .format(r_h2o, angle_h2o)
 
 # Hydrogen
-r_h2 = 2.0
+r_h2 = 5.0
 
 h2 = """
     0 1
@@ -247,4 +251,4 @@ h2 = """
     units bohr
 """ .format(r_h2)
 
-RHF_SCF_solver(h2o)
+UHF_SCF_solver(h2o)
