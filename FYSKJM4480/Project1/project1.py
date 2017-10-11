@@ -153,7 +153,7 @@ def UHF_SCF_solver(mol_spec, tol=1e-1, theta = 0.5, plot=False):
     e_dn = eigh(F_dn, S, eigvals_only=True)
     
     # Self-Consistent Field (SCF) iterations
-    
+    '''Did not manage to make the SCF interaction loop correctly'''
     
     # Energy calculations 
     print('\nCalculated UHF_energy:   ', UHF_energy(D_up, D_dn, H, W) + Enuc)
@@ -214,8 +214,8 @@ def RHF_SCF_solver(mol_spec, plot=False):
     # Again we have a generalized eigenvalue problem, namely Fu=Su epsilon
     epsilon = eigh(F, S, eigvals_only=True)
     
-    # Self-Consistent field iterations
-    
+    # Self-Consistent field (SCF) iterations
+    '''Did not manage to make the SCF interaction loop correctly'''
     
     # Energy calculations 
     print('\nCalculated RHF_energy:   ', RHF_energy(H, W, D) + Enuc)
@@ -251,4 +251,11 @@ h2 = """
     units bohr
 """ .format(r_h2)
 
+print('\nUHF $H_2O$: ')
 UHF_SCF_solver(h2o)
+print('\nRHF $H_2O$: ')
+RHF_SCF_solver(h2o)
+print('\nUHF $H_2$:  ')
+UHF_SCF_solver(h2)
+print('\nRHF $H_2$:  ')
+RHF_SCF_solver(h2)
