@@ -1,0 +1,97 @@
+\documentclass[norsk,a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} %for å inkludere grafikk
+\usepackage{verbatim} %for å inkludere filer med tegn LaTeX ikke liker
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{hyperref}
+%\usepackage{subfigure}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{color}
+
+\lstset{language=python}
+\lstset{basicstyle=\small}
+\lstset{backgroundcolor=\color{white}}
+\lstset{frame=single}
+\lstset{stringstyle=\ttfamily}
+\lstset{keywordstyle=\color{red}\bfseries}
+\lstset{commentstyle=\itshape\color{blue}}
+\lstset{showspaces=false}
+\lstset{showstringspaces=false}
+\lstset{showtabs=false}
+\lstset{breaklines}
+\lstset{postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}}
+%\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+%\titleformat{\paragraph}
+%{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+%\titlespacing*{\paragraph}
+%{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+
+\title{FYS-KJM4480 - Quantum mechanics for many-particle systems \\\vspace{2mm} \Large{Project 2}}
+\author{\large Even Marius Nordhagen}
+\date\today
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+\item For the Github repository containing programs and results, follow this link: 
+\url{https://github.com/UiO-INF5620/INF5620-evenmn/tree/master/project_2}
+\end{itemize}
+
+\section{Introduction}
+Words for motivation
+\newpage
+\section{Theory}
+Here I should present all the important equations
+
+\section{Exercise 1}
+\subsection{h}
+\begin{equation}
+\hat{H}=\hat{H_0}+\hat{V}
+\end{equation}
+We use equation ... and ..., and get
+\begin{align}
+\hat{V}&=-\frac{1}{2}g\sum_{pq}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}\notag\\
+&=-\frac{1}{2}g\sum_{p}^Mc_{p+}^{\dagger}c_{p-}^{\dagger}\sum_q^Mc_{q-}c_{q+}\notag\\
+&=-\frac{1}{2}g\bigg(\sum_{p=1}^4\hat{P}_p^{\dagger}\bigg)\bigg(\sum_{q=1}^4\hat{P}_q\bigg)
+\end{align}
+Similarly we get
+\begin{align}
+\hat{H_0}&=\sum_{p\sigma}\varepsilon_pc_{p\sigma}^{\dagger}c_{p\sigma}\notag\\
+&=\sum_p(p-1)\sum_{\sigma}c_{p\sigma}^{\dagger}c_{p\sigma}\notag\\
+&=\sum_p(p-1)\hat{n}_p.
+\end{align}
+Thus we end up with
+\begin{equation}
+\hat{H}=\sum_p(p-1)\hat{n}_p-\frac{1}{2}g\bigg(\sum_{p=1}^4\hat{P}_p^{\dagger}\bigg)\bigg(\sum_{q=1}^4\hat{P}_q\bigg)
+\end{equation}
+
+\section{Garbage} 
+\begin{table} [H]
+\centering
+\caption{This table represents the error when solving the system for a constant solution. }
+\begin{tabularx}{\textwidth}{XXXX} \hline
+\label{tab:constant_error}
+Elements & 1D & 2D & 3D \\ \hline
+P1 & 2.77555756e-15 & 3.55271367e-15 & 2.60902410e-14 \\
+P2 & 1.26343380e-13 & 1.39666056e-13 & 8.69304628e-14 \\ \hline
+\end{tabularx}
+\end{table}
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=100mm]{constant_solution_2.png}
+%\caption{This figure shows the numerical solution of the constant function in 2 dimensions \label{fig:constant_error_2}}
+%\end{figure}
+ 
+
+\end{document}
