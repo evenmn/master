@@ -12,7 +12,7 @@
 \usepackage{subcaption}
 \usepackage{caption}
 \usepackage{color}
-\usepackage[sep=3pt, offset=1.0em]{simpler-wick}
+\usepackage[sep=3pt, offset=0.8em]{simpler-wick}
 
 \lstset{language=python}
 \lstset{basicstyle=\small}
@@ -62,7 +62,7 @@ Here I should present all the important equations
 Will only include terms which contribute, and we obtain
 \begin{align}
 \hat{P}_p\hat{P}_q^{\dagger}&=c_{p-}c_{p+}c_{q+}^{\dagger}c_{q-}^{\dagger}\notag\\
-&=\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}+\{\wick{\c c_{p-}c_{p+}c_{q+}^{\dagger}\c c_{q-}^{\dagger}}\}+\{\wick{c_{p-}\c c_{p+}\c c_{q+}^{\dagger}c_{q-}^{\dagger}}\}+\{\wick{\c1 c_{p-}\c2 c_{p+}\c2 c_{q+}^{\dagger}\c1 c_{q-}^{\dagger}}\}\notag\\
+&=\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}+\{\wick{\c c_{p-}c_{p+}c_{q+}^{\dagger}\c c_{q-}^{\dagger}}\}+\{\wick{c_{p-}\c c_{p+}\c c_{q+}^{\dagger}c_{q-}^{\dagger}}\}+\{\wick{\c2 c_{p-}\c1 c_{p+}\c1 c_{q+}^{\dagger}\c2 c_{q-}^{\dagger}}\}\notag\\
 &=\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}-\delta_{p-q-}c_{p+}c_{q+}^{\dagger}-\delta_{p+q+}c_{p-}c_{q-}^{\dagger}+\delta_{p+q+}\delta_{p-q-}
 \end{align}
 due to Wick's theorem. Several terms vanish since a delta function of operators of opposite spin does not contribute, i.e. $\delta_{p+q-}=0$. Calculating $\hat{P}_q^{\dagger}\hat{P}_p$ is a simple task:
@@ -76,6 +76,37 @@ Furthermore we will omit the spin in delta functions, because it does not affect
 &=\delta_{pq}(1-\hat{n}_q)
 \end{align}
 
+\subsection{e}
+We have $N=4$, thus 
+\begin{align}
+|\Phi\rangle&=c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}|-\rangle\\
+&=\hat{P}_1^{\dagger}\hat{P}_2^{\dagger}|-\rangle.
+\end{align}
+$M$ is the number of states, with $p$ as an index
+\begin{align}
+\hat{P}&=\sum_{p=1}^M\hat{P}_p^{\dagger}\hat{P}_p\\
+&=\hat{P}_1^{\dagger}\hat{P}_1+\hat{P}_2^{\dagger}\hat{P}_2+\hat{P}_3^{\dagger}\hat{P}_3+\hat{P}_4^{\dagger}\hat{P}_4
+\end{align}
+since $M=4$. 
+\begin{align}
+\hat{P}|\Phi\rangle&=\Big(\hat{P}_1^{\dagger}\hat{P}_1\hat{P}_1^{\dagger}\hat{P}_2^{\dagger}+\hat{P}_2^{\dagger}\hat{P}_2\hat{P}_1^{\dagger}\hat{P}_2^{\dagger}+...\Big)|-\rangle\\
+&=\Big(\delta_{11}\hat{P}_1^{\dagger}\hat{P}_2^{\dagger}+\delta_{22}\hat{P}_1^{\dagger}\hat{P}_2^{\dagger}\Big)|-\rangle\\
+&=2|\Phi\rangle
+\end{align}
+where the two last terms in $\hat{P}$ do not contribute since $|\Phi\rangle$ does not contain creation operators with index 3 or 4. This computation was quite short since we could replace all operators with $\hat{P}$ which is not always the case, something we will see when calculating $\hat{S}_z|\Phi\rangle$.
+\begin{align}
+\hat{S}_z=&\frac{1}{2}\sum_{p\sigma}\sigma c_{p\sigma}^{\dagger}c_{p\sigma}\\
+=&\frac{1}{2}\Big(c_{1+}^{\dagger}c_{1+}-c_{1-}^{\dagger}c_{1-}+c_{2+}^{\dagger}c_{2+}-c_{2-}^{\dagger}c_{2-}+\notag\\
+&c_{3+}^{\dagger}c_{3+}-c_{3-}^{\dagger}c_{3-}+c_{4+}^{\dagger}c_{4+}-c_{4-}^{\dagger}c_{4-}\Big)|-\rangle
+\end{align}
+\begin{align}
+\hat{S}_z|\Phi\rangle=&\frac{1}{2}\Big(c_{1+}^{\dagger}c_{1+}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}-c_{1-}^{\dagger}c_{1-}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}\notag\\
+&+c_{2+}^{\dagger}c_{2+}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}-c_{2-}^{\dagger}c_{2-}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}\Big)|-\rangle\\
+=&\frac{1}{2}\Big(\delta_{1+1+}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}-\delta_{1-1-}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}\notag\\\
+&+\delta_{2+2+}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}-\delta_{2-2-}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}\Big)|-\rangle\\
+=&\frac{1}{2}(1-1+1-1)|\Phi\rangle\\
+=&0|\Phi\rangle
+\end{align}
 
 \subsection{h}
 \begin{equation}
