@@ -12,6 +12,7 @@
 \usepackage{subcaption}
 \usepackage{caption}
 \usepackage{color}
+\usepackage[sep=3pt, offset=1.0em]{simpler-wick}
 
 \lstset{language=python}
 \lstset{basicstyle=\small}
@@ -54,6 +55,28 @@ Words for motivation
 Here I should present all the important equations
 
 \section{Exercise 1}
+\subsection{d}
+\begin{equation}
+[\hat{P}_p,\hat{P}_q^{\dagger}]=\hat{P}_p\hat{P}_q^{\dagger}-\hat{P}_q^{\dagger}\hat{P}_p
+\end{equation}
+Will only include terms which contribute, and we obtain
+\begin{align}
+\hat{P}_p\hat{P}_q^{\dagger}&=c_{p-}c_{p+}c_{q+}^{\dagger}c_{q-}^{\dagger}\notag\\
+&=\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}+\{\wick{\c c_{p-}c_{p+}c_{q+}^{\dagger}\c c_{q-}^{\dagger}}\}+\{\wick{c_{p-}\c c_{p+}\c c_{q+}^{\dagger}c_{q-}^{\dagger}}\}+\{\wick{\c1 c_{p-}\c2 c_{p+}\c2 c_{q+}^{\dagger}\c1 c_{q-}^{\dagger}}\}\notag\\
+&=\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}-\delta_{p-q-}c_{p+}c_{q+}^{\dagger}-\delta_{p+q+}c_{p-}c_{q-}^{\dagger}+\delta_{p+q+}\delta_{p-q-}
+\end{align}
+due to Wick's theorem. Several terms vanish since a delta function of operators of opposite spin does not contribute, i.e. $\delta_{p+q-}=0$. Calculating $\hat{P}_q^{\dagger}\hat{P}_p$ is a simple task:
+\begin{equation}
+\hat{P}_q^{\dagger}\hat{P}_p=\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}.
+\end{equation}
+Furthermore we will omit the spin in delta functions, because it does not affect the delta function as long as the spin is equally directed. We set $p=q$, but not in the Dirac delta functions:
+\begin{align}
+\hat{P}_p\hat{P}_q^{\dagger}-\hat{P}_q^{\dagger}\hat{P}_p&=-\delta_{pq}c_{q+}^{\dagger}c_{q+}-\delta_{pq}c_{q-}^{\dagger}c_{q-}+\delta_{pq}\delta_{qq}\notag\\
+&=\delta_{pq}(1-c_{q+}^{\dagger}c_{q+}-c_{q-}^{\dagger}c_{q-})\notag\\
+&=\delta_{pq}(1-\hat{n}_q)
+\end{align}
+
+
 \subsection{h}
 \begin{equation}
 \hat{H}=\hat{H_0}+\hat{V}
