@@ -13,6 +13,7 @@
 \usepackage{caption}
 \usepackage{color}
 \usepackage[sep=3pt, offset=0.8em]{simpler-wick}
+\usepackage{tikz}
 
 \lstset{language=python}
 \lstset{basicstyle=\small}
@@ -107,6 +108,96 @@ where the two last terms in $\hat{P}$ do not contribute since $|\Phi\rangle$ doe
 =&\frac{1}{2}(1-1+1-1)|\Phi\rangle\\
 =&0|\Phi\rangle
 \end{align}
+
+\subsection{f}
+Observe that $|1\bar{1}2\bar{2}\rangle=|\Phi\rangle$.
+
+\begin{figure*}
+\begin{center}
+  \begin{tikzpicture}[scale=1.2]
+    \begin{scope}
+      \foreach \i in {1,...,4}
+      {
+        \draw (-1,\i-1) node[anchor=east] {$p = \i$} --(2,\i-1);
+      }
+      \filldraw (0,0) node[anchor=north,inner sep=.5cm] {$\sigma=+$} circle (0.25cm); 
+      \filldraw (1,0) node[anchor=north,inner sep=.5cm] {$\sigma=-$} circle (0.25cm);
+      \filldraw (0,1) circle (0.25cm); 
+      \filldraw (1,1) circle (0.25cm);
+    \end{scope}
+    \begin{scope}[xshift=4cm]
+      \foreach \i in {1,...,4}
+      {
+        \draw (-1,\i-1) --(2,\i-1);
+      }
+      \filldraw (0,0) node[anchor=north,inner sep=.5cm] {$\sigma=+$} circle (0.25cm); 
+      \filldraw (1,0) node[anchor=north,inner sep=.5cm] {$\sigma=-$} circle (0.25cm);
+      \draw (0,1) circle (0.25cm); 
+      \draw (1,1) circle (0.25cm);
+      \filldraw (0,2) circle (0.25cm); 
+      \filldraw (1,2) circle (0.25cm);
+    \end{scope}
+    \begin{scope}[xshift=8cm]
+      \foreach \i in {1,...,4}
+      {
+        \draw (-1,\i-1) --(2,\i-1);
+      }
+      \filldraw (0,0) node[anchor=north,inner sep=.5cm] {$\sigma=+$} circle (0.25cm); 
+      \filldraw (1,0) node[anchor=north,inner sep=.5cm] {$\sigma=-$} circle (0.25cm);
+      \draw (0,1) circle (0.25cm); 
+      \draw (1,1) circle (0.25cm);
+      \filldraw (0,3) circle (0.25cm); 
+      \filldraw (1,3) circle (0.25cm);
+    \end{scope}
+  \end{tikzpicture}
+  \newline
+  \begin{tikzpicture}[scale=1.2]
+    \begin{scope}
+      \foreach \i in {1,...,4}
+      {
+        \draw (-1,\i-1) node[anchor=east] {$p = \i$} --(2,\i-1);
+      }
+      \draw (0,0) node[anchor=north,inner sep=.5cm] {$\sigma=+$} circle (0.25cm); 
+      \draw (1,0) node[anchor=north,inner sep=.5cm] {$\sigma=-$} circle (0.25cm);
+      \filldraw (0,1) circle (0.25cm); 
+      \filldraw (1,1) circle (0.25cm);
+      \filldraw (0,2) circle (0.25cm); 
+      \filldraw (1,2) circle (0.25cm);
+    \end{scope}
+    \begin{scope}[xshift=4cm]
+      \foreach \i in {1,...,4}
+      {
+        \draw (-1,\i-1) --(2,\i-1);
+      }
+      \draw (0,0) node[anchor=north,inner sep=.5cm] {$\sigma=+$} circle (0.25cm); 
+      \draw (1,0) node[anchor=north,inner sep=.5cm] {$\sigma=-$} circle (0.25cm);
+      \filldraw (0,1) circle (0.25cm); 
+      \filldraw (1,1) circle (0.25cm);
+      \filldraw (0,3) circle (0.25cm); 
+      \filldraw (1,3) circle (0.25cm);
+    \end{scope}
+    \begin{scope}[xshift=8cm]
+      \foreach \i in {1,...,4}
+      {
+        \draw (-1,\i-1) --(2,\i-1);
+      }
+      \draw (0,0) node[anchor=north,inner sep=.5cm] {$\sigma=+$} circle (0.25cm); 
+      \draw (1,0) node[anchor=north,inner sep=.5cm] {$\sigma=-$} circle (0.25cm);
+      \draw (0,1) circle (0.25cm); 
+      \draw (1,1) circle (0.25cm);
+      \filldraw (0,2) circle (0.25cm); 
+      \filldraw (1,2) circle (0.25cm);
+      \filldraw (0,3) circle (0.25cm); 
+      \filldraw (1,3) circle (0.25cm);
+    \end{scope}
+  \end{tikzpicture}
+\end{center}
+\caption{Need good caption here.\label{fig:schematic}}
+\end{figure*}
+From figure (\ref{fig:schematic}) one can observe that the dimension of the subspace for $M=4$ is $3+2+1=6$, which is the number of possible states. We can easily imagine that for $M=2$ we would get 1 state, with $M=5$ we would get $4+3+2+1=10$ states and so on. Thus the dimension of the subspace for an arbitrary $M$ is given by
+\begin{equation}
+n_M=\sum_{m=1}^{M}(M-m)=\sum_{m=1}^{M-1}(M-m)=...
+\end{equation}
 
 \subsection{h}
 \begin{equation}
