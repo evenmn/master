@@ -46,17 +46,54 @@
 
 \begin{itemize}
 \item For the Github repository containing programs and results, follow this link: 
-\url{https://github.com/UiO-INF5620/INF5620-evenmn/tree/master/project_2}
+\url{https://github.com/evenmn/master/tree/master/FYSKJM4480/Project2}
 \end{itemize}
 
 \section{Introduction}
-Words for motivation
-\newpage
-\section{Theory}
-Here I should present all the important equations
+Superconductivity might be one of 20th century's most exciting physical discoveries, and for a long time the theory behind was a mystery. In 1957, 46 years after the first observation by Kamerlingh Onnes, John Bardeen, Leon Cooper and John Robert Schrieffer came up with a quantum theory describing superconductivity on microscopic level. This theory was built on Cooper pairs, which is a pair of electrons with lower energy than the Fermi energy, i.e. there is a bounding between them. We can treat the pairs as a particle, which is a boson due to the total spin 1, and this boson-like pair is the reason why the current can flow unhindered in a superconductor. 
 
-\section{Exercise 1}
-\subsection{d}
+Furthermore the theory is also used in nuclear physics to describe the paring interaction between nucleons in an atomic nucleus. 
+
+This project aims to study such a pairing model, known as BCS-theory after its founders. In the first part we are working with this model independently. Then we will use Configuration-Interaction Doubled (CID) as an approximation to make the equations computer-friendly, and thereafter we repeat this using Coupled-Cluster Doubled (CCD). Finally the results are compared for both the methods, and we will discuss why one method is better than the other.
+\newpage
+
+\section{Pairing model}
+In this project we use a slightly simplified pairing model, which we assume to be carrying a constant strength $g$. The Hamiltonian is therefore given by
+\begin{equation}
+\hat{H}=\hat{H}_0+\hat{V}
+\end{equation}
+with
+\begin{equation}
+\hat{H}_0=\sum_{p\sigma}\epsilon_pc_{p\sigma}^{\dagger}c_{p\sigma},\quad \epsilon_p=\xi\cdot(p-1)
+\end{equation}
+and
+\begin{equation}
+\hat{V}=-\frac{1}{2}g\sum_{pq}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}.
+\end{equation}
+
+We will only study systems of a even number of particles, $N$, and the ground-state wavefunction is then given by the Slater determinant
+\begin{equation}
+|\Phi\rangle=c_{1+}^{\dagger}c_{1-}^{\dagger}\hdots c_{N/2 +}^{\dagger}c_{N/2 -}^{\dagger}|\Phi\rangle.
+\end{equation}
+Further I will define some operators that will be useful when doing the calculations. 
+\begin{equation}
+\hat{P}_p^{\dagger}\equiv c_{p+}^{\dagger}c_{p-}^{\dagger},\quad \hat{P}_p\equiv c_{p-}c_{p+}
+\end{equation}
+\begin{equation}
+\hat{n}_p\equiv\sum_{\sigma}c_{p\sigma}^{\dagger}c_{p\sigma}
+\end{equation}
+\begin{equation}
+\hat{P}=\sum_p\hat{P}_p^{\dagger}\hat{P}_p
+\end{equation}
+and finally
+\begin{equation}
+\hat{S}_z=\frac{1}{2}\sum_{p\sigma}\sigma c_{p\sigma}^{\dagger}c_{p\sigma}.
+\end{equation}
+
+\subsection{Exercise 1A}
+\subsection{Exercise 1B}
+\subsection{Exercise 1C}
+\subsection{Exercise 1D}
 \begin{equation}
 [\hat{P}_p,\hat{P}_q^{\dagger}]=\hat{P}_p\hat{P}_q^{\dagger}-\hat{P}_q^{\dagger}\hat{P}_p
 \end{equation}
