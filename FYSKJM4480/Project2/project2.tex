@@ -99,9 +99,9 @@ and finally
 \end{equation}
 Will only include terms which contribute, and we obtain
 \begin{align}
-\hat{P}_p\hat{P}_q^{\dagger}&=c_{p-}c_{p+}c_{q+}^{\dagger}c_{q-}^{\dagger}\notag\\
+\hat{P}_p\hat{P}_q^{\dagger}&=\sum_{pq}c_{p-}c_{p+}c_{q+}^{\dagger}c_{q-}^{\dagger}\notag\\
 &=\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}+\{\wick{\c c_{p-}c_{p+}c_{q+}^{\dagger}\c c_{q-}^{\dagger}}\}+\{\wick{c_{p-}\c c_{p+}\c c_{q+}^{\dagger}c_{q-}^{\dagger}}\}+\{\wick{\c2 c_{p-}\c1 c_{p+}\c1 c_{q+}^{\dagger}\c2 c_{q-}^{\dagger}}\}\notag\\
-&=\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}-\delta_{p-q-}c_{p+}c_{q+}^{\dagger}-\delta_{p+q+}c_{p-}c_{q-}^{\dagger}+\delta_{p+q+}\delta_{p-q-}
+&=\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}-\delta_{pq}c_{p+}c_{q+}^{\dagger}-\delta_{pq}c_{p-}c_{q-}^{\dagger}+\delta_{pq}\delta_{pq}
 \end{align}
 due to Wick's theorem. Several terms vanish since a delta function of operators of opposite spin does not contribute, i.e. $\delta_{p+q-}=0$. Calculating $\hat{P}_q^{\dagger}\hat{P}_p$ is a simple task:
 \begin{equation}
