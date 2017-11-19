@@ -21,4 +21,8 @@ for k in range(M.shape[0]):
         new_list.append(eigenvalues[i][k])
     plt.plot(g_list, new_list, label='Eigenvalue {}'.format(k))
 plt.legend(loc='best')
+plt.title('Eigenvalues')
+plt.xlabel('g')
+plt.ylabel('Energy')
+plt.savefig('eigenvalues.png')
 plt.show()
