@@ -49,7 +49,7 @@
 \url{https://github.com/evenmn/master/tree/master/FYSKJM4480/Project2}
 \end{itemize}
 
-\section{Introduction}
+\section*{Introduction}
 Superconductivity might be one of 20th century's most exciting physical discoveries, and for a long time the theory behind was a mystery. In 1957, 46 years after the first observation by Kamerlingh Onnes [REFERENCE], John Bardeen, Leon Cooper and John Robert Schrieffer came up with a quantum theory describing superconductivity on microscopic level[REFERENCE]. This theory was built on Cooper pairs, which is a pair of electrons with lower energy than the Fermi energy, i.e. there is a bounding between them. We can treat the pairs as a spinless particle, which is a boson, and this boson-like pair is the reason why the current can flow unhindered in a superconductor. 
 
 Furthermore the theory is also used in nuclear physics to describe the paring interaction between nucleons in an atomic nucleus. 
@@ -65,10 +65,12 @@ In this project we use a slightly simplified pairing model, which we assume to b
 with
 \begin{equation}
 \hat{H}_0=\sum_{p\sigma}\epsilon_pc_{p\sigma}^{\dagger}c_{p\sigma},\quad \epsilon_p=\xi\cdot(p-1)
+\label{eq:H0_init}
 \end{equation}
 and
 \begin{equation}
 \hat{V}=-\frac{1}{2}g\sum_{pq}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}.
+\label{eq:V_init}
 \end{equation}
 where $\epsilon_p=\xi(p-1)$, with $\xi$ set to 1.
 
@@ -92,6 +94,51 @@ and finally
 \end{equation}
 
 \subsection*{1A}
+\begin{align}
+[\hat{H}_0,\hat{S}_z]&=\bigg[\sum_{p\sigma}\epsilon_pc_{p\sigma}^{\dagger}c_{p\sigma},\frac{1}{2}\sum_{q\sigma}\sigma c_{q\sigma}^{\dagger}c_{q\sigma}\bigg]\notag\\
+&=\frac{1}{2}\sum_{pq\sigma}\epsilon_{p}\sigma(c_{p\sigma}^{\dagger}c_{p\sigma}c_{q\sigma}^{\dagger}c_{q\sigma}-c_{q\sigma}^{\dagger}c_{q\sigma}c_{p\sigma}^{\dagger}c_{p\sigma})
+\end{align}
+We use Wick's theorem on the two terms, and observe that only single contraction will contribute because of the orientation
+\begin{equation}
+c_{p\sigma}^{\dagger}c_{p\sigma}c_{q\sigma}^{\dagger}c_{q\sigma}=\{c_{p\sigma}^{\dagger}c_{q\sigma}^{\dagger}c_{p\sigma}c_{q\sigma}\}+\delta_{pq}c_{p\sigma}^{\dagger}c_{q\sigma}
+\end{equation}
+\begin{equation}
+c_{q\sigma}^{\dagger}c_{q\sigma}c_{p\sigma}^{\dagger}c_{p\sigma}=\{c_{p\sigma}^{\dagger}c_{q\sigma}^{\dagger}c_{p\sigma}c_{q\sigma}\}+\delta_{qp}c_{q\sigma}^{\dagger}c_{p\sigma}
+\end{equation}
+The first terms (the normal-ordered products) cancel, and we obtain
+\begin{equation}
+[\hat{H}_0,\hat{S}_z]=\frac{1}{2}\sum_{pq\sigma}\epsilon_p\sigma(\delta_{pq}c_{p\sigma}^{\dagger}c_{q\sigma}-\delta_{qp}c_{q\sigma}^{\dagger}c_{p\sigma})
+\end{equation}
+We get contribution only when $q=p$
+\begin{equation}
+[\hat{H}_0,\hat{S}_z]=\frac{1}{2}\sum_{p\sigma}\epsilon_p(c_{p\sigma}^{\dagger}c_{p\sigma}-c_{p\sigma}^{\dagger}c_{p\sigma})=0
+\end{equation}
+
+Also the potential commutes with $\hat{S}_z$:
+\begin{align}
+[\hat{V},\hat{S}_z]&=\bigg[-\frac{1}{2}g\sum_{pq}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+},\frac{1}{2}\sum_{r\sigma}\sigma c_{r\sigma}^{\dagger}c_{r\sigma}\bigg]\notag\\
+&=-\frac{1}{4}\sum_{pqr\sigma}\sigma(c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{r\sigma}^{\dagger}c_{r\sigma}-c_{r\sigma}^{\dagger}c_{r\sigma}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+})
+\end{align}
+The fours terms written out are as follows
+\begin{equation}
+c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{r+}^{\dagger}c_{r+}=\{c_{p+}^{\dagger}c_{p-}^{\dagger}c_{r+}^{\dagger}c_{q-}c_{q+}c_{r+}\}+\delta_{qr}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{r+}
+\end{equation}
+\begin{equation}
+c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{r-}^{\dagger}c_{r-}=\{c_{p+}^{\dagger}c_{p-}^{\dagger}c_{r-}^{\dagger}c_{q-}c_{q+}c_{r-}\}+\delta_{qr}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{r-}c_{q+}
+\end{equation}
+\begin{equation}
+c_{r+}^{\dagger}c_{r+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}=\{c_{p+}^{\dagger}c_{p-}^{\dagger}c_{r+}^{\dagger}c_{q-}c_{q+}c_{r+}\}+\delta_{rp}c_{r+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}
+\end{equation}
+\begin{equation}
+c_{r-}^{\dagger}c_{r-}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}=\{c_{p+}^{\dagger}c_{p-}^{\dagger}c_{r-}^{\dagger}c_{q-}c_{q+}c_{r-}\}+\delta_{rp}c_{p+}^{\dagger}c_{r-}^{\dagger}c_{q-}c_{q+}
+\end{equation}
+Again the first terms cancel, and we are left with
+\begin{align}
+[\hat{V},\hat{S}_z]=-\frac{1}{4}g\sum_{pqr\sigma}\sigma\Big(&(\delta_{qr}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{r+}+\delta_{qr}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{r-}c_{q+})-\notag\\
+&(\delta_{rp}c_{r+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}+\delta_{rp}c_{p+}^{\dagger}c_{r-}^{\dagger}c_{q-}c_{q+})\Big)
+\end{align}
+In the first two terms we will get contributions when $r=q$, and for the two last terms we will get contributions when $r=p$. We can easily see that the two first terms become equal to the two last terms, and will cancel each other.
+
 \subsection*{1B}
 \subsection*{1C}
 We are supposed to show that $\hat{P}$ commutes with $\hat{S}_z$, with other words $[\hat{P},\hat{S}_z]=0$
@@ -129,8 +176,8 @@ Observe that the first terms cancel, and we are left with terms of $\delta_{pq}$
 Will only include terms which contribute, and we obtain
 \begin{align}
 \hat{P}_p\hat{P}_q^{\dagger}&=\sum_{pq}c_{p-}c_{p+}c_{q+}^{\dagger}c_{q-}^{\dagger}\notag\\
-&=\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}+\{\wick{\c c_{p-}c_{p+}c_{q+}^{\dagger}\c c_{q-}^{\dagger}}\}+\{\wick{c_{p-}\c c_{p+}\c c_{q+}^{\dagger}c_{q-}^{\dagger}}\}+\{\wick{\c2 c_{p-}\c1 c_{p+}\c1 c_{q+}^{\dagger}\c2 c_{q-}^{\dagger}}\}\notag\\
-&=\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}-\delta_{pq}c_{p+}c_{q+}^{\dagger}-\delta_{pq}c_{p-}c_{q-}^{\dagger}+\delta_{pq}\delta_{pq}
+&=\sum_{pq}(\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}+\{\wick{\c c_{p-}c_{p+}c_{q+}^{\dagger}\c c_{q-}^{\dagger}}\}+\{\wick{c_{p-}\c c_{p+}\c c_{q+}^{\dagger}c_{q-}^{\dagger}}\}+\{\wick{\c2 c_{p-}\c1 c_{p+}\c1 c_{q+}^{\dagger}\c2 c_{q-}^{\dagger}}\})\notag\\
+&=\sum_{pq}(\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}-\delta_{pq}c_{p+}c_{q+}^{\dagger}-\delta_{pq}c_{p-}c_{q-}^{\dagger}+\delta_{pq}\delta_{pq})
 \end{align}
 due to Wick's theorem. Several terms vanish since a delta function of operators of opposite spin does not contribute, i.e. $\delta_{p+q-}=0$. Calculating $\hat{P}_q^{\dagger}\hat{P}_p$ is a simple task:
 \begin{equation}
@@ -275,7 +322,7 @@ Need to figure out this
 \begin{equation}
 \hat{H}=\hat{H_0}+\hat{V}
 \end{equation}
-We use equation ... and ..., and get
+We use equation (\ref{eq:H0_init}) and (\ref{eq:V_init}), and get
 \begin{align}
 \hat{V}&=-\frac{1}{2}g\sum_{pq}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}\notag\\
 &=-\frac{1}{2}g\sum_{p}^Mc_{p+}^{\dagger}c_{p-}^{\dagger}\sum_q^Mc_{q-}c_{q+}\notag\\
@@ -384,11 +431,11 @@ where the first one is
 \begin{equation}
 \langle p'\bar{p}'|p\bar{p}\rangle=\langle -|\hat{P}_{p'}\hat{P}_p^{\dagger}|-\rangle=\langle -|\hat{P}_{p}^{\dagger}\hat{P}_{p'}+\delta_{p'p}(1-\hat{n}_p)|-\rangle=\delta_{p'p}
 \end{equation}
-and similar for the other three. We can finally write out the ...
+and similar for the other three. We can finally write out the matrix element expression
 \begin{equation}
 \langle p'\bar{p}'q'\bar{q}|\hat{H}|p\bar{p}q\bar{q}\rangle=2(2-p-q)(\delta_{q'p}\delta_{p'q}+\delta_{q'q}\delta_{p'p})-\frac{1}{2}g(\delta_{p'p}+\delta_{p'q}+\delta_{q'p}+\delta_{q'q})
 \end{equation}
-Observe that the first term from $\hat{H}_0$ will never contribute since Pauli's exclusion principle restricts $q>p$ (and $q'>p'$). $\hat{H}_0$ will therefore only make contributions on the diagonal when we form a matrix based on Full Configuration-Interactions. 
+Observe that the first term from $\hat{H}_0$ will never contribute since Pauli's exclusion principle restricts $q>p$ (and $q'>p'$). $\hat{H}_0$ will therefore only make contributions on the diagonal when we form a matrix based on Full Configuration-Interactions. It is also worth to notice that there will not be any contribution if all the indexes are different.
 
 \subsection*{2B}
 In our case we get a matrix on the form
@@ -426,15 +473,33 @@ We can only spot 5 eigenvalue lines, even though we know it should be 6 and the 
 Need probability plot as well
 
 \subsection*{2C}
+The single excited determinants ($|\Phi_i^a\rangle$) will not contribute to the exact eigefunction since we require $p=\bar{p}$, i.e two particles with opposite spin shall always lay on the same level. We will work with CID (Configuration-Interaction Doubles), but have in mind that it is the same as CISD (Configuration-Interaction Singles-Doubles). In general the doubly excited determinants can be written
+\begin{equation}
+|\Phi_{ij}^{ab}\rangle=c_a^{\dagger}c_b^{\dagger}c_ic_j|\Phi\rangle
+\end{equation}
+I our case the first unoccupied index $a$ has positive spin, while the second has negative spin. Since they both will lay on the same level, the second index is denoted with a bar, which implies negative spin. Similarly the second occupied index has negative spin, so we have
+\begin{equation}
+|\Phi_{i\bar{i}}^{a\bar{a}}\rangle=c_{a+}^{\dagger}c_{a-}^{\dagger}c_{i+}c_{i-}|\Phi\rangle=\hat{P}_a^{\dagger}\hat{P}_i|\Phi\rangle
+\end{equation}
+
 \subsection*{2D}
 \subsection*{2E}
 
 \section{Coupled-Cluster (CC)}
 \subsection*{3A}
-Just write down the expressions
+The general CCD wavefunction is as following
+\begin{equation}
+|\Psi_{CID}\rangle=\exp{(\hat{T})}|\Phi\rangle=(1+\hat{T}+\frac{1}{2}\hat{T}^2)|\Phi\rangle
+\end{equation}
+Because our system contains of only four particles, higher order terms do not appear. 
 
 \subsection*{3B}
-...
+\begin{equation}
+|\Psi_{CID}\rangle=(1+\hat{C}_2)|\phi\rangle=(1+\hat{T})|\Phi\rangle
+\end{equation}
+\begin{equation}
+|\Psi_{CCD}\rangle=|\Psi_{CID}\rangle+(1/2\hat{T}^2)|\Phi\rangle
+\end{equation}
 
 \subsection*{3C}
 \begin{equation}
