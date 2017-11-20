@@ -50,11 +50,11 @@
 \end{itemize}
 
 \section{Introduction}
-Superconductivity might be one of 20th century's most exciting physical discoveries, and for a long time the theory behind was a mystery. In 1957, 46 years after the first observation by Kamerlingh Onnes [REFERENCE], John Bardeen, Leon Cooper and John Robert Schrieffer came up with a quantum theory describing superconductivity on microscopic level[REFERENCE]. This theory was built on Cooper pairs, which is a pair of electrons with lower energy than the Fermi energy, i.e. there is a bounding between them. We can treat the pairs as a particle, which is a boson due to the total spin 1, and this boson-like pair is the reason why the current can flow unhindered in a superconductor. 
+Superconductivity might be one of 20th century's most exciting physical discoveries, and for a long time the theory behind was a mystery. In 1957, 46 years after the first observation by Kamerlingh Onnes [REFERENCE], John Bardeen, Leon Cooper and John Robert Schrieffer came up with a quantum theory describing superconductivity on microscopic level[REFERENCE]. This theory was built on Cooper pairs, which is a pair of electrons with lower energy than the Fermi energy, i.e. there is a bounding between them. We can treat the pairs as a spinless particle, which is a boson, and this boson-like pair is the reason why the current can flow unhindered in a superconductor. 
 
 Furthermore the theory is also used in nuclear physics to describe the paring interaction between nucleons in an atomic nucleus. 
 
-This project aims to study such a pairing model, known as BCS-theory after its founders. In the first part we are working with this model independently. Then we will use Configuration-Interaction Doubled (CID) as an approximation to make the equations computer-friendly, and thereafter we repeat this using Coupled-Cluster Doubled (CCD). Finally the results are compared for both the methods, and we will discuss why one method is better than the other.
+This project aims to study such a pairing model, known as BCS-theory after its founders. In the first part we are working with this model independently. Then we will use Full Configuration-Interaction (FCI) to find the exact energy eigenvalues and Rayleigh-Schrodinger Perturbation Theory of third order (RSPT3) as an approximation to make the equations computer-friendly. Thereafter we repeat this using Coupled-Cluster Doubled (CCD), and finally we compare the approximations to the exact solutions.
 \newpage
 
 \section{Pairing model}
@@ -70,6 +70,7 @@ and
 \begin{equation}
 \hat{V}=-\frac{1}{2}g\sum_{pq}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}.
 \end{equation}
+where $\epsilon_p=\xi(p-1)$, with $\xi$ set to 1.
 
 We will only study systems of a even number of particles, $N$, and the ground-state wavefunction is then given by the Slater determinant
 \begin{equation}
@@ -90,10 +91,38 @@ and finally
 \hat{S}_z=\frac{1}{2}\sum_{p\sigma}\sigma c_{p\sigma}^{\dagger}c_{p\sigma}.
 \end{equation}
 
-\subsection{Exercise 1A}
-\subsection{Exercise 1B}
-\subsection{Exercise 1C}
-\subsection{Exercise 1D}
+\subsection*{1A}
+\subsection*{1B}
+\subsection*{1C}
+We are supposed to show that $\hat{P}$ commutes with $\hat{S}_z$, with other words $[\hat{P},\hat{S}_z]=0$
+\begin{align}
+[\hat{P},\hat{S}_z]&=[\sum_p\hat{P}_p^{\dagger}\hat{P}_p,\frac{1}{2}\sum_{q\sigma}\sigma c_{q\sigma}^{\dagger}c_{q\sigma}]\notag\\
+&=\frac{1}{2}\sum_{pq\sigma}\sigma[\hat{P}_p^{\dagger}\hat{P}_p,c_{q\sigma}^{\dagger}c_{q\sigma}]\notag\\
+&=\frac{1}{2}\sum_{pq}\Big(+(c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+}c_{q+}^{\dagger}c_{q+}-c_{q+}^{\dagger}c_{q+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+})\notag\\
+&\quad-(c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+}c_{q-}^{\dagger}c_{q-}-c_{q-}^{\dagger}c_{q-}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+})\Big)
+\end{align}
+We get four terms, which will be worked out separately:
+\begin{equation}
+c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+}c_{q+}^{\dagger}c_{q+} = \{c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q+}c_{p-}c_{p+}\}+\delta_{pq}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{q+}
+\end{equation}
+\begin{equation}
+c_{q+}^{\dagger}c_{q+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+} = \{c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q+}c_{p-}c_{p+}\}+\delta_{qp}c_{q+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+}
+\end{equation}
+\begin{equation}
+c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+}c_{q-}^{\dagger}c_{q-} = \{c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}^{\dagger}c_{q-}c_{p-}c_{p+}\}-\delta_{pq}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p+}c_{q-}
+\end{equation}
+\begin{equation}
+c_{q-}^{\dagger}c_{q-}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+} = \{c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}^{\dagger}c_{q-}c_{p-}c_{p+}\}-\delta_{qp}c_{p+}^{\dagger}c_{q-}^{\dagger}c_{p+}c_{p-}
+\end{equation}
+Observe that the first terms cancel, and we are left with terms of $\delta_{pq}$ and $\delta_{qp}$. Those will contribute if and only if $p=q$, which happens exactly once since both $p$ and $q$ runs over all possible states. 
+\begin{align}
+[\hat{P}, \hat{S}_z]=&\frac{1}{2}\sum_p\Big((c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+}+c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p+}c_{p-})-\notag\\
+&(c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+}+c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p+}c_{p-})\Big)\\
+=&0
+\end{align}
+
+
+\subsection*{1D}
 \begin{equation}
 [\hat{P}_p,\hat{P}_q^{\dagger}]=\hat{P}_p\hat{P}_q^{\dagger}-\hat{P}_q^{\dagger}\hat{P}_p
 \end{equation}
@@ -114,7 +143,7 @@ Furthermore we will omit the spin in delta functions, because it does not affect
 &=\delta_{pq}(1-\hat{n}_q)\label{eq:ex1d}
 \end{align}
 
-\subsection{e}
+\subsection*{1E}
 A fundamental property of the annihilation operator states that a such operator acting on the vacuum state becomes zero. This property will be used multiple times henceforce to get rid of terms, and the approach will often be to move the annihilation operator(s) such that this happens. 
 We have $N=4$, thus 
 \begin{align}
@@ -149,7 +178,7 @@ where the two last terms in $\hat{P}$ do not contribute since $|\Phi\rangle$ doe
 =&0|\Phi\rangle
 \end{align}
 
-\subsection{f}
+\subsection*{1F}
 Observe that $|1\bar{1}2\bar{2}\rangle=|\Phi\rangle$.
 
 \begin{figure*}
@@ -239,10 +268,10 @@ From figure (\ref{fig:schematic}) one can observe that the dimension of the subs
 n_M=\sum_{m=1}^{M-1}(M-m).
 \end{equation}
 
-\subsection{1G}
+\subsection*{1G}
+Need to figure out this
 
-
-\subsection{1H}
+\subsection*{1H}
 \begin{equation}
 \hat{H}=\hat{H_0}+\hat{V}
 \end{equation}
@@ -264,7 +293,7 @@ Thus we end up with
 \end{equation}
 
 \section{Configuration-Interaction (CI)}
-\subsection{2A}
+\subsection*{2A}
 \begin{align}
 \sum_s\hat{P}_s|p\bar{p}q\bar{q}\rangle=&\sum_s\hat{P}_s\hat{P}_p^{\dagger}\hat{P}_q^{\dagger}|-\rangle
 \label{eq:2Aa}
@@ -292,7 +321,7 @@ I will start with the first one:
 \begin{equation}
 \hat{H}_0|p\bar{p}q\bar{q}\rangle = \sum_{r\sigma}\epsilon_rc_{r\sigma}^{\dagger}c_{r\sigma}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}|-\rangle
 \end{equation}
-I will use Wick's theorem to calculate this, and since requires normal ordering, the vacuum state will kill all strings including an annihilation operator. In this case we therefore get four terms which come from single contraction. We will get delta functions, which only contribute when both indexes are equal, so for instance if we get $\delta_{rp}$ we need to set $r=p$ since $r$ runs over all possible states.
+Wick's theorem is used to calculate this, and since it requires normal ordering, the vacuum state will kill all strings including an annihilation operator. In this case we therefore get four terms which come from single contraction. We will get delta functions, which only contribute when both indexes are equal, so for instance if we get $\delta_{rp}$ we need to set $r=p$ since $r$ runs over all possible states.
 \begin{align}
 \hat{H}_0|p\bar{p}q\bar{q}\rangle =& \sum_{r\sigma}\epsilon_r\{c_{r\sigma}^{\dagger}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}c_{r\sigma}\}|-\rangle\notag\\
 &+\sum_{r\sigma}\epsilon_r\delta_{r\sigma p+}c_{r\sigma}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}|-\rangle\notag\\
@@ -343,7 +372,7 @@ One term done, one to go. Fortunately the potential term is much easier to calcu
 \begin{align}
 \langle p'\bar{p}'q'\bar{q}|\hat{V}|p\bar{p}q\bar{q}\rangle=-\frac{1}{2}g\langle p'\bar{p}'q'\bar{q}|(\sum_r\hat{P}_r^{\dagger})(\sum_s\hat{P}_s)|p\bar{p}q\bar{q}\rangle
 \end{align}
-I the beginning of this exercise we proved that $\sum_s\hat{P}_s|p\bar{p}q\bar{q}\rangle=|p\bar{p}q\bar{q}\rangle$. Similarly one can prove the corresponding conjugate
+In the beginning of this exercise we proved that $\sum_s\hat{P}_s|p\bar{p}q\bar{q}\rangle=|p\bar{p}q\bar{q}\rangle$. Similarly one can prove the corresponding complex conjugate
 \begin{equation}
 \langle p'\bar{p}'q'\bar{q}'|\sum_r\hat{P}_r^{\dagger}=\langle p'\bar{p}'|+\langle q'\bar{q}'|
 \end{equation}
@@ -359,7 +388,10 @@ and similar for the other three. We can finally write out the ...
 \begin{equation}
 \langle p'\bar{p}'q'\bar{q}|\hat{H}|p\bar{p}q\bar{q}\rangle=2(2-p-q)(\delta_{q'p}\delta_{p'q}+\delta_{q'q}\delta_{p'p})-\frac{1}{2}g(\delta_{p'p}+\delta_{p'q}+\delta_{q'p}+\delta_{q'q})
 \end{equation}
-Observe that the first term from $\hat{H}_0$ will never contribute since Pauli's exclusion principle restricts $q>p$ (and $q'>p'$). $\hat{H}_0$ will therefore only make contributions on the diagonal when we form a matrix based on CI. In out case we get a matrix on the form
+Observe that the first term from $\hat{H}_0$ will never contribute since Pauli's exclusion principle restricts $q>p$ (and $q'>p'$). $\hat{H}_0$ will therefore only make contributions on the diagonal when we form a matrix based on Full Configuration-Interactions. 
+
+\subsection*{2B}
+In our case we get a matrix on the form
 \begin{equation}
 \begin{pmatrix} 
 H_{12}^{12}&H_{12}^{13}&H_{12}^{14}&H_{12}^{23}&H_{12}^{24}&H_{12}^{34}\\
@@ -391,23 +423,34 @@ The eigenvalues of the Hamiltonian are the diagonal elements after diagonalizati
 \end{figure}
 We can only spot 5 eigenvalue lines, even though we know it should be 6 and the legend tells us there is 6 eigenvalues. The reason is obvious, eigenvalue 3 and 4 are the same, and we have a degeneracy. 
 
-\section{Garbage} 
-\begin{table} [H]
-\centering
-\caption{This table represents the error when solving the system for a constant solution. }
-\begin{tabularx}{\textwidth}{XXXX} \hline
-\label{tab:constant_error}
-Elements & 1D & 2D & 3D \\ \hline
-P1 & 2.77555756e-15 & 3.55271367e-15 & 2.60902410e-14 \\
-P2 & 1.26343380e-13 & 1.39666056e-13 & 8.69304628e-14 \\ \hline
-\end{tabularx}
-\end{table}
+Need probability plot as well
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=100mm]{constant_solution_2.png}
-%\caption{This figure shows the numerical solution of the constant function in 2 dimensions \label{fig:constant_error_2}}
-%\end{figure}
- 
+\subsection*{2C}
+\subsection*{2D}
+\subsection*{2E}
+
+\section{Coupled-Cluster (CC)}
+\subsection*{3A}
+Just write down the expressions
+
+\subsection*{3B}
+...
+
+\subsection*{3C}
+\begin{equation}
+\langle \Phi|\hat{H}(1+\hat{T})|\Phi\rangle=\langle \Phi|\hat{H}|\Phi\rangle+\langle \Phi|\hat{H}\hat{T}|\Phi\rangle
+\end{equation}
+The first term is already calculated, and we found it to be $2(\epsilon_p+\epsilon_q)(\delta_{p'p}+\delta_{p'q}+\delta_{q'p}+\delta_{q'q})$. In this case we deal with the reference wave function, such that $p'=p$ and $q'=q$. We then obtain
+\begin{equation}
+\langle \Phi|\hat{H}|\Phi\rangle=2\epsilon_p+2\epsilon_q
+\end{equation}
+
+Furthermore the second term 
+
+\section{Appendices}
+\subsection*{Appendix A}
+...There are in general two ways to do this: We could find the eigenvalues symbolic and insert $g$ afterwards, or we could find the eigenvalues of each matrix inserted $g$. Surprisingly I found the latter to be faster, and decided to do it that way. The Python implementation looks like this:
+\lstinputlisting{eigenproblem_solver.py}
+
 
 \end{document}
