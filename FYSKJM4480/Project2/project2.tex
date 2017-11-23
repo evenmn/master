@@ -465,8 +465,8 @@ etc.. Calculate all elements, and get
 The eigenvalues of the Hamiltonian are the diagonal elements after diagonalization, and we find them using the numpy package in Python (see Appendix A). The eigenvalues as a function of $g$ are plotted in figure (\ref{fig:eigenvalues}).
 \begin{figure}[H]
 \centering
-\includegraphics[width=100mm]{eigenvalues.png}
-\caption{NEED CAPTION \label{fig:eigenvalues}}
+\includegraphics[width=100mm]{eigenvalues_FCI.png}
+\caption{NEED CAPTION \label{fig:eigenvalues_FCI}}
 \end{figure}
 We can only spot 5 eigenvalue lines, even though we know it should be 6 and the legend tells us there is 6 eigenvalues. The reason is obvious, eigenvalue 3 and 4 are the same, and we have a degeneracy. 
 
@@ -477,13 +477,53 @@ The single excited determinants ($|\Phi_i^a\rangle$) will not contribute to the 
 \begin{equation}
 |\Phi_{ij}^{ab}\rangle=c_a^{\dagger}c_b^{\dagger}c_ic_j|\Phi\rangle
 \end{equation}
-I our case the first unoccupied index $a$ has positive spin, while the second has negative spin. Since they both will lay on the same level, the second index is denoted with a bar, which implies negative spin. Similarly the second occupied index has negative spin, so we have
+In our case the first unoccupied index $a$ has positive spin, while the second has negative spin. Since they both will lay on the same level, the second index is denoted with a bar, which implies negative spin. Similarly the second occupied index has negative spin, so we have
 \begin{equation}
 |\Phi_{i\bar{i}}^{a\bar{a}}\rangle=c_{a+}^{\dagger}c_{a-}^{\dagger}c_{i+}c_{i-}|\Phi\rangle=\hat{P}_a^{\dagger}\hat{P}_i|\Phi\rangle
 \end{equation}
+\begin{figure}[H]
+\centering
+\includegraphics[width=100mm]{groundstate_comparison.png}
+\caption{NEED CAPTION \label{fig:groundstate_comparison}}
+\end{figure}
 
 \subsection*{2D}
+The non-degenerate Rayleigh-Schrodinger Perturbation Theory (RSPT) energy is given by
+\begin{equation}
+E^{(n)}=\langle \Phi|\hat{V}|\Psi^{(n-1)}\rangle
+\end{equation}
+with
+\begin{equation}
+|\Psi^{(n)}\rangle=\hat{R}\bigg[\hat{V}|\Phi^{(n-1)}\rangle-\sum_{j=1}^{n-1}|\Psi^{(j)}\rangle\bigg].
+\end{equation}
+The first order energy correction becomes
+\begin{equation}
+E^{(1)}=\langle\Phi|\hat{V}|\Psi^{(0)}\rangle=\langle\Phi|\hat{V}|\Phi\rangle.
+\end{equation}
+We also calculate $|\Psi^{(1)}\rangle$, which we will need for higher order energy expressions. 
+\begin{equation}
+|\Psi^{(1)}\rangle=\hat{R}\bigg[\hat{V}|\Psi^{(0)}\rangle-\sum_{j=1}^{0}E^{(1-j)}|\Psi^{(j)}\rangle\bigg]=\hat{R}\hat{V}|\Phi\rangle
+\end{equation}
+We then obtain the following for the second order correction:
+\begin{equation}
+E^{(2)}=\langle\Phi|\hat{V}|\Psi^{(1)}\rangle=\langle\Phi|\hat{V}\hat{R}\hat{V}|\Phi\rangle
+\end{equation}
+and
+\begin{equation}
+|\Psi^{(2)}\rangle=\hat{R}\bigg[\hat{V}\hat{R}\hat{V}|\Phi\rangle-E^{(1)}|\Psi^{(1)}\rangle\bigg]=\hat{R}\bigg[\hat{V}-\langle\Phi|\hat{V}|\Phi\rangle\bigg]\hat{R}\hat{V}|\Phi\rangle.
+\end{equation}
+Finally we can compute the third order correction energy:
+\begin{equation}
+E^{(3)}=\langle\Phi|\hat{V}\hat{R}\hat{V}\hat{R}\hat{V}|\Phi\rangle-\langle\Phi|\hat{V}|\Phi\rangle\langle\Phi|\hat{V}\hat{R}\hat{R}\hat{V}|\Phi\rangle
+\end{equation}
+We can see that the first term follows a certain pattern for increasing order corrections, and is considered as the leading term. The second term is smaller, and in rough estimates it is normal to omit it. 
+
 \subsection*{2E}
+We are now going to compute the ground state energy to third order in Rayleigh-Schrodinger perturbation theory
+\begin{equation}
+E_{RSPT3}=E^{(0)}+gE^{(1)}+g^2E^{(2)}+g^3E^{(3)}.
+\end{equation}
+There are two way to do this: We could use second quantization and many-body perturbation theory (MBPT) or we could use basic PT on matrix form. 
 
 \section{Coupled-Cluster (CC)}
 \subsection*{3A}
@@ -505,12 +545,36 @@ Because our system contains of only four particles, higher order terms do not ap
 \begin{equation}
 \langle \Phi|\hat{H}(1+\hat{T})|\Phi\rangle=\langle \Phi|\hat{H}|\Phi\rangle+\langle \Phi|\hat{H}\hat{T}|\Phi\rangle
 \end{equation}
-The first term is already calculated, and we found it to be $2(\epsilon_p+\epsilon_q)(\delta_{p'p}+\delta_{p'q}+\delta_{q'p}+\delta_{q'q})$. In this case we deal with the reference wave function, such that $p'=p$ and $q'=q$. We then obtain
+The first term is already calculated, and we found it to be $(2(\epsilon_p+\epsilon_q)-g)(\delta_{p'p}+\delta_{p'q}+\delta_{q'p}+\delta_{q'q})$. In this case we deal with the reference wave function, such that $p'=p$ and $q'=q$. We then obtain
 \begin{equation}
-\langle \Phi|\hat{H}|\Phi\rangle=2\epsilon_p+2\epsilon_q
+\langle \Phi|\hat{H}|\Phi\rangle=2\epsilon_p+2\epsilon_q-g
 \end{equation}
 
-Furthermore the second term 
+Furthermore we work out the second term. Recall that $a$ is an unoccupied index, $i$ is occupied and $p, , rq$ and $s$ are arbitrary indexes. Because of $\hat{H}$ we can immediately see that the term again can be split up in two new terms:
+\begin{align}
+\langle\Phi|\hat{H}|\Phi\rangle=&\langle p'\bar{p}'q'\bar{q}'|(\sum_r(r-1)\hat{n}_r)(\sum_{ia}t_i^a\hat{P}_a^{\dagger}\hat{P}_i)|p\bar{p}q\bar{q}\rangle\notag\\
+&+\langle p'\bar{p}'q'\bar{q}'|-\frac{1}{2}g(\sum_{r}\hat{P}_r^{\dagger})(\sum_s\hat{P}_s)(\sum_{ia}t_i^a\hat{P}_a^{\dagger}\hat{P}_i)|p\bar{p}q\bar{q}\rangle
+\end{align}
+We first examine the first of these terms:
+\begin{align*}
+\langle p'\bar{p}'q'\bar{q}'|(\sum_r(r-1)\hat{n}_r)(\sum_{ia}t_i^a\hat{P}_a^{\dagger}\hat{P}_i)|p\bar{p}q\bar{q}\rangle=\sum_{ria}\epsilon_r\langle-|\hat{P}_{p}\hat{P}_p^{\dagger}(\sum_{\sigma}c_{r\sigma}^{\dagger}c_{r\sigma})\hat{P}_a^{\dagger}\hat{P}_i|-\rangle
+\end{align*}
+We could calculate this, but instead I will argue why it becomes zero. The rightmost operator is an annihilation operator, which means that it never will be contracted in a non-zero term. If we use Wick's theorem on the operators, we then will have an annihilation operator in every term, and since we need to leave them on normal order, we will always have an annihilation operator acting on the vacuum which is zero by definition. 
+
+Further we need to calculate the second term. 
+\begin{align}
+&\langle p'\bar{p}'q'\bar{q}'|-\frac{1}{2}g(\sum_{r}\hat{P}_r^{\dagger})(\sum_s\hat{P}_s)(\sum_{ia}t_i^a\hat{P}_a^{\dagger}\hat{P}_i)|p\bar{p}q\bar{q}\rangle\notag\\
+=&-\frac{1}{2}g\sum_{rsia}t_i^a\langle-|\hat{P}_{p'}\hat{P}_{q'}\hat{P}_r^{\dagger}\hat{P}_s\hat{P}_a^{\dagger}\hat{P}_i\hat{P}_p^{\dagger}\hat{P}_q^{\dagger}|-\rangle
+\end{align}
+We will now use Wick's theorem on the operators. On the same basis as for the first term, only terms without annihilation operators will contribute. There are several possible fully contracted terms, but we need to keep in mind that if an arbitrary operator has contracted to say an occupied index, it can only be contracted to occupied indexes. The fully contracted term is therefore 
+\begin{align*}
+\{\hat{P}_{p'}\hat{P}_{q'}\hat{P}_r^{\dagger}\hat{P}_s\hat{P}_a^{\dagger}\hat{P}_i\hat{P}_p^{\dagger}\hat{P}_q^{\dagger}\}_{fc}&=\wick{\c3 c_{p'-}\c4 c_{p'+}\c5 c_{q'-}\c6 c_{q'+}\c4 c_{r+}^{\dagger}\c3 c_{r-}^{\dagger}\c7 c_{s-}\c8 c_{s+}\c6 c_{a+}^{\dagger}\c5 c_{a-}^{\dagger}\c2 c_{i-}\c1 c_{i+}\c1 c_{p+}^{\dagger}\c2 c_{p-}^{\dagger}\c8 c_{q+}^{\dagger}\c7 c_{q-}^{\dagger}}\\
+&=\delta_{p'r}\delta_{p'r}\delta_{q'a}\delta_{q'a}\delta_{sq}\delta_{sq}\delta_{ip}\delta_{ip}
+\end{align*}
+Again the sum runs over all possible indexes, i.e, at one point we will have $p'=i$, $q'=a$, $s=q$ and $r=p$, and we get contribution. After some argumentation, we obtain
+\begin{equation}
+E_{CCD}=2\epsilon_1+2\epsilon_2-g-\frac{1}{2}g\sum_{ia}t_i^a
+\end{equation}
 
 \section{Appendices}
 \subsection*{Appendix A}
