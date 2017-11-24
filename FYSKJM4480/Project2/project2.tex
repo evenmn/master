@@ -473,7 +473,7 @@ We can only spot 5 eigenvalue lines, even though we know it should be 6 and the 
 Need probability plot as well
 
 \subsection*{2C}
-The single excited determinants ($|\Phi_i^a\rangle$) will not contribute to the exact eigefunction since we require $p=\bar{p}$, i.e two particles with opposite spin shall always lay on the same level. We will work with CID (Configuration-Interaction Doubles), but have in mind that it is the same as CISD (Configuration-Interaction Singles-Doubles). In general the doubly excited determinants can be written
+The single excited determinants ($|\Phi_i^a\rangle$) will not contribute to the exact eigefunction since we require $p=\bar{p}$, i.e two particles with opposite spin shall always lay on the same level. We will work with Configuration-Interaction Doubles (CID), but have in mind that it is the same as CConfiguration-Interaction Singles-Doubles (CISD). In general the doubly excited determinants can be written
 \begin{equation}
 |\Phi_{ij}^{ab}\rangle=c_a^{\dagger}c_b^{\dagger}c_ic_j|\Phi\rangle
 \end{equation}
@@ -481,11 +481,36 @@ In our case the first unoccupied index $a$ has positive spin, while the second h
 \begin{equation}
 |\Phi_{i\bar{i}}^{a\bar{a}}\rangle=c_{a+}^{\dagger}c_{a-}^{\dagger}c_{i+}c_{i-}|\Phi\rangle=\hat{P}_a^{\dagger}\hat{P}_i|\Phi\rangle
 \end{equation}
+The CISD space is given by
+\begin{equation}
+\hat{H}_{CISD}=\begin{pmatrix}
+E_{SCF}&0&\hat{H}_{OD}\\
+0&\hat{H}_{SS}&\hat{H}_{SD}\\
+\hat{H}_{D0}&\hat{H}_{DS}&\hat{H}_{DD}
+\end{pmatrix}
+\end{equation}
+Since CID now corresponds to CISD, we get
+\begin{equation}
+\hat{H}_{CID}=\begin{pmatrix}
+H_{12}^{12}&0&H_{12}^{34}\\
+0&H_{13}^{13}&H_{13}^{34}\\
+H_{34}^{12}&H_{34}^{13}&H_{34}^{34}
+\end{pmatrix}=
+\begin{pmatrix}
+-2-g&0&0\\
+0&-4-g&-1/2g\\
+0&-1/2g&-10-g
+\end{pmatrix}
+\end{equation}
+Where all the matrix elements have been calculating in a earlier exercise. We can see that we only pick 7 elements out of 36, and we miss 29 FCI basis functions. In figure (\ref{fig:groundstate_comparison}) we ground-state energy from FCI is plotted together with the CID ground-state energy, and we see that the FCI energy is bending as function of $g$, while the CID energy is linear. They are the same at $g=0$.
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=100mm]{groundstate_comparison.png}
-\caption{NEED CAPTION \label{fig:groundstate_comparison}}
+\caption{The FCI and CID ground-state (GS) energies as functions of g \label{fig:groundstate_comparison}}
 \end{figure}
+
+
 
 \subsection*{2D}
 The non-degenerate Rayleigh-Schrodinger Perturbation Theory (RSPT) energy is given by
@@ -575,6 +600,44 @@ Again the sum runs over all possible indexes, i.e, at one point we will have $p'
 \begin{equation}
 E_{CCD}=2\epsilon_1+2\epsilon_2-g-\frac{1}{2}g\sum_{ia}t_i^a
 \end{equation}
+
+\subsection*{3D}
+The normal ordered Fock operator is given by 
+\begin{equation}
+\{\hat{F}\}=\hat{H}_0^{(1qp)}+\hat{V}^{(1qp)}
+\end{equation}
+where $(1qp)$ indicates one quasi particle. If we apply Wick's theorem on $\hat{H}_0$, we get
+\begin{align}
+\hat{H}_0&=\sum_{p\sigma}\epsilon_{p\sigma}^{\dagger}c_{p\sigma}\notag\\
+&=\sum_{p\sigma}\epsilon_{p}\{c_{p\sigma}^{\dagger}c_{p\sigma}\}+\sum_{p\sigma}\epsilon_p\wick{\c c_{p\sigma}^{\dagger}\c c_{p\sigma}}\notag\\
+&=\sum_{i\sigma}\epsilon_{i}\{c_{i\sigma}^{\dagger}c_{i\sigma}\}+\sum_{i\sigma}\epsilon_i\wick{\c c_{i\sigma}^{\dagger}\c c_{i\sigma}}+\sum_{a\sigma}\epsilon_{a}\{c_{a\sigma}^{\dagger}c_{a\sigma}\}+\sum_{a\sigma}\epsilon_a\wick{\c c_{a\sigma}^{\dagger}\c c_{a\sigma}}\notag\\
+&=\sum_{i\sigma}\epsilon_{i}\{c_{i\sigma}^{\dagger}c_{i\sigma}\}+\sum_i\epsilon_i+\sum_{a\sigma}\epsilon_{a}\{c_{a\sigma}^{\dagger}c_{a\sigma}\}\notag\\
+&=\sum_{p\sigma}\epsilon_{p}\{c_{p\sigma}^{\dagger}c_{p\sigma}\}+\sum_i\epsilon_i
+\end{align} 
+where the first term corresponds to one quasi particle and the second corresponds to zero quasi particles. For the potential operator I will only calculate the $(1qp)$ part, which is the terms we get from Wick's theorem with one contraction. 
+\begin{align}
+\hat{V}^{(1qp)}&=-\frac{1}{2}g\sum_{pq}(\wick{\c1 c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}\c1 c_{q+}+c_{p+}^{\dagger}\c2 c_{p-}^{\dagger}\c2 c_{q-}c_{q+}})\notag\\
+&=-\frac{1}{2}g\sum_{pq}(\wick{\c1 c_{i+}^{\dagger}c_{i-}^{\dagger}c_{j-}\c1 c_{j+}+c_{i+}^{\dagger}\c2 c_{i-}^{\dagger}\c2 c_{j-}c_{j+}})\notag\\
+&=-\frac{1}{2}g\sum_{ij}(\delta_{ij}c_{i-}^{\dagger}c_{j-}+\delta_{ij}c_{i+}^{\dagger}c_{j+})\notag\\
+&=-\frac{1}{2}g\sum_{i\sigma}c_{i\sigma}^{\dagger}c_{i\sigma}
+\end{align}
+where we observed that all the unoccupied operators became zero since $c_{p}^{\dagger}c_{q}=b_{p}^{\dagger}b_{q}=0$. We then use the definition of the Fock operator:
+\begin{align}
+\hat{F}_N&=\hat{H}_0^{(1qp)}+\hat{V}^{(1qp)}\notag\\
+&=\sum_{i\sigma}\epsilon_{i}\{c_{i\sigma}^{\dagger}c_{i\sigma}\}+\sum_{a\sigma}\epsilon_{a}\{c_{a\sigma}^{\dagger}c_{a\sigma}\}-\frac{1}{2}g\sum_{i\sigma}c_{i\sigma}^{\dagger}c_{i\sigma}\notag\\
+&=\sum_{i\sigma}(\epsilon_i-\frac{1}{2}g)\{c_{i\sigma}^{\dagger}c_{i\sigma}\}+\sum_{a\sigma}\epsilon_a\{c_{a+}^{\dagger}c_{a\sigma}\}\notag\\
+&=\sum_{p\sigma}f_p\{c_{p\sigma}^{\dagger}c_{p\sigma}\}
+\end{align}
+with $f_i=\epsilon_i-\frac{1}{2}g$ and $f_a=\epsilon_a$.
+
+Our Baker-Campbell-Hausdorff (BCH) exponential expansion $e^{\hat{T}}$ has two terms, implying that the amplitude equation can be written as a polynomial of order no higher than 5 $\Rightarrow$ 2 nested commutators. 
+
+The amplitude equations are in general given by
+\begin{equation}
+F_{ij}^{ab}(t)=\langle\Phi_{ij}^{ab}|\{\hat{H}_Ne^{\hat{T}}\}_c|\Phi\rangle=0
+\end{equation}
+
+The $\{...\}_c$ notation is only used around two (or more) operators, and indicates that the term contains \textit{at least} one contraction between both operators. It is frequently used when we have a large number of terms with contraction between two certain operators, so we can replace all those terms with a $\{...\}_c$ notation. 
 
 \section{Appendices}
 \subsection*{Appendix A}
