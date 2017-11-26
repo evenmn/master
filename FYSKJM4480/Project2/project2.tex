@@ -31,11 +31,6 @@
 
 \setcounter{secnumdepth}{4}
 
-%\titleformat{\paragraph}
-%{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
-%\titlespacing*{\paragraph}
-%{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-
 
 \title{FYS-KJM4480 - Quantum mechanics for many-particle systems \\\vspace{2mm} \Large{Project 2}}
 \author{\large Even Marius Nordhagen}
@@ -93,7 +88,16 @@ and finally
 \hat{S}_z=\frac{1}{2}\sum_{p\sigma}\sigma c_{p\sigma}^{\dagger}c_{p\sigma}.
 \end{equation}
 
+If $\hat{H}$, $\hat{P}$ and $\hat{S}_z$ commute, we can reduce this problem to an eigenvalue problem on the form
+\begin{align*}
+\hat{H}|\Psi_k;S_z,P\rangle&=E_{k,S_z,P}|\Psi_k;S_z,P\rangle\\
+\hat{P}|\Psi_k;S_z,P\rangle&=S_z|\Psi_k;S_z,P\rangle\\
+\hat{S}_z|\Psi_k;S_z,P\rangle&=P|\Psi_k;S_z,P\rangle
+\end{align*}
+where the eigenvalues are the energies, momentums and the spin in z-direction respectively. We need to check this:
+
 \subsection*{1A}
+Firstly, we check if the Hamiltonian commutes with the spin-projection operator, and since $\hat{H}=\hat{H}_0+\hat{V}$, we can split this calculation into two simpler calculations. Let us start with $[\hat{H}_0,\hat{S}_z]$:
 \begin{align}
 [\hat{H}_0,\hat{S}_z]&=\bigg[\sum_{p\sigma}\epsilon_pc_{p\sigma}^{\dagger}c_{p\sigma},\frac{1}{2}\sum_{q\sigma}\sigma c_{q\sigma}^{\dagger}c_{q\sigma}\bigg]\notag\\
 &=\frac{1}{2}\sum_{pq\sigma}\epsilon_{p}\sigma(c_{p\sigma}^{\dagger}c_{p\sigma}c_{q\sigma}^{\dagger}c_{q\sigma}-c_{q\sigma}^{\dagger}c_{q\sigma}c_{p\sigma}^{\dagger}c_{p\sigma})
@@ -114,7 +118,7 @@ We get contribution only when $q=p$
 [\hat{H}_0,\hat{S}_z]=\frac{1}{2}\sum_{p\sigma}\epsilon_p(c_{p\sigma}^{\dagger}c_{p\sigma}-c_{p\sigma}^{\dagger}c_{p\sigma})=0
 \end{equation}
 
-Also the potential commutes with $\hat{S}_z$:
+So $\hat{H}_0$ commutes with the spin-projection operator. Further we need to work out  $[\hat{V},\hat{S}_z]$:
 \begin{align}
 [\hat{V},\hat{S}_z]&=\bigg[-\frac{1}{2}g\sum_{pq}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+},\frac{1}{2}\sum_{r\sigma}\sigma c_{r\sigma}^{\dagger}c_{r\sigma}\bigg]\notag\\
 &=-\frac{1}{4}\sum_{pqr\sigma}\sigma(c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{r\sigma}^{\dagger}c_{r\sigma}-c_{r\sigma}^{\dagger}c_{r\sigma}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+})
@@ -140,13 +144,40 @@ Again the first terms cancel, and we are left with
 In the first two terms we will get contributions when $r=q$, and for the two last terms we will get contributions when $r=p$. We can easily see that the two first terms become equal to the two last terms, and will cancel each other.
 
 \subsection*{1B}
+Secondly, we check if the Hamiltonian commutes with the counter-operator. Again we split up:
+\begin{align*}
+[\hat{H}_0, \hat{P}]&=\Big[\sum_{p\sigma}\epsilon_pc_{p\sigma}^{\dagger}c_{p\sigma},\sum_q\hat{P}_q\hat{P}_q\Big]\\
+&= \begin{aligned}[t]
+\sum_{pq}\epsilon_p\Big[&(c_{p+}^{\dagger}c_{p+}c_{q+}^{\dagger}c_{q-}^{\dagger}c_{q-}c_{q+}
++c_{p-}^{\dagger}c_{p-}c_{q+}^{\dagger}c_{q-}^{\dagger}c_{q-}c_{q+})\\
+&(c_{q+}^{\dagger}c_{q-}^{\dagger}c_{q-}c_{q+}c_{p+}^{\dagger}c_{p+}
++c_{q+}^{\dagger}c_{q-}^{\dagger}c_{q-}c_{q+}c_{p-}^{\dagger}c_{p-})\Big]
+\end{aligned}
+\end{align*}
+We can immediately see that each term only will allow one (non-zero) contraction when Wick's theorem is used:
+\begin{equation}
+c_{p+}^{\dagger}c_{p+}c_{q+}^{\dagger}c_{q-}^{\dagger}c_{q-}c_{q+}=\{c_{p+}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p+}c_{q-}c_{q+}\}+\delta_{pq}c_{p+}^{\dagger}c_{q-}^{\dagger}c_{q-}c_{q+}
+\end{equation}
+\begin{equation}
+c_{p-}^{\dagger}c_{p-}c_{q+}^{\dagger}c_{q-}^{\dagger}c_{q-}c_{q+}=\{c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{q-}c_{q+}\}-\delta_{pq}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}c_{q+}
+\end{equation}
+\begin{equation}
+c_{q+}c_{q-}c_{p+}^{\dagger}c_{p+}c_{q+}^{\dagger}c_{q-}^{\dagger}=\{c_{p+}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p+}c_{q-}c_{q+}\}+\delta_{qp}c_{q+}^{\dagger}c_{q-}^{\dagger}c_{q-}c_{p+}
+\end{equation}
+\begin{equation}
+c_{q+}c_{q-}c_{p-}^{\dagger}c_{p-}c_{q+}^{\dagger}c_{q-}^{\dagger}=\{c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{q-}c_{q+}\}-\delta_{qp}c_{q-}^{\dagger}c_{q+}^{\dagger}c_{p-}c_{q+}
+\end{equation}
+Recall that we sum over all possible $p$ and $q$s, and for each $p$ we will have a $q$ which is equal. Due to the Kronecker delta, we only get contributions when this happens ($p=q$), but a watchful eye will see that the terms cancel in this case $\Rightarrow [\hat{H}_0,\hat{P}]=0$.
+
+
+
 \subsection*{1C}
-We are supposed to show that $\hat{P}$ commutes with $\hat{S}_z$, with other words $[\hat{P},\hat{S}_z]=0$
+The last commutator we need to check is $[\hat{P},\hat{S}_z]$:
 \begin{align}
 [\hat{P},\hat{S}_z]&=[\sum_p\hat{P}_p^{\dagger}\hat{P}_p,\frac{1}{2}\sum_{q\sigma}\sigma c_{q\sigma}^{\dagger}c_{q\sigma}]\notag\\
 &=\frac{1}{2}\sum_{pq\sigma}\sigma[\hat{P}_p^{\dagger}\hat{P}_p,c_{q\sigma}^{\dagger}c_{q\sigma}]\notag\\
 &=\frac{1}{2}\sum_{pq}\Big(+(c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+}c_{q+}^{\dagger}c_{q+}-c_{q+}^{\dagger}c_{q+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+})\notag\\
-&\quad-(c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+}c_{q-}^{\dagger}c_{q-}-c_{q-}^{\dagger}c_{q-}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+})\Big)
+&\mathrel{\phantom{=}}-(c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+}c_{q-}^{\dagger}c_{q-}-c_{q-}^{\dagger}c_{q-}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+})\Big)
 \end{align}
 We get four terms, which will be worked out separately:
 \begin{equation}
@@ -163,9 +194,11 @@ c_{q-}^{\dagger}c_{q-}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+} = \{c_{p+}^{\
 \end{equation}
 Observe that the first terms cancel, and we are left with terms of $\delta_{pq}$ and $\delta_{qp}$. Those will contribute if and only if $p=q$, which happens exactly once since both $p$ and $q$ runs over all possible states. 
 \begin{align}
-[\hat{P}, \hat{S}_z]=&\frac{1}{2}\sum_p\Big((c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+}+c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p+}c_{p-})-\notag\\
-&(c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+}+c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p+}c_{p-})\Big)\\
-=&0
+[\hat{P}, \hat{S}_z]&= \begin{aligned}[t]
+\frac{1}{2}\sum_p\Big(&(c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+}+c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p+}c_{p-})-\notag\\
+&(c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p-}c_{p+}+c_{p+}^{\dagger}c_{p-}^{\dagger}c_{p+}c_{p-})\Big)
+\end{aligned}\\
+&=0
 \end{align}
 
 
@@ -175,15 +208,16 @@ Observe that the first terms cancel, and we are left with terms of $\delta_{pq}$
 \end{equation}
 Will only include terms which contribute, and we obtain
 \begin{align}
-\hat{P}_p\hat{P}_q^{\dagger}&=\sum_{pq}c_{p-}c_{p+}c_{q+}^{\dagger}c_{q-}^{\dagger}\notag\\
-&=\sum_{pq}(\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}+\{\wick{\c c_{p-}c_{p+}c_{q+}^{\dagger}\c c_{q-}^{\dagger}}\}+\{\wick{c_{p-}\c c_{p+}\c c_{q+}^{\dagger}c_{q-}^{\dagger}}\}+\{\wick{\c2 c_{p-}\c1 c_{p+}\c1 c_{q+}^{\dagger}\c2 c_{q-}^{\dagger}}\})\notag\\
-&=\sum_{pq}(\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}-\delta_{pq}c_{p+}c_{q+}^{\dagger}-\delta_{pq}c_{p-}c_{q-}^{\dagger}+\delta_{pq}\delta_{pq})
+\hat{P}_p\hat{P}_q^{\dagger}
+&=c_{p-}c_{p+}c_{q+}^{\dagger}c_{q-}^{\dagger}\notag\\
+&=\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}+\wick{\c c_{p-}c_{p+}c_{q+}^{\dagger}\c c_{q-}^{\dagger}}+\wick{c_{p-}\c c_{p+}\c c_{q+}^{\dagger}c_{q-}^{\dagger}}+\wick{\c2 c_{p-}\c1 c_{p+}\c1 c_{q+}^{\dagger}\c2 c_{q-}^{\dagger}}\notag\\
+&=\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}-\delta_{pq}c_{p+}c_{q+}^{\dagger}-\delta_{pq}c_{p-}c_{q-}^{\dagger}+\delta_{pq}\delta_{pq}
 \end{align}
 due to Wick's theorem. Several terms vanish since a delta function of operators of opposite spin does not contribute, i.e. $\delta_{p+q-}=0$. Calculating $\hat{P}_q^{\dagger}\hat{P}_p$ is a simple task:
 \begin{equation}
 \hat{P}_q^{\dagger}\hat{P}_p=\{c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{p+}\}.
 \end{equation}
-Furthermore we will omit the spin in delta functions, because it does not affect the delta function as long as the spin is equally directed. We set $p=q$, but not in the Dirac delta functions:
+Furthermore we will omit the spin in delta functions, because it does not affect the delta function as long as the spin is equally directed. As always the deltas $\delta_{pq}$ contribute if and only if $p=q$, so we can set $q=p$ in the operators after the first delta in each term:
 \begin{align}
 \hat{P}_p\hat{P}_q^{\dagger}-\hat{P}_q^{\dagger}\hat{P}_p&=-\delta_{pq}c_{q+}^{\dagger}c_{q+}-\delta_{pq}c_{q-}^{\dagger}c_{q-}+\delta_{pq}\delta_{qq}\notag\\
 &=\delta_{pq}(1-c_{q+}^{\dagger}c_{q+}-c_{q-}^{\dagger}c_{q-})\notag\\
@@ -191,39 +225,56 @@ Furthermore we will omit the spin in delta functions, because it does not affect
 \end{align}
 
 \subsection*{1E}
-A fundamental property of the annihilation operator states that a such operator acting on the vacuum state becomes zero. This property will be used multiple times henceforce to get rid of terms, and the approach will often be to move the annihilation operator(s) such that this happens. 
+A fundamental property of the annihilation operator states that a such operator acting on the vacuum state becomes zero. This property will be used multiple times henceforce to get rid of terms, and the approach will often be to move the annihilation operator(s) all the way to the right such that this happens. 
 We have $N=4$, thus 
 \begin{align}
 |\Phi\rangle&=c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}|-\rangle\\
 &=\hat{P}_1^{\dagger}\hat{P}_2^{\dagger}|-\rangle.
 \end{align}
-$M$ is the number of states, with $p$ as an index
+$M$ is the number of states, with $p$ as the index
 \begin{align}
 \hat{P}&=\sum_{p=1}^M\hat{P}_p^{\dagger}\hat{P}_p\\
 &=\hat{P}_1^{\dagger}\hat{P}_1+\hat{P}_2^{\dagger}\hat{P}_2+\hat{P}_3^{\dagger}\hat{P}_3+\hat{P}_4^{\dagger}\hat{P}_4
 \end{align}
 since $M=4$. 
 \begin{align}
-\hat{P}|\Phi\rangle&=\Big(\hat{P}_1^{\dagger}\hat{P}_1\hat{P}_1^{\dagger}\hat{P}_2^{\dagger}+\hat{P}_2^{\dagger}\hat{P}_2\hat{P}_1^{\dagger}\hat{P}_2^{\dagger}+...\Big)|-\rangle\\
-&=\Big(\delta_{11}\hat{P}_1^{\dagger}\hat{P}_2^{\dagger}+\delta_{22}\hat{P}_1^{\dagger}\hat{P}_2^{\dagger}\Big)|-\rangle\\
-&=2|\Phi\rangle
+\hat{P}|\Phi\rangle&=\sum_p\hat{P}_p^{\dagger}\hat{P}_p\hat{P}_1^{\dagger}\hat{P}_2^{\dagger}|-\rangle
 \end{align}
-where the two last terms in $\hat{P}$ do not contribute since $|\Phi\rangle$ does not contain creation operators with index 3 or 4. This computation was quite short since we could replace all operators with $\hat{P}$ which is not always the case, something we will see when calculating $\hat{S}_z|\Phi\rangle$.
+The result obtained in exercise 1D will not be used to move $\hat{P}_p$ (the only operator containing annihilation operators) to the right. 
+\begin{align*}
+\hat{P}|\Phi\rangle
+&=\sum_p\hat{P}_p^{\dagger}\Big(\hat{P}_1^{\dagger}\hat{P}_p+\delta_{p1}(1-\hat{n}_1)\Big)\hat{P}_2^{\dagger}|-\rangle\\
+&=\sum_p\hat{P}_p^{\dagger}\hat{P}_1^{\dagger}\hat{P}_p\hat{P}_2^{\dagger}|-\rangle+\sum_p\delta_{p1}\hat{P}_p^{\dagger}\hat{P}_2^{\dagger}|-\rangle+\sum_p\delta_{p1}\hat{P}_p^{\dagger}\hat{n}_1\hat{P}_2^{\dagger}|-\rangle
+\end{align*}
+The last term vanishes because the number operator is hermitian, and can therefore be moved to the right. The second term becomes $|\Phi\rangle$ since the delta "requires" $p=1$. We are left with the first term to work out, and again we use equation (\ref{eq:ex1d}):
+\begin{align*}
+\sum_p\hat{P}_p^{\dagger}\hat{P}_1^{\dagger}\hat{P}_p\hat{P}_2^{\dagger}|-\rangle
+&=\sum_p\hat{P}_p^{\dagger}\hat{P}_1^{\dagger}\hat{P}_2^{\dagger}\hat{P}_p|-\rangle+\sum_p\hat{P}_p^{\dagger}\hat{P}_1^{\dagger}\delta_{p2}(1-\hat{n}_2)|-\rangle\\
+&=\sum_p\delta_{p2}\hat{P}_p^{\dagger}\hat{P}_1^{\dagger}|-\rangle+\sum_p\hat{P}_p^{\dagger}\hat{P}_1^{\dagger}\hat{n}_2|-\rangle\\
+&=\hat{P}_2^{\dagger}\hat{P}_1^{\dagger}|-\rangle=|\Phi\rangle
+\end{align*}
+On line number one the first term vanished because an annihilation operator acted on the vacuum state and on the second line the last term vanished since it contained a number operator. In total we then have:
+\begin{equation}
+\hat{P}|\Phi\rangle=|\Phi\rangle+|\Phi\rangle=2|\Phi\rangle
+\end{equation}
+The calculations above are pretty well-commented, but since the same operations are repeating, I do not consider that much comments as necessary in the coming calculations. For the $\hat{P}|\Phi\rangle$ calculation we were lucky since we could use pair creation and pair annihilation operators and could use the result from 1D. This is not always the case, something we will see when calculating $\hat{S}_z|\Phi\rangle$.
 \begin{align}
-\hat{S}_z=&\frac{1}{2}\sum_{p\sigma}\sigma c_{p\sigma}^{\dagger}c_{p\sigma}\\
-=&\frac{1}{2}\Big(c_{1+}^{\dagger}c_{1+}-c_{1-}^{\dagger}c_{1-}+c_{2+}^{\dagger}c_{2+}-c_{2-}^{\dagger}c_{2-}+\notag\\
-&c_{3+}^{\dagger}c_{3+}-c_{3-}^{\dagger}c_{3-}+c_{4+}^{\dagger}c_{4+}-c_{4-}^{\dagger}c_{4-}\Big)|-\rangle
+\hat{S}_z&=\frac{1}{2}\sum_{p\sigma}\sigma c_{p\sigma}^{\dagger}c_{p\sigma}\\
+&=\frac{1}{2}\Big(c_{1+}^{\dagger}c_{1+}-c_{1-}^{\dagger}c_{1-}+c_{2+}^{\dagger}c_{2+}-c_{2-}^{\dagger}c_{2-}+\notag\\
+&\mathrel{\phantom{=}}c_{3+}^{\dagger}c_{3+}-c_{3-}^{\dagger}c_{3-}+c_{4+}^{\dagger}c_{4+}-c_{4-}^{\dagger}c_{4-}\Big)|-\rangle
 \end{align}
 \begin{align}
-\hat{S}_z|\Phi\rangle=&\frac{1}{2}\Big(c_{1+}^{\dagger}c_{1+}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}-c_{1-}^{\dagger}c_{1-}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}\notag\\
-&+c_{2+}^{\dagger}c_{2+}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}-c_{2-}^{\dagger}c_{2-}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}\Big)|-\rangle\\
-=&\frac{1}{2}\Big(\wick{c_{1+}^{\dagger}\c1 c_{1+}\c1 c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}-c_{1-}^{\dagger}\c2 c_{1-}c_{1+}^{\dagger}\c2 c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}}\notag\\
-&\wick{+c_{2+}^{\dagger}\c3 c_{2+}c_{1+}^{\dagger}c_{1-}^{\dagger}\c3 c_{2+}^{\dagger}c_{2-}^{\dagger}-c_{2-}^{\dagger}\c4 c_{2-}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}\c4 c_{2-}^{\dagger}}\Big)|-\rangle\\
-=&\frac{1}{2}\Big(\delta_{1+1+}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}-\delta_{1-1-}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}\notag\\\
-&+\delta_{2+2+}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}-\delta_{2-2-}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}\Big)|-\rangle\\
-=&\frac{1}{2}(1-1+1-1)|\Phi\rangle\\
-=&0|\Phi\rangle
+\hat{S}_z|\Phi\rangle
+&=\frac{1}{2}\Big(c_{1+}^{\dagger}c_{1+}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}-c_{1-}^{\dagger}c_{1-}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}\notag\\
+&\mathrel{\phantom{=}}+c_{2+}^{\dagger}c_{2+}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}-c_{2-}^{\dagger}c_{2-}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}\Big)|-\rangle\\
+&=\frac{1}{2}\Big(\wick{c_{1+}^{\dagger}\c1 c_{1+}\c1 c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}-c_{1-}^{\dagger}\c2 c_{1-}c_{1+}^{\dagger}\c2 c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}}\notag\\
+&\mathrel{\phantom{=}}+\wick{c_{2+}^{\dagger}\c3 c_{2+}c_{1+}^{\dagger}c_{1-}^{\dagger}\c3 c_{2+}^{\dagger}c_{2-}^{\dagger}-c_{2-}^{\dagger}\c4 c_{2-}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}\c4 c_{2-}^{\dagger}}\Big)|-\rangle\\
+&=\frac{1}{2}\Big(\delta_{1+1+}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}-\delta_{1-1-}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}\notag\\\
+&\mathrel{\phantom{=}}+\delta_{2+2+}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}-\delta_{2-2-}c_{1+}^{\dagger}c_{1-}^{\dagger}c_{2+}^{\dagger}c_{2-}^{\dagger}\Big)|-\rangle\\
+&=\frac{1}{2}(1-1+1-1)|\Phi\rangle\\
+&=0|\Phi\rangle
 \end{align}
+PS: I know this was a tedious approach, and perhaps it would be better to not write out the sum
 
 \subsection*{1F}
 Observe that $|1\bar{1}2\bar{2}\rangle=|\Phi\rangle$.
@@ -370,17 +421,18 @@ I will start with the first one:
 \end{equation}
 Wick's theorem is used to calculate this, and since it requires normal ordering, the vacuum state will kill all strings including an annihilation operator. In this case we therefore get four terms which come from single contraction. We will get delta functions, which only contribute when both indexes are equal, so for instance if we get $\delta_{rp}$ we need to set $r=p$ since $r$ runs over all possible states.
 \begin{align}
-\hat{H}_0|p\bar{p}q\bar{q}\rangle =& \sum_{r\sigma}\epsilon_r\{c_{r\sigma}^{\dagger}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}c_{r\sigma}\}|-\rangle\notag\\
-&+\sum_{r\sigma}\epsilon_r\delta_{r\sigma p+}c_{r\sigma}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}|-\rangle\notag\\
-&-\sum_{r\sigma}\epsilon_r\delta_{r\sigma p-}c_{r\sigma}^{\dagger}c_{p+}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}|-\rangle\notag\\
-&+\sum_{r\sigma}\epsilon_r\delta_{r\sigma q+}c_{r\sigma}^{\dagger}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}^{\dagger}|-\rangle\notag\\
-&-\sum_{r\sigma}\epsilon_r\delta_{r\sigma q-}c_{r\sigma}^{\dagger}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}|-\rangle\\
-=&(\epsilon_pc_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}-\epsilon_pc_{p-}^{\dagger}c_{p+}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}\notag\\
-&+\epsilon_qc_{q+}^{\dagger}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}^{\dagger}-\epsilon_qc_{q-}^{\dagger}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger})|-\rangle\\
-=&(\epsilon_pc_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}+\epsilon_pc_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}\notag\\
-&+\epsilon_qc_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}+\epsilon_qc_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger})|-\rangle\\
-=&2(\epsilon_p+\epsilon_q)(\hat{P}_p^{\dagger}\hat{P}_p^{\dagger})|-\rangle\\
-=&2(2-p-q)|p\bar{p}q\bar{q}\rangle
+\hat{H}_0|p\bar{p}q\bar{q}\rangle 
+&= \sum_{r\sigma}\epsilon_r\{c_{r\sigma}^{\dagger}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}c_{r\sigma}\}|-\rangle\notag\\
+&\mathrel{\phantom{=}}+\sum_{r\sigma}\epsilon_r\delta_{r\sigma p+}c_{r\sigma}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}|-\rangle\notag\\
+&\mathrel{\phantom{=}}-\sum_{r\sigma}\epsilon_r\delta_{r\sigma p-}c_{r\sigma}^{\dagger}c_{p+}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}|-\rangle\notag\\
+&\mathrel{\phantom{=}}+\sum_{r\sigma}\epsilon_r\delta_{r\sigma q+}c_{r\sigma}^{\dagger}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}^{\dagger}|-\rangle\notag\\
+&\mathrel{\phantom{=}}-\sum_{r\sigma}\epsilon_r\delta_{r\sigma q-}c_{r\sigma}^{\dagger}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}|-\rangle\\
+&=(\epsilon_pc_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}-\epsilon_pc_{p-}^{\dagger}c_{p+}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}\notag\\
+&\mathrel{\phantom{=}}+\epsilon_qc_{q+}^{\dagger}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}^{\dagger}-\epsilon_qc_{q-}^{\dagger}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger})|-\rangle\\
+&=(\epsilon_pc_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}+\epsilon_pc_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}\notag\\
+&\mathrel{\phantom{=}}+\epsilon_qc_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}+\epsilon_qc_{p+}^{\dagger}c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger})|-\rangle\\
+&=2(\epsilon_p+\epsilon_q)(\hat{P}_p^{\dagger}\hat{P}_p^{\dagger})|-\rangle\\
+&=2(2-p-q)|p\bar{p}q\bar{q}\rangle
 \end{align} 
 where $\xi=1$ is assumed. We then get
 \begin{equation}
@@ -559,12 +611,10 @@ The general CCD wavefunction is as following
 Because our system contains of only four particles, higher order terms do not appear. 
 
 \subsection*{3B}
-\begin{equation}
-|\Psi_{CID}\rangle=(1+\hat{C}_2)|\phi\rangle=(1+\hat{T})|\Phi\rangle
-\end{equation}
-\begin{equation}
-|\Psi_{CCD}\rangle=|\Psi_{CID}\rangle+(1/2\hat{T}^2)|\Phi\rangle
-\end{equation}
+\begin{align}
+|\Psi_{CID}\rangle&=(1+\hat{C}_2)|\phi\rangle=(1+\hat{T})|\Phi\rangle\\
+|\Psi_{CCD}\rangle&=|\Psi_{CID}\rangle+(1/2\hat{T}^2)|\Phi\rangle
+\end{align}
 
 \subsection*{3C}
 \begin{equation}
@@ -577,8 +627,8 @@ The first term is already calculated, and we found it to be $(2(\epsilon_p+\epsi
 
 Furthermore we work out the second term. Recall that $a$ is an unoccupied index, $i$ is occupied and $p, , rq$ and $s$ are arbitrary indexes. Because of $\hat{H}$ we can immediately see that the term again can be split up in two new terms:
 \begin{align}
-\langle\Phi|\hat{H}|\Phi\rangle=&\langle p'\bar{p}'q'\bar{q}'|(\sum_r(r-1)\hat{n}_r)(\sum_{ia}t_i^a\hat{P}_a^{\dagger}\hat{P}_i)|p\bar{p}q\bar{q}\rangle\notag\\
-&+\langle p'\bar{p}'q'\bar{q}'|-\frac{1}{2}g(\sum_{r}\hat{P}_r^{\dagger})(\sum_s\hat{P}_s)(\sum_{ia}t_i^a\hat{P}_a^{\dagger}\hat{P}_i)|p\bar{p}q\bar{q}\rangle
+\langle\Phi|\hat{H}|\Phi\rangle&=\langle p'\bar{p}'q'\bar{q}'|(\sum_r(r-1)\hat{n}_r)(\sum_{ia}t_i^a\hat{P}_a^{\dagger}\hat{P}_i)|p\bar{p}q\bar{q}\rangle\notag\\
+&\mathrel{\phantom{=}}+\langle p'\bar{p}'q'\bar{q}'|-\frac{1}{2}g(\sum_{r}\hat{P}_r^{\dagger})(\sum_s\hat{P}_s)(\sum_{ia}t_i^a\hat{P}_a^{\dagger}\hat{P}_i)|p\bar{p}q\bar{q}\rangle
 \end{align}
 We first examine the first of these terms:
 \begin{align*}
@@ -593,7 +643,8 @@ Further we need to calculate the second term.
 \end{align}
 We will now use Wick's theorem on the operators. On the same basis as for the first term, only terms without annihilation operators will contribute. There are several possible fully contracted terms, but we need to keep in mind that if an arbitrary operator has contracted to say an occupied index, it can only be contracted to occupied indexes. The fully contracted term is therefore 
 \begin{align*}
-\{\hat{P}_{p'}\hat{P}_{q'}\hat{P}_r^{\dagger}\hat{P}_s\hat{P}_a^{\dagger}\hat{P}_i\hat{P}_p^{\dagger}\hat{P}_q^{\dagger}\}_{fc}&=\wick{\c3 c_{p'-}\c4 c_{p'+}\c5 c_{q'-}\c6 c_{q'+}\c4 c_{r+}^{\dagger}\c3 c_{r-}^{\dagger}\c7 c_{s-}\c8 c_{s+}\c6 c_{a+}^{\dagger}\c5 c_{a-}^{\dagger}\c2 c_{i-}\c1 c_{i+}\c1 c_{p+}^{\dagger}\c2 c_{p-}^{\dagger}\c8 c_{q+}^{\dagger}\c7 c_{q-}^{\dagger}}\\
+\{\hat{P}_{p'}\hat{P}_{q'}\hat{P}_r^{\dagger}\hat{P}_s\hat{P}_a^{\dagger}\hat{P}_i\hat{P}_p^{\dagger}\hat{P}_q^{\dagger}\}_{fc}
+&=\wick{\c2 c_{p'-}\c1 c_{p'+}\c6 c_{q'-}\c5 c_{q'+}\c1 c_{r+}^{\dagger}\c2 c_{r-}^{\dagger}\c4 c_{s-}\c3 c_{s+}\c5 c_{a+}^{\dagger}\c6 c_{a-}^{\dagger}\c2 c_{i-}\c1 c_{i+}\c1 c_{p+}^{\dagger}\c2 c_{p-}^{\dagger}\c3 c_{q+}^{\dagger}\c4 c_{q-}^{\dagger}}\\
 &=\delta_{p'r}\delta_{p'r}\delta_{q'a}\delta_{q'a}\delta_{sq}\delta_{sq}\delta_{ip}\delta_{ip}
 \end{align*}
 Again the sum runs over all possible indexes, i.e, at one point we will have $p'=i$, $q'=a$, $s=q$ and $r=p$, and we get contribution. After some argumentation, we obtain
@@ -632,12 +683,92 @@ with $f_i=\epsilon_i-\frac{1}{2}g$ and $f_a=\epsilon_a$.
 
 Our Baker-Campbell-Hausdorff (BCH) exponential expansion $e^{\hat{T}}$ has two terms, implying that the amplitude equation can be written as a polynomial of order no higher than 5 $\Rightarrow$ 2 nested commutators. 
 
-The amplitude equations are in general given by
+The CCD amplitude equations are in general given by
 \begin{equation}
 F_{ij}^{ab}(t)=\langle\Phi_{ij}^{ab}|\{\hat{H}_Ne^{\hat{T}}\}_c|\Phi\rangle=0
 \end{equation}
 
-The $\{...\}_c$ notation is only used around two (or more) operators, and indicates that the term contains \textit{at least} one contraction between both operators. It is frequently used when we have a large number of terms with contraction between two certain operators, so we can replace all those terms with a $\{...\}_c$ notation. 
+The $\{...\}_c$ notation is only used around two (or more) operators, and indicates that the term contains \textit{at least} one contraction between both operators. It is frequently used when we have a large number of terms with contraction between two certain operators, so we can replace all those terms with a $\{...\}_c$ notation. The amplitude equations simplify to
+\begin{equation}
+\langle\Phi_{i\bar{i}}^{a\bar{a}}|\{\hat{F}_N\hat{T}\}_c|\Phi\rangle+\langle\Phi_{i\bar{i}}^{a\bar{a}}|\{\hat{V}_N(1+\hat{T}+\frac{1}{2}\hat{T}^2)\}_c|\Phi\rangle=0
+\end{equation}
+because...
+
+
+\subsection*{3E}
+We will now work the terms out one by one:
+\subsubsection*{First term}
+\begin{equation}
+\langle\Phi_{i\bar{i}}^{a\bar{a}}|\{\hat{F}_N\hat{T}\}_c|\Phi\rangle=\sum_{jbp\sigma}f_pt_j^b\langle\Phi|c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}\{c_{p\sigma}^{\dagger}c_{p\sigma}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}\}_c|\Phi\rangle
+\end{equation}
+We apply generalized Wick's theorem on the operator string, and we are only interested in the fully contracted terms. We need to take care of the connection restriction
+\begin{align*}
+c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}\{c_{p\sigma}^{\dagger}c_{p\sigma}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}\}_c
+&=\wick{\c4 c_{i+}^{\dagger}\c3 c_{i-}^{\dagger}\c2 c_{a-}\c1 c_{a+}\c1 c_{p+}^{\dagger}\c1 c_{p+}\c1 c_{b+}^{\dagger}\c2 c_{b-}^{\dagger}\c3 c_{j-}\c4 c_{j+}}\notag\\
+&\mathrel{\phantom{=}}+\wick{\c4 c_{i+}^{\dagger}\c3 c_{i-}^{\dagger}\c2 c_{a-}\c1 c_{a+}\c5 c_{p+}^{\dagger}\c4 c_{p+}\c1 c_{b+}^{\dagger}\c2 c_{b-}^{\dagger}\c3 c_{j-}\c5 c_{j+}}\notag\\
+&\mathrel{\phantom{=}}+\wick{\c4 c_{i+}^{\dagger}\c3 c_{i-}^{\dagger}\c1 c_{a-}\c2 c_{a+}\c1 c_{p-}^{\dagger}\c1 c_{p-}\c2 c_{b+}^{\dagger}\c1 c_{b-}^{\dagger}\c3 c_{j-}\c4 c_{j+}}\notag\\
+&\mathrel{\phantom{=}}+\wick{\c3 c_{i+}^{\dagger}\c4 c_{i-}^{\dagger}\c2 c_{a-}\c1 c_{a+}\c5 c_{p-}^{\dagger}\c4 c_{p-}\c1 c_{b+}^{\dagger}\c2 c_{b-}^{\dagger}\c5 c_{j-}\c3 c_{j+}}\notag\\
+&=\delta_{ij}\delta_{ij}\delta_{ab}\delta_{ap}\delta_{pb}-\delta_{ip}\delta_{ij}\delta_{ab}\delta_{ab}\delta_{pj}\\
+&\mathrel{\phantom{=}}+\delta_{ij}\delta_{ij}\delta_{ap}\delta_{ab}\delta_{pb}-\delta_{ip}\delta_{ij}\delta_{ab}\delta_{ab}\delta_{pj}
+\end{align*}
+We insert back into the bracket, and get
+\begin{equation}
+\langle\Phi_{i\bar{i}}^{a\bar{a}}|\{\hat{F}_N\hat{T}\}_c|\Phi\rangle=f_at_i^a-f_it_i^a+f_at_i^a-f_it_i^a=2(f_a-f_i)t_i^a
+\end{equation}
+
+\subsubsection*{Second term}
+\begin{equation}
+\langle\Phi_{i\bar{i}}^{a\bar{a}}|\hat{V}_N|\Phi\rangle=-\frac{1}{2}\sum_{pq}\langle\Phi|c_{i+}^{\dagger}c_{i-}^{\dagger}\{c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}\}_c|\Phi\rangle
+\end{equation}
+We apply generalized Wick's theorem on the operator string, and we are only interested in the fully contracted terms. In general we should keep in mind that the Hamiltonian fraction is connected, but it will not make any difference for this specific string.
+\begin{align}
+c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}&=\wick{\c4 c_{i+}^{\dagger}\c3 c_{i-}^{\dagger}\c2 c_{a-}\c1 c_{a+}\c1 c_{p+}^{\dagger}\c2 c_{p-}^{\dagger}\c3 c_{q-}\c4 c_{q+}}\notag\\
+&=\delta_{iq}\delta_{iq}\delta_{ap}\delta_{ap}
+\end{align}
+There is only one non-zero fully contraction
+\begin{align}
+\langle\Phi_{i\bar{i}}^{a\bar{a}}|\hat{V}_N|\Phi\rangle&=-\frac{1}{2}g\sum_{pq}\delta_{iq}\delta_{iq}\delta_{ap}\delta_{ap}\langle\Phi|\Phi\rangle\notag\\
+&=-\frac{1}{2}g
+\end{align}
+
+\subsubsection*{Third term}
+\begin{align}
+\langle\Phi_{i\bar{i}}^{a\bar{a}}|\{\hat{V}_N\hat{T}\}_c|\Phi\rangle=-\frac{1}{2}g\sum_{pqjb}t_j^b\langle\Phi|c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}\{c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}\}_c|\Phi\rangle\notag
+\end{align}
+We apply generalized Wick's theorem on the operator string, and are only interested in the fully contracted terms:
+\begin{align}
+&(c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+})_{fc}\notag\\
+&=\wick{\c4 c_{i+}^{\dagger}\c3 c_{i-}^{\dagger}\c2 c_{a-}\c1 c_{a+}\c1 c_{p+}^{\dagger}\c2 c_{p-}^{\dagger}\c2 c_{q-}\c1 c_{q+}\c1 c_{b+}^{\dagger}\c2 c_{b-}^{\dagger}\c3 c_{j-}\c4 c_{j+}}
++\wick{\c2 c_{i+}^{\dagger}\c1c_{i-}^{\dagger}\c6 c_{a-}\c5 c_{a+}\c4 c_{p+}^{\dagger}\c3 c_{p-}^{\dagger}\c1 c_{q-}\c2 c_{q+}\c5 c_{b+}^{\dagger}\c6 c_{b-}^{\dagger}\c3 c_{j-}\c4 c_{j+}}\notag\\
+&=\delta_{ij}\delta_{ij}\delta_{ap}\delta_{ap}\delta_{qb}\delta_{qb}+\delta_{iq}\delta_{iq}\delta_{ab}\delta_{ab}\delta_{pj}\delta_{pj}
+\end{align}
+We get contribution from the first term when $j=i$, $p=a$ and $q=b$, and from the second when $q=i$, $b=a$ and $p=j$. Since $i$ and $a$ are fixed, $b$ and $j$ are respectively the only "free" parameters, which we need to sum over. We obtain
+\begin{align}
+\langle\Phi_{i\bar{i}}^{a\bar{a}}|\{\hat{V}_N\hat{T}\}_c|\Phi\rangle&=-\frac{1}{2}g\bigg(\sum_bt_i^b\delta_{ii}\delta_{ii}\delta_{aa}\delta_{aa}\delta_{bb}\delta_{bb}+\sum_jt_j^a\delta_{ii}\delta_{ii}\delta_{aa}\delta_{aa}\delta_{jj}\delta_{jj}\bigg)\notag\\
+&=-\frac{1}{2}g\bigg(\sum_bt_i^b+\sum_jt_j^a\bigg)
+\end{align}
+
+\subsubsection*{Fourth term}
+
+we end up with
+\begin{equation}
+F_i^a(t)\equiv2(f_a-f_i)t_i^a-\frac{1}{2}g\bigg(1+\sum_bt_i^b+\sum_jt_j^a+t_1^3t_2^4+t_1^4t_2^3-t_i^a\sum_{bj}t_j^b\bigg)=0
+\label{eq:amplitudes}
+\end{equation}
+which is the CCD amplitude equations. 
+
+\subsection*{3F}
+Let us play with equation (\ref{eq:amplitudes}):
+\begin{equation}
+2(f_i-f_a)t_i^a=-\frac{1}{2}g\bigg(1+\sum_bt_i^b+\sum_jt_j^a+t_1^3t_2^4+t_1^4t_2^3-t_i^a\sum_{bj}t_j^b\bigg)
+\end{equation}
+Notice that the terms on the left-hand side are switched. Now we add $\sigma t_i^a$ on both sides, where $\sigma$ is a shift parameter which we later will use to stabilize the CCD energy solution.
+\begin{equation}
+[2(f_i-f_a)+\sigma]t_i^a=\sigma t_i^a-\frac{1}{2}g\Big(1+\sum_bt_i^b+\sum_jt_j^a+t_1^3t_2^4+t_1^4t_2^3-t_i^a\sum_{bj}t_j^b\Big)
+\end{equation}
+\begin{equation}
+t_i^a=[2(f_i-f_a)+\sigma]^{-1}\bigg(\sigma t_i^a-\frac{1}{2}g\Big(1+\sum_bt_i^b+\sum_jt_j^a+t_1^3t_2^4+t_1^4t_2^3-t_i^a\sum_{bj}t_j^b\Big)\bigg)
+\end{equation}
 
 \section{Appendices}
 \subsection*{Appendix A}
