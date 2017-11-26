@@ -94,7 +94,7 @@ If $\hat{H}$, $\hat{P}$ and $\hat{S}_z$ commute, we can reduce this problem to a
 \hat{P}|\Psi_k;S_z,P\rangle&=S_z|\Psi_k;S_z,P\rangle\\
 \hat{S}_z|\Psi_k;S_z,P\rangle&=P|\Psi_k;S_z,P\rangle
 \end{align*}
-where the eigenvalues are the energies, momentums and the spin in z-direction respectively. We need to check this:
+where the eigenvalues are the energies, the number of pairs and the spin in z-direction respectively. We need to check this:
 
 \subsection*{1A}
 Firstly, we check if the Hamiltonian commutes with the spin-projection operator, and since $\hat{H}=\hat{H}_0+\hat{V}$, we can split this calculation into two simpler calculations. Let us start with $[\hat{H}_0,\hat{S}_z]$:
@@ -277,7 +277,7 @@ The calculations above are pretty well-commented, but since the same operations 
 PS: I know this was a tedious approach, and perhaps it would be better to not write out the sum
 
 \subsection*{1F}
-Observe that $|1\bar{1}2\bar{2}\rangle=|\Phi\rangle$.
+In the previous exercise we saw that $\hat{P}_1^{\dagger}\hat{P}_2^{\dagger}|-\rangle$ is an eigenvector of $\hat{P}$ and $\hat{S}_z$, and the basis which spans the subspace of Hilbert space should have the same form, exactly $\hat{P}_p^{\dagger}\hat{P}_q^{\dagger}|-\rangle$ Observe that $|1\bar{1}2\bar{2}\rangle=|\Phi\rangle$.
 
 \begin{figure*}
 \begin{center}
@@ -359,15 +359,15 @@ Observe that $|1\bar{1}2\bar{2}\rangle=|\Phi\rangle$.
     \end{scope}
   \end{tikzpicture}
 \end{center}
-\caption{Need good caption here.\label{fig:schematic}}
+\caption{Above all basis states of our pair interaction system are presented schematically with $P=2$ as the number of pairs and $S_z=0$ are the total spin. The solid dots indicate occupied states, while the empty dots indicate unoccupied states (holes). The reference state $|\Phi\rangle$ is represented in the upper left corner. This is all possible states since the excusion principle does not allow two particles with same spin to stay at the same level. For further description, see the text.\label{fig:schematic}}
 \end{figure*}
-From figure (\ref{fig:schematic}) one can observe that the dimension of the subspace for $M=4$ is $3+2+1=6$, which is the number of possible states. We can easily imagine that for $M=2$ we would get 1 state, with $M=5$ we would get $4+3+2+1=10$ states and so on. Thus the dimension of the subspace for an arbitrary $M$ is given by the arithmetic series
+We have a pairwise system, where each particle needs to have a partner in the same level with opposite spin. From figure (\ref{fig:schematic}) one can observe that the dimension of the subspace for $M=4$ is $3+2+1=6$, which is the number of possible states. We can easily imagine that for $M=2$ we would get 1 state, with $M=5$ we would get $4+3+2+1=10$ states and so on. Thus the dimension of the subspace for an arbitrary $M$ is given by the arithmetic series
 \begin{equation}
 n_M=\sum_{m=1}^{M-1}(M-m).
 \end{equation}
 
 \subsection*{1G}
-Need to figure out this
+With $P=0$ we do not have any pairs, so the only state consists of unoccupied states (but not holes, since they are not surrounded by particles). I do not find it necessary to draw this, since it just will be a state without particles.
 
 \subsection*{1H}
 \begin{equation}
@@ -390,6 +390,7 @@ Thus we end up with
 \hat{H}=\sum_p(p-1)\hat{n}_p-\frac{1}{2}g\bigg(\sum_{p=1}^4\hat{P}_p^{\dagger}\bigg)\bigg(\sum_{q=1}^4\hat{P}_q\bigg)
 \end{equation}
 
+\newpage
 \section{Configuration-Interaction (CI)}
 \subsection*{2A}
 \begin{align}
@@ -471,7 +472,7 @@ One term done, one to go. Fortunately the potential term is much easier to calcu
 \begin{align}
 \langle p'\bar{p}'q'\bar{q}|\hat{V}|p\bar{p}q\bar{q}\rangle=-\frac{1}{2}g\langle p'\bar{p}'q'\bar{q}|(\sum_r\hat{P}_r^{\dagger})(\sum_s\hat{P}_s)|p\bar{p}q\bar{q}\rangle
 \end{align}
-In the beginning of this exercise we proved that $\sum_s\hat{P}_s|p\bar{p}q\bar{q}\rangle=|p\bar{p}q\bar{q}\rangle$. Similarly one can prove the corresponding complex conjugate
+In the beginning of this exercise we proved that $\sum_s\hat{P}_s|p\bar{p}q\bar{q}\rangle=|p\bar{p}\rangle+|q\bar{q}\rangle$. Similarly one can prove the corresponding hermitian conjugate
 \begin{equation}
 \langle p'\bar{p}'q'\bar{q}'|\sum_r\hat{P}_r^{\dagger}=\langle p'\bar{p}'|+\langle q'\bar{q}'|
 \end{equation}
@@ -487,7 +488,7 @@ and similar for the other three. We can finally write out the matrix element exp
 \begin{equation}
 \langle p'\bar{p}'q'\bar{q}|\hat{H}|p\bar{p}q\bar{q}\rangle=2(2-p-q)(\delta_{q'p}\delta_{p'q}+\delta_{q'q}\delta_{p'p})-\frac{1}{2}g(\delta_{p'p}+\delta_{p'q}+\delta_{q'p}+\delta_{q'q})
 \end{equation}
-Observe that the first term from $\hat{H}_0$ will never contribute since Pauli's exclusion principle restricts $q>p$ (and $q'>p'$). $\hat{H}_0$ will therefore only make contributions on the diagonal when we form a matrix based on Full Configuration-Interactions. It is also worth to notice that there will not be any contribution if all the indexes are different.
+Observe that the first term from $\hat{H}_0$ will never contribute since Pauli's exclusion principle restricts $q>p$ (and $q'>p'$). $\hat{H}_0$ will therefore only make contributions on the diagonal when we form a matrix based on Full Configuration-Interactions (as expected). It is also worth to notice that there will not be any contribution if all the indexes are different.
 
 \subsection*{2B}
 In our case we get a matrix on the form
@@ -514,22 +515,26 @@ etc.. Calculate all elements, and get
 -1/2g&0&-1/2g&-1/2g&-8-g&-1/2g\\
 0&-1/2g&-1/2g&-1/2g&-1/2g&-10-g \end{pmatrix}.
 \end{equation}
-The eigenvalues of the Hamiltonian are the diagonal elements after diagonalization, and we find them using the numpy package in Python (see Appendix A). The eigenvalues as a function of $g$ are plotted in figure (\ref{fig:eigenvalues}).
-\begin{figure}[H]
+The eigenvalues of the Hamiltonian are the diagonal elements after diagonalization, and we find them using the numpy package in Python (see Appendix A). The eigenvalues as a function of $g$ are plotted in figure (\ref{fig:eigenvalues_FCI}).
+\begin{figure}[h]
 \centering
 \includegraphics[width=100mm]{eigenvalues_FCI.png}
-\caption{NEED CAPTION \label{fig:eigenvalues_FCI}}
+\caption{Above the (exact) FCI energies are presented as a function of $g$, where $g\in[-1,1]$. The reference energy is highlighted with a thick line. See text for further description. \label{fig:eigenvalues_FCI}}
 \end{figure}
-We can only spot 5 eigenvalue lines, even though we know it should be 6 and the legend tells us there is 6 eigenvalues. The reason is obvious, eigenvalue 3 and 4 are the same, and we have a degeneracy. 
+We can only spot 5 eigenvalue lines, even though we know it should be 6 and the legend tells us there is 6 eigenvalues. The reason is obvious, eigenvalue 3 is hidden behind eigenvalue 4 since they are identical. We have a double degeneracy, i.e, the energy for state 3 and 4 are the same. 
 
-Need probability plot as well
+\begin{figure}[H]
+\centering
+\includegraphics[width=100mm]{probability_FCI.png}
+\caption{\label{fig:prob_FCI}}
+\end{figure}
 
 \subsection*{2C}
-The single excited determinants ($|\Phi_i^a\rangle$) will not contribute to the exact eigefunction since we require $p=\bar{p}$, i.e two particles with opposite spin shall always lay on the same level. We will work with Configuration-Interaction Doubles (CID), but have in mind that it is the same as CConfiguration-Interaction Singles-Doubles (CISD). In general the doubly excited determinants can be written
+The single excited determinants ($|\Phi_i^a\rangle$) will not contribute to the exact eigenfunction since we require $p=\bar{p}$, i.e two particles with opposite spin shall always be at the same level. We will work with Configuration-Interaction Doubles (CID), but have in mind that it is the same as Configuration-Interaction Singles-Doubles (CISD). In general the doubly excited determinants can be written
 \begin{equation}
 |\Phi_{ij}^{ab}\rangle=c_a^{\dagger}c_b^{\dagger}c_ic_j|\Phi\rangle
 \end{equation}
-In our case the first unoccupied index $a$ has positive spin, while the second has negative spin. Since they both will lay on the same level, the second index is denoted with a bar, which implies negative spin. Similarly the second occupied index has negative spin, so we have
+In our case the first unoccupied index $a$ has positive spin, while the second has negative spin. Since they both will be at the same level, the second index is denoted with a bar, which implies negative spin. Similarly the second occupied index has negative spin, so we have
 \begin{equation}
 |\Phi_{i\bar{i}}^{a\bar{a}}\rangle=c_{a+}^{\dagger}c_{a-}^{\dagger}c_{i+}c_{i-}|\Phi\rangle=\hat{P}_a^{\dagger}\hat{P}_i|\Phi\rangle
 \end{equation}
@@ -541,7 +546,7 @@ E_{SCF}&0&\hat{H}_{OD}\\
 \hat{H}_{D0}&\hat{H}_{DS}&\hat{H}_{DD}
 \end{pmatrix}
 \end{equation}
-Since CID now corresponds to CISD, we get
+Because CID now corresponds to CISD, we get
 \begin{equation}
 \hat{H}_{CID}=\begin{pmatrix}
 H_{12}^{12}&0&H_{12}^{34}\\
@@ -554,15 +559,21 @@ H_{34}^{12}&H_{34}^{13}&H_{34}^{34}
 0&-1/2g&-10-g
 \end{pmatrix}
 \end{equation}
-Where all the matrix elements have been calculating in a earlier exercise. We can see that we only pick 7 elements out of 36, and we miss 29 FCI basis functions. In figure (\ref{fig:groundstate_comparison}) we ground-state energy from FCI is plotted together with the CID ground-state energy, and we see that the FCI energy is bending as function of $g$, while the CID energy is linear. They are the same at $g=0$.
+Where all the matrix elements have been calculating in a earlier exercise. We can see that we only pick 7 elements out of 36, and we miss 29 FCI basis functions. In figure (\ref{fig:groundstate_comparison}) the ground-state energy from FCI is plotted together with the CID ground-state energy, and we see that the FCI energy is bending as function of $g$, while the CID energy is linear. They are the same at $g=0$.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=100mm]{groundstate_comparison.png}
-\caption{The FCI and CID ground-state (GS) energies as functions of g \label{fig:groundstate_comparison}}
+\caption{The FCI and CID ground-state (GS) energy as functions of $g$ where $g$ runs from -1 to 1.  \label{fig:groundstate_comparison}}
 \end{figure}
 
+Considering the low number of matrix elements, we get a quite good approximation of the groundstate energy using CID. 
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=100mm]{probability_CID.png}
+\caption{\label{fig:prob_CID}}
+\end{figure}
 
 \subsection*{2D}
 The non-degenerate Rayleigh-Schrodinger Perturbation Theory (RSPT) energy is given by
@@ -593,15 +604,26 @@ Finally we can compute the third order correction energy:
 \begin{equation}
 E^{(3)}=\langle\Phi|\hat{V}\hat{R}\hat{V}\hat{R}\hat{V}|\Phi\rangle-\langle\Phi|\hat{V}|\Phi\rangle\langle\Phi|\hat{V}\hat{R}\hat{R}\hat{V}|\Phi\rangle
 \end{equation}
-We can see that the first term follows a certain pattern for increasing order corrections, and is considered as the leading term. The second term is smaller, and in rough estimates it is normal to omit it. 
+We can see that the first term follows a certain pattern for increasing order corrections, and is considered as the leading term. The second term is smaller, and for rough estimates it is sometimes omitted. Further we can insert $\hat{R}$ expression:
+\begin{equation}
+\hat{R}=\sum_{j,j\neq k}\frac{1}{\epsilon_k-\epsilon_j}|\Phi_j\rangle\langle\Phi_j|
+\end{equation}
+such that $\hat{V}$ is the only operator to take care of:
+\begin{align}
+E_k^{(1)}&=\langle\Phi_k|\hat{V}|\Phi_k\rangle\\
+E_k^{(2)}&=\sum_{j,j\neq k}\frac{|\langle\Phi_k|\hat{V}|\Phi_j\rangle|^2}{\epsilon_k-\epsilon_j}\\
+E_k^{(3)}&=\sum_{j,j\neq k}\sum_{j',j'\neq k}\frac{\langle\Phi_k|\hat{V}|\Phi_j\rangle\langle\Phi_j|\hat{V}|\Phi_{j'}\rangle\langle\Phi_{j'}|\hat{V}|\Phi_k\rangle}{(\epsilon_k-\epsilon_j)(\epsilon_k-\epsilon_{j'})}\notag\\
+&\mathrel{\phantom{=}}-\sum_{j,j\neq k}\frac{\langle\Phi_k|\hat{V}|\Phi_k\rangle\langle\Phi_k|\hat{V}|\Phi_{j}\rangle\langle\Phi_j|\hat{V}|\Phi_k\rangle}{(\epsilon_k-\epsilon_j)(\epsilon_k-\epsilon_j)}
+\end{align}
 
 \subsection*{2E}
 We are now going to compute the ground state energy to third order in Rayleigh-Schrodinger perturbation theory
 \begin{equation}
 E_{RSPT3}=E^{(0)}+gE^{(1)}+g^2E^{(2)}+g^3E^{(3)}.
 \end{equation}
-There are two way to do this: We could use second quantization and many-body perturbation theory (MBPT) or we could use basic PT on matrix form. 
+where $E^{(0)}=\langle\Phi|\Phi\rangle$ is the groundstate energy and the other energies are expressed in the previous exercise. There are two way to compute this: We could use second quantization and many-body perturbation theory (MBPT) or we could use basic PT on matrix form. 
 
+\newpage
 \section{Coupled-Cluster (CC)}
 \subsection*{3A}
 The general CCD wavefunction is as following
@@ -749,6 +771,21 @@ We get contribution from the first term when $j=i$, $p=a$ and $q=b$, and from th
 \end{align}
 
 \subsubsection*{Fourth term}
+The fourth term is rather complicated to work out, but the connection restriction helps us.
+\begin{align*}
+&\langle\Phi_{i\bar{i}}^{a\bar{a}}|\{\hat{V}_N\hat{T}^2\}_c|\Phi\rangle=\\
+&-\frac{1}{4}g\sum_{pq}\sum_{bj}t_j^b\sum_{ck}t_k^c\langle\Phi|c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}\{c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\}|\Phi\rangle
+\end{align*}
+As we can see, we get a string consisting of 16 operators, and there is in total $16!$ possible fully contracted terms. Of course, most of them vanish due to general second quantization rules, but also the connection restriction kills some terms. There will be 6 terms that contribute:
+\begin{align*}
+&\mathrel{\phantom{=}}c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\\
+&=c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\\
+&\mathrel{\phantom{=}}+c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\\
+&\mathrel{\phantom{=}}+c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\\
+&\mathrel{\phantom{=}}+c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\\
+&\mathrel{\phantom{=}}+c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\\
+&\mathrel{\phantom{=}}+c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}
+\end{align*}
 
 we end up with
 \begin{equation}
