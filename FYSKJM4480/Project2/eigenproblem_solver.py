@@ -58,15 +58,3 @@ plt.xlabel('g')
 plt.ylabel('Energy')
 plt.savefig('eigenvalues_CID.png')
 plt.show()
-
-# --- Comparison of ground-state energy ---
-E = lambda g: 1 - g**2 + (25/48)*g**2
-plt.plot(g_list, E(g_list))
-plt.plot(g_list, new_list_FCI, label='FCI GS')
-plt.plot(g_list, new_list_CID, label='CID GS')
-plt.title('FCI and CID ground-state comparison')
-plt.xlabel('g')
-plt.ylabel('Energy')
-plt.savefig('groundstate_comparison.png')
-plt.legend(loc='best')
-plt.show()
