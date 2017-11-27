@@ -778,13 +778,13 @@ The fourth term is rather complicated to work out, but the connection restrictio
 \end{align*}
 As we can see, we get a string consisting of 16 operators, and there is in total $16!$ possible fully contracted terms. Of course, most of them vanish due to general second quantization rules, but also the connection restriction kills some terms. There will be 6 terms that contribute:
 \begin{align*}
-&\mathrel{\phantom{=}}c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\\
-&=c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\\
-&\mathrel{\phantom{=}}+c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\\
-&\mathrel{\phantom{=}}+c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\\
-&\mathrel{\phantom{=}}+c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\\
-&\mathrel{\phantom{=}}+c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\\
-&\mathrel{\phantom{=}}+c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}
+&\mathrel{\phantom{=}}c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}\{c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\}_c\\
+&=\wick{\c1 c_{i+}^{\dagger}\c2 c_{i-}^{\dagger}\c8 c_{a-}\c7 c_{a+}\c4 c_{p+}^{\dagger}\c3 c_{p-}^{\dagger}\c6 c_{q-}\c5 c_{q+}\c7 c_{b+}^{\dagger}\c8 c_{b-}^{\dagger}\c1 c_{j-}\c2 c_{j+}\c5 c_{c+}^{\dagger}\c6 c_{c-}^{\dagger}\c3 c_{k-}\c4 c_{k+}}\\
+&\mathrel{\phantom{=}}+\wick{\c8 c_{i+}^{\dagger}\c7 c_{i-}^{\dagger}\c4 c_{a-}\c3 c_{a+}\c2 c_{p+}^{\dagger}\c1 c_{p-}^{\dagger}\c6 c_{q-}\c5 c_{q+}\c3 c_{b+}^{\dagger}\c4 c_{b-}^{\dagger}\c1 c_{j-}\c2 c_{j+}\c5 c_{c+}^{\dagger}\c6 c_{c-}^{\dagger}\c7 c_{k-}\c8 c_{k+}}\\
+&\mathrel{\phantom{=}}+\wick{\c4 c_{i+}^{\dagger}\c3 c_{i-}^{\dagger}\c8 c_{a-}\c7 c_{a+}\c6 c_{p+}^{\dagger}\c5 c_{p-}^{\dagger}\c2 c_{q-}\c1 c_{q+}\c1 c_{b+}^{\dagger}\c2 c_{b-}^{\dagger}\c3 c_{j-}\c4 c_{j+}\c7 c_{c+}^{\dagger}\c8 c_{c-}^{\dagger}\c5 c_{k-}\c6 c_{k+}}\\
+&\mathrel{\phantom{=}}+\wick{\c8 c_{i+}^{\dagger}\c7 c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}}\\
+&\mathrel{\phantom{=}}+\wick{c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}}\\
+&\mathrel{\phantom{=}}+\wick{c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}}
 \end{align*}
 
 we end up with
@@ -806,6 +806,18 @@ Notice that the terms on the left-hand side are switched. Now we add $\sigma t_i
 \begin{equation}
 t_i^a=[2(f_i-f_a)+\sigma]^{-1}\bigg(\sigma t_i^a-\frac{1}{2}g\Big(1+\sum_bt_i^b+\sum_jt_j^a+t_1^3t_2^4+t_1^4t_2^3-t_i^a\sum_{bj}t_j^b\Big)\bigg)
 \end{equation}
+
+\subsection*{3G}
+We can solve this given an initial condition, a $g$ and a $\sigma$. We are given the initial guess $t_i^{a(0)}=0$, and we can then solve this difference equation recursively. The first iteration gives
+\begin{equation}
+t_i^{a(1)}=-\frac{1}{2}g[2(\epsilon_i-\epsilon_a-1/2g)+\sigma]^{-1}
+\end{equation}
+and so on. we need to solve all the $t_i^{a(i)}$ matrix (for all indexes) before we go on to the next iteration $t_i^{a(i+1)}$. Further iterations are computed numerically, see Appendix B for script. For $\sigma=1$ we get:
+\begin{figure}[H]
+\centering
+\includegraphics[width=100mm]{probability_CID.png}
+\caption{\label{fig:prob_CID}}
+\end{figure}
 
 \section{Appendices}
 \subsection*{Appendix A}
