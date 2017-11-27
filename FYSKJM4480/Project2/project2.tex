@@ -640,8 +640,15 @@ E^{(3)}=-\frac{641}{1152}g^3+\frac{410}{1152}g^3=-\frac{231}{1152}g^3
 \end{equation*}
 and our RSPT3 approximation becomes
 \begin{equation}
-E_{RSPT3}(g)=2 - g^2 + (25/48)*g**4 - (231/1152)*g**6
+E_{RSPT3}(g)=2-g-\frac{25}{48}g^2 - \frac{231}{1152}g^3
 \end{equation}
+This polynomial is plotted in figure (\ref{fig:RSPT_energy}). This looks quite similar to the exact solution, go straight to exercise 3H if you cannot wait comparing them.
+\begin{figure}[h]
+\centering
+\includegraphics[width=100mm]{RSPT_energy.png}
+\caption{The RSPT3 energy plotted for $g\in[-1, 1]$. \label{fig:RSPT_energy}}
+\end{figure}
+
 
 \newpage
 \section{Coupled-Cluster (CC)}
@@ -653,10 +660,14 @@ The general CCD wavefunction is as following
 Because our system contains of only four particles, higher order terms do not appear. 
 
 \subsection*{3B}
+The CID wavefunction is on the form
 \begin{align}
-|\Psi_{CID}\rangle&=(1+\hat{C}_2)|\phi\rangle=(1+\hat{T})|\Phi\rangle\\
-|\Psi_{CCD}\rangle&=|\Psi_{CID}\rangle+(1/2\hat{T}^2)|\Phi\rangle
+|\Psi_{CID}\rangle&=(1+\hat{C}_2)|\phi\rangle=(1+\hat{T})|\Phi\rangle
 \end{align}
+and we see that it only differs from the CCD wavefunction with one term
+\begin{align*}
+|\Psi_{CCD}\rangle&=|\Psi_{CID}\rangle+\frac{1}{2}\hat{T}^2|\Phi\rangle
+\end{align*}
 
 \subsection*{3C}
 \begin{equation*}
@@ -734,8 +745,6 @@ The $\{...\}_c$ notation is only used around two (or more) operators, and indica
 \begin{equation}
 \langle\Phi_{i\bar{i}}^{a\bar{a}}|\{\hat{F}_N\hat{T}\}_c|\Phi\rangle+\langle\Phi_{i\bar{i}}^{a\bar{a}}|\{\hat{V}_N(1+\hat{T}+\frac{1}{2}\hat{T}^2)\}_c|\Phi\rangle=0
 \end{equation}
-because...
-
 
 \subsection*{3E}
 We will now work the terms out one by one:
@@ -848,7 +857,7 @@ The aim of this exercise is to compare all the approximation methods we have use
 \includegraphics[width=100mm]{total_comparison.png}
 \caption{The CCD energy using $\sigma=0.2$ and $g\in[-1,1]$ with 100 iterations to find $t_i^a$. \label{fig:total_comparison}}
 \end{figure}
-As we can see, the 
+As we can see, the CCD is a quite good approximation to the true groundstate energy, but not as good as CID. Further the RSPT3 is not that good, but I suspect some computation errors, especially in the last term. 
 
 \section{Appendices}
 \subsection*{Appendix A}
@@ -863,6 +872,7 @@ As we can see, the
 
 \subsection*{Appendix D}
 RSPT3 energy
+\lstinputlisting{RSPT_energy.py}
 
 \subsection*{Appendix E}
 CCD energy
