@@ -45,7 +45,7 @@
 \end{itemize}
 
 \section*{Introduction}
-Superconductivity might be one of 20th century's most exciting physical discoveries, and for a long time the theory behind was a mystery. In 1957, 46 years after the first observation by Kamerlingh Onnes \cite {Onnes}, John Bardeen, Leon Cooper and John Robert Schrieffer came up with a quantum theory describing superconductivity on microscopic level \cite {BCS}. This theory was built on Cooper pairs, which is a pair of electrons with lower energy than the Fermi energy, i.e. there is a bounding between them. We can treat the pairs as a spinless particle, which is a boson, and this boson-like pair is the reason why the current can flow unhindered in a superconductor. 
+Superconductivity might be one of 20th century's most exciting physical discoveries, and for a long time the theory behind was a mystery. In 1957, 49 years after the first observation by Kamerlingh Onnes \cite {Onnes}, John Bardeen, Leon Cooper and John Robert Schrieffer came up with a quantum theory describing superconductivity on microscopic level \cite {BCS}. This theory was built on Cooper pairs, which is a pair of electrons with lower energy than the Fermi energy, i.e. there is a bounding between them. We can treat the pairs as a spinless particle, which is a boson, and this boson-like pair is the reason why the current can flow unhindered in a superconductor. 
 
 Furthermore the theory is also used in nuclear physics to describe the paring interaction between nucleons in an atomic nucleus. 
 
@@ -620,7 +620,7 @@ and
 \end{equation*}
 Finally we can compute the third order correction energy:
 \begin{equation*}
-E^{(3)}=\langle\Phi|\hat{V}\hat{R}\hat{V}\hat{R}\hat{V}|\Phi\rangle-\langle\Phi|\hat{V}|\Phi\rangle\langle\Phi|\hat{V}\hat{R}\hat{R}\hat{V}|\Phi\rangle
+E^{(3)}=\langle\Phi|\hat{V}\hat{R}\hat{V}\hat{R}\hat{V}|\Phi\rangle-\langle\Phi|\hat{V}|\Phi\rangle\langle\Phi|\hat{V}\hat{R}^2\hat{V}|\Phi\rangle
 \end{equation*}
 We can see that the first term follows a certain pattern for increasing order corrections, and is considered as the leading term. The second term is smaller, and for rough estimates it is sometimes omitted. Further we can insert $\hat{R}$ expression:
 \begin{equation}
@@ -641,7 +641,7 @@ E_{RSPT3}=E^{(0)}+gE^{(1)}+g^2E^{(2)}+g^3E^{(3)}.
 \end{equation}
 where $E^{(0)}=\langle\Phi|\hat{H}_0|\Phi\rangle=2$ is the ground energy and the other energies are expressed in the previous exercise ($k$ is set to be 0). There are two way to compute this: We could either use second quantization and many-body perturbation theory (MBPT) or we could use basic PT on matrix form. Since the latter already is derived, we better use that method. 
 
-Set $k=0$ for the other terms, and use the matrix in equation (\ref{eq:FCI_matrix}) to find the products. We obtain
+Set $k=0$ for the other terms, and use the matrix in equation (\ref{eq:FCI_matrix}) to find the products. Remember $\epsilon_p=\xi(p-1)$ where $\xi=1$ and obtain
 \begin{align*}
 E^{(1)}=-g
 \end{align*}
@@ -658,7 +658,7 @@ The last term, $E^{(3)}$, is far the most complicated, and it is easy to make mi
 Among the 20 terms in the sum, 9 is zero, and we get a relatively nasty fraction. For the second part we get
 \begin{align*}
 &\sum_{j,j\neq k}\frac{\langle\Phi_k|\hat{V}|\Phi_k\rangle\langle\Phi_k|\hat{V}|\Phi_{j}\rangle\langle\Phi_j|\hat{V}|\Phi_k\rangle}{(\epsilon_k-\epsilon_j)(\epsilon_k-\epsilon_j)}\\
-&=-\frac{1}{4}\Big(1+\frac{1}{4}+\frac{1}{9}+\frac{1}{16}\Big)\\
+&=-\frac{1}{4}\Big(1+\frac{1}{4}+\frac{1}{9}+\frac{1}{16}\Big)g^3\\
 &=-\frac{410}{1152}g^3
 \end{align*}
 In total we get 
@@ -830,21 +830,23 @@ We get contribution from the first term when $j=i$, $p=a$ and $q=b$, and from th
 \subsubsection*{Fourth term}
 The fourth term is rather complicated to work out, but the connection restriction helps us.
 \begin{align*}
-&\langle\Phi_{i\bar{i}}^{a\bar{a}}|\{\hat{V}_N\hat{T}^2\}_c|\Phi\rangle=\\
-&-\frac{1}{4}g\sum_{pq}\sum_{bj}t_j^b\sum_{ck}t_k^c\langle\Phi|c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}\{c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\}|\Phi\rangle
+&\langle\Phi_{i\bar{i}}^{a\bar{a}}|\{\hat{V}_N\hat{T}^2\}_c|\Phi\rangle\\
+&=-\frac{1}{4}g\sum_{pq}\sum_{bj}t_j^b\sum_{ck}t_k^c\langle\Phi|c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}\{c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\}|\Phi\rangle
 \end{align*}
-As we can see, we get a string consisting of 16 operators, and there is in total $16!$ possible fully contracted terms. Of course, most of them vanish due to general second quantization rules, but also the connection restriction kills some terms. There will be 6 terms that contribute:
+As we can see, we get a string consisting of 16 operators, and there is in total $16!$ possible fully contracted terms. Of course, most of them vanish due to general second quantization rules, but also the connection restriction kills some terms. There will be 6 terms that contribute, but I just managed to find two of them:
 \begin{align*}
 &\mathrel{\phantom{=}}c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}\{c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}\}_c\\
-&=\wick{\c1 c_{i+}^{\dagger}\c2 c_{i-}^{\dagger}\c8 c_{a-}\c7 c_{a+}\c4 c_{p+}^{\dagger}\c3 c_{p-}^{\dagger}\c6 c_{q-}\c5 c_{q+}\c7 c_{b+}^{\dagger}\c8 c_{b-}^{\dagger}\c1 c_{j-}\c2 c_{j+}\c5 c_{c+}^{\dagger}\c6 c_{c-}^{\dagger}\c3 c_{k-}\c4 c_{k+}}\\
-&\mathrel{\phantom{=}}+\wick{\c8 c_{i+}^{\dagger}\c7 c_{i-}^{\dagger}\c4 c_{a-}\c3 c_{a+}\c2 c_{p+}^{\dagger}\c1 c_{p-}^{\dagger}\c6 c_{q-}\c5 c_{q+}\c3 c_{b+}^{\dagger}\c4 c_{b-}^{\dagger}\c1 c_{j-}\c2 c_{j+}\c5 c_{c+}^{\dagger}\c6 c_{c-}^{\dagger}\c7 c_{k-}\c8 c_{k+}}\\
-&\mathrel{\phantom{=}}+\wick{\c4 c_{i+}^{\dagger}\c3 c_{i-}^{\dagger}\c8 c_{a-}\c7 c_{a+}\c6 c_{p+}^{\dagger}\c5 c_{p-}^{\dagger}\c2 c_{q-}\c1 c_{q+}\c1 c_{b+}^{\dagger}\c2 c_{b-}^{\dagger}\c3 c_{j-}\c4 c_{j+}\c7 c_{c+}^{\dagger}\c8 c_{c-}^{\dagger}\c5 c_{k-}\c6 c_{k+}}\\
-&\mathrel{\phantom{=}}+\wick{\c8 c_{i+}^{\dagger}\c7 c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}}\\
-&\mathrel{\phantom{=}}+\wick{c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}}\\
-&\mathrel{\phantom{=}}+\wick{c_{i+}^{\dagger}c_{i-}^{\dagger}c_{a-}c_{a+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{b+}^{\dagger}c_{b-}^{\dagger}c_{j-}c_{j+}c_{c+}^{\dagger}c_{c-}^{\dagger}c_{k-}c_{k+}}
+&=\wick{\c1 c_{i+}^{\dagger}\c2 c_{i-}^{\dagger}\c8 c_{a-}\c7 c_{a+}\c4 c_{p+}^{\dagger}\c3 c_{p-}^{\dagger}\c6 c_{q-}\c5 c_{q+}\c7 c_{b+}^{\dagger}\c8 c_{b-}^{\dagger}\c1 c_{j-}\c2 c_{j+}\c5 c_{c+}^{\dagger}\c6 c_{c-}^{\dagger}\c3 c_{k-}\c4 c_{k+}}+\hdots\\
+&\mathrel{\phantom{=}}+\wick{\c8 c_{i+}^{\dagger}\c7 c_{i-}^{\dagger}\c6 c_{a-}\c5 c_{a+}\c4 c_{p+}^{\dagger}\c3 c_{p-}^{\dagger}\c2 c_{q-}\c1 c_{q+}\c1 c_{b+}^{\dagger}\c2 c_{b-}^{\dagger}\c3 c_{j-}\c4 c_{j+}\c5 c_{c+}^{\dagger}\c6 c_{c-}^{\dagger}\c7 c_{k-}\c8 c_{k+}}\\
+&=\delta_{ij}\delta_{ij}\delta_{pk}\delta_{pk}\delta_{ab}\delta_{ab}\delta_{qc}\delta_{qc}+\delta_{ik}\delta_{ik}\delta_{pj}\delta_{pj}\delta_{ac}\delta_{ac}\delta_{qb}\delta_{qb}+\hdots
 \end{align*}
-
-we end up with
+Insert this back into the brackets, obtain
+\begin{align*}
+&-\frac{1}{4}g\sum_{pq}\sum_{bj}t_j^b\sum_{ck}t_k^c\langle\Phi|(\delta_{ij}\delta_{ij}\delta_{pk}\delta_{pk}\delta_{ab}\delta_{ab}\delta_{qc}\delta_{qc}+\delta_{ik}\delta_{ik}\delta_{pj}\delta_{pj}\delta_{ac}\delta_{ac}\delta_{qb}\delta_{qb})|\Phi\rangle\\
+&=-\frac{1}{4}gt_i^a\sum_{ck}t_k^c-\frac{1}{4}g\sum_{bj}t_j^bt_i^a\\
+&=-\frac{1}{2}gt_i^a\sum_{bj}t_j^b
+\end{align*}
+Which is the last term in the correct solution, but still miss the first two terms. The correct solution is
 \begin{equation}
 F_i^a(t)\equiv2(f_a-f_i)t_i^a-\frac{1}{2}g\bigg(1+\sum_bt_i^b+\sum_jt_j^a+t_1^3t_2^4+t_1^4t_2^3-t_i^a\sum_{bj}t_j^b\bigg)=0
 \label{eq:amplitudes}
@@ -903,6 +905,7 @@ As we can see, the CCD is a quite good approximation to the true groundstate ene
 \end{thebibliography}
 \endgroup
 
+\newpage
 \section{Appendices}
 \subsection*{Appendix A}
 In exercise we needed to find eigenvalues of a matrix as function of $g$, and there are in general two ways to do this: We could find the eigenvalues symbolic and insert $g$ afterwards, or we could find the eigenvalues of each matrix inserted $g$. Surprisingly I found the latter to be faster, and decided to do it that way. The Python implementation looks like this:
