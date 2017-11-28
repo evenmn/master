@@ -16,7 +16,7 @@
 \usepackage{tikz}
 
 \lstset{language=python}
-\lstset{basicstyle=\small}
+\lstset{basicstyle=\tiny}
 \lstset{backgroundcolor=\color{white}}
 \lstset{frame=single}
 \lstset{stringstyle=\ttfamily}
@@ -670,7 +670,7 @@ and our RSPT3 approximation becomes
 E_{RSPT3}(g)=2-g-\frac{25}{48}g^2 - \frac{231}{1152}g^3
 \end{equation}
 This polynomial is plotted in figure (\ref{fig:RSPT_energy}). This looks quite similar to the exact solution, go straight to exercise 3H if you cannot wait comparing them.
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=100mm]{RSPT_energy.png}
 \caption{The RSPT3 energy plotted for $g\in[-1, 1]$. \label{fig:RSPT_energy}}
@@ -684,7 +684,7 @@ The general CCD wavefunction is as following
 \begin{equation}
 |\Psi_{CID}\rangle=\exp{(\hat{T})}|\Phi\rangle=(1+\hat{T}+\frac{1}{2}\hat{T}^2)|\Phi\rangle
 \end{equation}
-Because our system contains of only four particles, higher order terms do not appear. 
+Where we have Taylor expanded the exponential. Because our system contains of only four particles, higher order terms do not appear. 
 
 \subsection*{3B}
 The CID wavefunction is on the form
@@ -905,21 +905,25 @@ As we can see, the CCD is a quite good approximation to the true groundstate ene
 
 \section{Appendices}
 \subsection*{Appendix A}
-...There are in general two ways to do this: We could find the eigenvalues symbolic and insert $g$ afterwards, or we could find the eigenvalues of each matrix inserted $g$. Surprisingly I found the latter to be faster, and decided to do it that way. The Python implementation looks like this:
+In exercise we needed to find eigenvalues of a matrix as function of $g$, and there are in general two ways to do this: We could find the eigenvalues symbolic and insert $g$ afterwards, or we could find the eigenvalues of each matrix inserted $g$. Surprisingly I found the latter to be faster, and decided to do it that way. The Python implementation looks like this:
 \lstinputlisting{eigenproblem_solver.py}
 
 \subsection*{Appendix B}
+The probability plotter Python code, used in exercise 2B and 2C
 \lstinputlisting{probability_plotter.py}
 
+\newpage
 \subsection*{Appendix C}
+Script used to compare the methods, used in exercise 2C and 3H
 \lstinputlisting{comparison.py}
 
 \subsection*{Appendix D}
-RSPT3 energy
+RSPT3 energy plotter, used in exercise 2E:
 \lstinputlisting{RSPT_energy.py}
 
+\newpage
 \subsection*{Appendix E}
-CCD energy
+CCD energy plotter, used in exercise 3G:
 \lstinputlisting{CCD_energy.py}
 
 \end{document}
