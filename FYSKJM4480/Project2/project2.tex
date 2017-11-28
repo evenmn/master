@@ -167,9 +167,36 @@ c_{q+}c_{q-}c_{p+}^{\dagger}c_{p+}c_{q+}^{\dagger}c_{q-}^{\dagger}=\{c_{p+}^{\da
 \begin{equation*}
 c_{q+}c_{q-}c_{p-}^{\dagger}c_{p-}c_{q+}^{\dagger}c_{q-}^{\dagger}=\{c_{p-}^{\dagger}c_{q+}^{\dagger}c_{q-}^{\dagger}c_{p-}c_{q-}c_{q+}\}-\delta_{qp}c_{q-}^{\dagger}c_{q+}^{\dagger}c_{p-}c_{q+}
 \end{equation*}
-Recall that we sum over all possible $p$ and $q$s, and for each $p$ we will have a $q$ which is equal. Due to the Kronecker delta, we only get contributions when this happens ($p=q$), but a watchful eye will see that the terms cancel in this case $\Rightarrow [\hat{H}_0,\hat{P}]=0$.
-
-
+Recall that we sum over all possible $p$ and $q$s, and for each $p$ we will have a $q$ which is equal. Due to the Kronecker delta, we only get contributions when this happens ($p=q$), but a watchful eye will see that the terms cancel in this case $\Rightarrow [\hat{H}_0,\hat{P}]=0$. The potential part can be worked out like this:
+\begin{align*}
+[\hat{V},\hat{P}]=-\frac{1}{2}g\sum_{pqr}[\hat{P}_r^{\dagger}\hat{P}_r, \hat{P}_p^{\dagger}\hat{P}_q]=-\frac{1}{2}g\sum_{pqr}(\hat{P}_r^{\dagger}\hat{P}_r\hat{P}_p^{\dagger}\hat{P}_q-\hat{P}_r^{\dagger}\hat{P}_r\hat{P}_p^{\dagger}\hat{P}_q\hat{P}_r^{\dagger}\hat{P}_r)
+\end{align*}
+Using Wick's theorem on both operator strings:
+\begin{align*}
+\hat{P}_r^{\dagger}\hat{P}_r\hat{P}_p^{\dagger}\hat{P}_q&=c_{r+}^{\dagger}c_{r-}^{\dagger}c_{r-}c_{r+}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}\\
+&=\{c_{r+}^{\dagger}c_{r-}^{\dagger}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{r-}c_{r+}c_{q-}c_{q+}\}-\delta_{rp}c_{r+}^{\dagger}c_{r-}^{\dagger}c_{p+}^{\dagger}c_{r+}c_{q-}c_{q+}\\
+&\mathrel{\phantom{=}}-\delta_{rp}c_{r+}^{\dagger}c_{r-}^{\dagger}c_{p-}^{\dagger}c_{r-}c_{q-}c_{q+}+\delta_{rp}\delta_{rp}c_{r+}^{\dagger}c_{r-}^{\dagger}c_{q-}c_{q+}
+\end{align*}
+\begin{align*}
+\hat{P}_p^{\dagger}\hat{P}_q\hat{P}_p^{\dagger}\hat{P}_q&=c_{p+}^{\dagger}c_{p-}^{\dagger}c_{q-}c_{q+}c_{r+}^{\dagger}c_{r-}^{\dagger}c_{r-}c_{r+}\\
+&=\{c_{r+}^{\dagger}c_{r-}^{\dagger}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{r-}c_{r+}c_{q-}c_{q+}\}-\delta_{qr}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{r+}^{\dagger}c_{q+}c_{r-}c_{r+}\\
+&\mathrel{\phantom{=}}-\delta_{qr}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{r-}^{\dagger}c_{q-}c_{r-}c_{r+}+\delta_{qr}\delta_{qr}c_{r+}^{\dagger}c_{r-}^{\dagger}c_{q-}c_{q+}
+\end{align*}
+\begin{align*}
+[\hat{V},\hat{P}]&=
+\begin{aligned}[t]
+-\frac{1}{2}g\sum_{pqr}\Big(&(-\delta_{rp}c_{r+}^{\dagger}c_{r-}^{\dagger}c_{p+}^{\dagger}c_{r+}c_{q-}c_{q+}-\delta_{rp}c_{r+}^{\dagger}c_{r-}^{\dagger}c_{p-}^{\dagger}c_{r-}c_{q-}c_{q+}+\delta_{rp}\delta_{rp}c_{r+}^{\dagger}c_{r-}^{\dagger}c_{q-}c_{q+})\\
+-&(-\delta_{qr}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{r+}^{\dagger}c_{q+}c_{r-}c_{r+}-\delta_{qr}c_{p+}^{\dagger}c_{p-}^{\dagger}c_{r-}^{\dagger}c_{q-}c_{r-}c_{r+}+\delta_{qr}\delta_{qr}c_{r+}^{\dagger}c_{r-}^{\dagger}c_{q-}c_{q+})\Big)
+\end{aligned}\\
+&=
+\begin{aligned}[t]
+-\frac{1}{2}g\sum_{pq}\Big(&(c_{r+}^{\dagger}c_{r-}^{\dagger}c_{q-}c_{q+}-c_{r+}^{\dagger}c_{r-}^{\dagger}c_{p+}^{\dagger}c_{r+}c_{q-}c_{q+}-c_{r+}^{\dagger}c_{r-}^{\dagger}c_{p-}^{\dagger}c_{r-}c_{q-}c_{q+})\\
+-&(c_{r+}^{\dagger}c_{r-}^{\dagger}c_{q-}c_{q+}-c_{p+}^{\dagger}c_{p-}^{\dagger}c_{r+}^{\dagger}c_{q+}c_{r-}c_{r+}-c_{p+}^{\dagger}c_{p-}^{\dagger}c_{r-}^{\dagger}c_{q-}c_{r-}c_{r+})\Big)
+\end{aligned}\\
+&=-\frac{1}{2}g\sum_{pq}\hat{P}_p^{\dagger}\Big((1-c_{p+}^{\dagger}c_{p+}-c_{p-}^{\dagger}c_{p-})-(1-c_{q+}^{\dagger}c_{q+}-c_{q-}^{\dagger}c_{q-})\Big)\hat{P}_q\\
+&=-\frac{1}{2}g\sum_{pq}\hat{P}_p^{\dagger}(\hat{n}_q-\hat{n}_p)\hat{P}_q
+\end{align*}
+We can see that this is zero when $p=q$, but that is not always the case. Anyway, is the equation above acts on a Slater determinant, it will always gives zero. First $\hat{P}_q$ will remove a $q$ from the determinant, and since the $\hat{n}_q$ later will count 0 $q$'s, that combination will give zero. The other possible combination is when $\hat{n}_p$ transforms the $p$ in the Slater determinant to 1, and then $\hat{P}_p^{\dagger}$ acting on it gives zero.
 
 \subsection*{1C}
 The last commutator we need to check is $[\hat{P},\hat{S}_z]$:
@@ -857,24 +884,22 @@ The aim of this exercise is to compare all the approximation methods we have use
 \includegraphics[width=100mm]{total_comparison.png}
 \caption{The CCD energy using $\sigma=0.2$ and $g\in[-1,1]$ with 100 iterations to find $t_i^a$. \label{fig:total_comparison}}
 \end{figure}
-As we can see, the CCD is a quite good approximation to the true groundstate energy, but not as good as CID. Further the RSPT3 is not that good, but I suspect some computation errors, especially in the last term. 
+As we can see, the CCD is a quite good approximation to the true groundstate energy, but not as good as CID. Further the RSPT3 is not that good, but I suspect some computation errors, in particular in $E^{(3)}$.
 
 \section{References}
 \begingroup
 \renewcommand{\section}[2]{}
 \begin{thebibliography}{}
 \bibitem{Onnes}
-  http://www.supraconductivite.fr/en/index.php?p=supra-resistance-supra-more
-  Morten Hjorth-Jensen.
-  Computational Physics, Lecture Notes Fall 2015.
-  Department of Physics, University of Oslo.
-  August 2015.
+  D. Delft and P. Kes. 
+  The discovery of superconductivity. 
+  Physics today, September 2010. 
+  \url{https://www.lorentz.leidenuniv.nl/history/cold/DelftKes_HKO_PT.pdf}
 \bibitem{BCS}
-  https://www.britannica.com/science/BCS-theory
-  R C Asgoori. 
-  Electrons in artificial atoms
-  Nature Vol 379 1.February 1996
-  http://www.nature.com/nature/journal/v379/n6564/pdf/379413a0.pdf
+  The Editors of Encyclopædia Britannica. 
+  BCS theory. 
+  21. December 1998. 
+  \url{https://www.britannica.com/science/BCS-theory}
 \end{thebibliography}
 \endgroup
 
