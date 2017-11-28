@@ -45,7 +45,7 @@
 \end{itemize}
 
 \section*{Introduction}
-Superconductivity might be one of 20th century's most exciting physical discoveries, and for a long time the theory behind was a mystery. In 1957, 46 years after the first observation by Kamerlingh Onnes [REFERENCE], John Bardeen, Leon Cooper and John Robert Schrieffer came up with a quantum theory describing superconductivity on microscopic level[REFERENCE]. This theory was built on Cooper pairs, which is a pair of electrons with lower energy than the Fermi energy, i.e. there is a bounding between them. We can treat the pairs as a spinless particle, which is a boson, and this boson-like pair is the reason why the current can flow unhindered in a superconductor. 
+Superconductivity might be one of 20th century's most exciting physical discoveries, and for a long time the theory behind was a mystery. In 1957, 46 years after the first observation by Kamerlingh Onnes \cite {Onnes}, John Bardeen, Leon Cooper and John Robert Schrieffer came up with a quantum theory describing superconductivity on microscopic level \cite {BCS}. This theory was built on Cooper pairs, which is a pair of electrons with lower energy than the Fermi energy, i.e. there is a bounding between them. We can treat the pairs as a spinless particle, which is a boson, and this boson-like pair is the reason why the current can flow unhindered in a superconductor. 
 
 Furthermore the theory is also used in nuclear physics to describe the paring interaction between nucleons in an atomic nucleus. 
 
@@ -858,6 +858,25 @@ The aim of this exercise is to compare all the approximation methods we have use
 \caption{The CCD energy using $\sigma=0.2$ and $g\in[-1,1]$ with 100 iterations to find $t_i^a$. \label{fig:total_comparison}}
 \end{figure}
 As we can see, the CCD is a quite good approximation to the true groundstate energy, but not as good as CID. Further the RSPT3 is not that good, but I suspect some computation errors, especially in the last term. 
+
+\section{References}
+\begingroup
+\renewcommand{\section}[2]{}
+\begin{thebibliography}{}
+\bibitem{Onnes}
+  http://www.supraconductivite.fr/en/index.php?p=supra-resistance-supra-more
+  Morten Hjorth-Jensen.
+  Computational Physics, Lecture Notes Fall 2015.
+  Department of Physics, University of Oslo.
+  August 2015.
+\bibitem{BCS}
+  https://www.britannica.com/science/BCS-theory
+  R C Asgoori. 
+  Electrons in artificial atoms
+  Nature Vol 379 1.February 1996
+  http://www.nature.com/nature/journal/v379/n6564/pdf/379413a0.pdf
+\end{thebibliography}
+\endgroup
 
 \section{Appendices}
 \subsection*{Appendix A}
