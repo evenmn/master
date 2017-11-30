@@ -42,24 +42,24 @@ In 1879 Thomas Edison produced the first reliable, long-lasting electric bulb, a
 
 At the same time we are burning huge amounts of oil to get energy, essentially for electricity or transport usage. Exactly how much oil is remaining on Earth is unknown, and how much we can make use of depends on the future technology. Anyway what is sure is that it will not last forever, and we need to find new, probably renewable, energy sources. What if we could find a renewable energy carrier which was so cold that it could cause superconductivity at the same time? We do not need to search further, the solution is liquid hydrogen! When hydrogen reacts with oxygen, we get water, which is 100\% renewable, at the same time as liquid hydrogen has a temperature of 20K. 
 
-We need a material which is superconducting above 20K, which can be made in large scales, and \chem{MgB_2} seems to be promising. Among others we have investigated a Rutherford cable (which has a core of \chem{MgB_2}).
+To improve the hydrogen economy, we need a material which is superconducting above $20K$ and can be made in large scales. For a long time, this material was unable, but in 2001 a group of Japanese scientists found that \chem{MgB_2} has transition temperature at $T_c=39K$, which is the highest of all known metallic superconductors [https://www.nature.com/articles/35065039, https://www.jsap.or.jp/jsapi/Pdf/Number06/04_CuttingEdge1.pdf]. This again gave hope for possible large-scale applications of superconductors using cryogen-free technology. 
+
+We are going to study a Rutherford tape consisting of cables with cores of \chem{MgB_2}. Rutherford cables are frequently used to generate magnetic fields in particle accelerators, and were first developed at the Rutherford Laboratory, hence the name [http://lss.fnal.gov/archive/2006/conf/fermilab-conf-06-323-td.pdf]. Our sample was recieved from Spain, and we will return the results as soon as they are ready. Maybe we participate in developing the next generation particle accelerators?
+
+Moreover we have examined the superconducting properties of a YBCO multilayer sample. YBCO has status as the first material to be found superconducting above the temperature of liquid nitrogen, which generated major optimism for superconductivity when it was discovered in 1987 [http://adsabs.harvard.edu/abs/1987PhRvL..58..908W], with its critical temperature at $T_c=93K$. 
 
 \section{Theory}\label{Sec:Theory}
 Superconductive materials have two main properties: They are resistance-free conductors under a critical temperature $T_c$ and magnetic field cannot penetrate the material under the same temperature $T_c$. The methods we gonna make use of both these main properties. Perhaps the easiest way to find the resistance of a sample is to connect the sample to a power supply and measure the voltage difference, $U$, between two points. The resistance can then be calculated by Ohm's law $U=RI$, given the current $I$. This is known as a four-point measurement or four-terminal sensing, and is widely used in transport measurements. No voltage drop corresponds to zero resistance. In figure (\ref{fig:onnes_1911}) one can find a sketch of a four-point measurement. 
 
 In some cases it is appropriate to use more advanced techniques, for instance when the sample structure is not uniform in every direction. Then we might want to measure the resistance in various directions, but without disturbing the samples with more contacts than necessary. By placing the contacts in each corner, we can reuse the contacts when "turning" the sample, known as the .. , illustrated in figure (..). 
 
+Transport measurements is the simplest of the two methods and will be our main method. As the name indicates, TM is all about set current to the sample and measure voltage drop. A standard TM is done by connecting current cables on the outermost connecting points and two voltage cables in between as illustrated in figure (...). 
+
 \begin{figure}[h]
 \centering
 \includegraphics[width=50mm]{onnes_1911.jpg}
 \caption{RT-graph drawn by Kamerlingh Onnes in 1911. Image downloaded from wikipedia \url{https://commons.wikimedia.org/wiki/File:Superconductivity_1911.gif} \label{fig:onnes_1911}}
 \end{figure}
-
-\section{Methods}\label{Sec:Methods}
-We will examine the samples using mainly two methods: Transport measurements and magneto optical imaging
-
-\subsection{Transport Measurements (TM)}
-Transport measurements is the simplest of the two methods and will be our main method. As the name indicates, TM is all about set current to the sample and measure voltage drop. A standard TM is done by connecting current cables on the outermost connecting points and two voltage cables in between as illustrated in figure (...). The connections are made by Indium (In) since it is a good conductor and easy to distribute, i.e ...
 
 \subsection{Magneto-Optical Imaging (MOI)}
 Our eyes are not able to see magnetism, but with a MOI apparatus we can take pictures of a superconductor and decide if a sample is superconducting using the elementary magnetic property discussed in section \ref{Sec:Theory}. The method is quite in-complicated where light is reflected by a Faraday crystal on top of the sample. If the Faraday crystal is affected by a magnetic field, it will polarize the light, and it will later be separated out by a polarization filter, as shown in figure (\ref{fig:MOI}). The idea is that all the light will go through the filter as long as the sample is not superconducting. Alternatively if the sample is superconducting, we will get no light passing in the superconducting area. Not only can MOI detect superconductivity, but we can also see exactly where the material is superconducting, which is convenient for non-homogeneous materials. 
@@ -69,6 +69,16 @@ Our eyes are not able to see magnetism, but with a MOI apparatus we can take pic
 \caption{General setup of MOI. Image is taken from wikipedia \url{http://www.mn.uio.no/fysikk/english/research/groups/amks/superconductivity/mo/} \label{fig:MOI}}
 \end{figure}
 We inducted MOI on 
+
+\section{Experiments}\label{Sec:Experiments}
+Now as the theory behind the methods is introduced, we are ready to see how the experiments actually were done. 
+We will examine the samples using mainly two methods: Transport measurements and magneto optical imaging
+
+\subsubsection{Transport Measurements (TM)}
+The connections are made by Indium (In) since it is a good conductor and easy to distribute, i.e ...
+
+\subsubsection{Magneto-Optical Imaging (MOI)}
+
 
 \section{Experiments} \label{Sec:Experiments}
 The experiments were implemented in the same way for both the samples, so unless there are reasonable differences, I will present the general approach
