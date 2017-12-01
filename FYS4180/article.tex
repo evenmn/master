@@ -9,8 +9,6 @@
 \let\pdfpageheight\paperheight
 \let\pdfpagewidth\paperwidth
 
-%\copyrightyear{2009} \vol{00} \issue{0} \DOI{000}
-
 \begin{document}
 
 \title[Granular superconductivity of Rutherford cable and cuprate/manganite multilayer]{How superconductivity in Rutherford MgB2 Cables and cuprate/manganite multilayer is affected by external factors}
@@ -19,7 +17,7 @@
 
 \shortauthors{E. M. Nordhagen}
  
-\received{00 November 2017}
+\received{00 December 2017}
 \revised{00 Month 2017}
 
 
@@ -49,22 +47,27 @@ We are going to study a Rutherford tape consisting of cables with cores of \chem
 Moreover we have examined the superconducting properties of a YBCO multilayer sample. YBCO has status as the first material to be found superconducting above the temperature of liquid nitrogen, which generated major optimism for superconductivity when it was discovered in 1987 [\url{http://adsabs.harvard.edu/abs/1987PhRvL..58..908W}], with its critical temperature at $T_c=93K$. 
 
 \section{Theory}\label{Sec:Theory}
-Superconductive materials have two main properties: They are resistance-free conductors under a critical temperature $T_c$ and magnetic field cannot penetrate the material under the same temperature $T_c$. The methods we gonna make use of both these main properties. Perhaps the easiest way to find the resistance of a sample is to connect the sample to a power supply and measure the voltage difference, $U$, between two points. The resistance can then be calculated by Ohm's law $U=RI$, given the current $I$. This is known as a four-point measurement or four-terminal sensing, and is widely used in transport measurements. No voltage drop corresponds to zero resistance. In figure (\ref{fig:onnes_1911}) one can find a sketch of a four-point measurement. 
+Superconductive materials have two main properties: They are resistance-free conductors under a critical temperature $T_c$ and magnetic field cannot penetrate the material under the same temperature $T_c$. The methods we gonna make use of both these main properties. Perhaps the easiest way to find the resistance of a sample is to connect the sample to a power supply and measure the voltage difference, $U$, between two points. The resistance can then be calculated by Ohm's law $U=RI$, given the current $I$. This is known as a four-point measurement or four-terminal sensing, and is widely used in transport measurements. No voltage drop corresponds to zero resistance. In figure (\ref{fig:4point}) one can find a sketch of a four-point measurement. 
 
-In some cases it is appropriate to use more advanced techniques, for instance when the sample structure is not uniform in every direction. Then we might want to measure the resistance in various directions, but without disturbing the samples with more contacts than necessary. By placing the contacts in each corner, we can reuse the contacts when "turning" the sample, known as the Monogomy, illustrated in figure (..). 
+In some cases it is appropriate to use more advanced techniques, for instance when the sample structure is not uniform in every direction. Then we might want to measure the resistance in various directions, but without disturbing the samples with more contacts than necessary. By placing the contacts in each corner, we can reuse the contacts when "turning" the sample, known as the Monogomery, illustrated in figure (\ref{fig:4corner}). 
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=50mm]{onnes_1911.jpg}
-\caption{RT-graph drawn by Kamerlingh Onnes in 1911. Image downloaded from wikipedia \url{https://commons.wikimedia.org/wiki/File:Superconductivity_1911.gif} \label{fig:onnes_1911}}
+\includegraphics[width=50mm]{4point.png}
+\caption{4-Point measurements.  \label{fig:4point}}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[width=50mm]{4corner.png}
+\caption{4-corner measurements.  \label{fig:4corner}}
 \end{figure}
 
 \subsection{Magneto-Optical Imaging (MOI)}
 Our eyes are not able to see magnetism, but with a MOI apparatus we can take pictures of a superconductor and decide if a sample is superconducting using the elementary magnetic property discussed in section \ref{Sec:Theory}. The method is quite in-complicated where light is reflected by a Faraday crystal on top of the sample. If the Faraday crystal is affected by a magnetic field, it will polarize the light, and it will later be separated out by a polarization filter, as shown in figure (\ref{fig:MOI}). The idea is that all the light will go through the filter as long as the sample is not superconducting. Alternatively if the sample is superconducting, we will get no light passing in the superconducting area. Not only can MOI detect superconductivity, but we can also see exactly where the material is superconducting, which is convenient for non-homogeneous materials. 
 \begin{figure}[h]
 \centering
-\includegraphics[width=50mm]{MOI.jpg}
-\caption{General setup of MOI. Image is taken from wikipedia \url{http://www.mn.uio.no/fysikk/english/research/groups/amks/superconductivity/mo/} \label{fig:MOI}}
+\includegraphics[width=50mm]{moi.png}
+\caption{General setup of MOI. \label{fig:MOI}}
 \end{figure}
 We inducted MOI on 
 
@@ -72,13 +75,24 @@ We inducted MOI on
 Now as the theory behind the methods is introduced, we are ready to see how the experiments actually were done. Our samples are the Rutherford tape consisting of 12 cables and the YBCO multilayer. Only the former was used in Magneto-Optical imaging, while we did transport measurements on both. 
 
 \subsection{Rutherford tape}
-A Rutherford cable is a cable consisting of multiple layers of superconducting materials. Our sample has a core of \chem{MgB_2} (with $39K$ as the transition temperature) covered by a layer of Niobium, which is another superconductor with critical temperature $7K$. We then expect really low total resistance below $7K$, a little more resistance between $7K$ and $39K$, and no superconductivity above $39K$. The Niobium layer is again covered the non-superconducting metal Cu10Ni, probably to protect the cables. 
+A Rutherford cable is a cable consisting of multiple layers of superconducting materials. Our sample has a core of \chem{MgB_2} (with $39K$ as the transition temperature) covered by a layer of Niobium, which is another superconductor with critical temperature $7K$. We then expect really low total resistance below $7K$, a little more resistance between $7K$ and $39K$, and no superconductivity above $39K$. The Niobium layer is again covered the non-superconducting metal Cu10Ni, probably to protect the cables. In figure (\ref{fig:rutherford2}) on can find a optical image of the cross section of the tape. 
+\begin{figure}[h]
+\centering
+\includegraphics[width=50mm]{rutherford1.jpg}
+\caption{General setup of MOI. \label{fig:rutherford2}}
+\end{figure}
 
 \subsubsection{Transport Measurements}
 The transport measurements on the Rutherford tape were done by 4-point measurement defined in the theory. The contacts are made of Indium (In) since it is a good conductor and easy to distribute. 
 
-\subsubsection{Magneto-Optical Imaging (MOI)}
 
+\subsubsection{Magneto-Optical Imaging (MOI)}
+Before the MOI analysis was done, we polished the sample to get the Faraday crystal closer to the superconducting part. This was done by a rotating sandpaper, and a image is shown in figure (\ref{fig:rutherford1}). Thereafter we cleaned it and placed it on the sample holder using vacuum fat which becomes sticky in vacuum. The Faraday crystal can not be attached to the ample in any way, so we needed stabilizators to make sure that it did not fall of the sample. When the sample was prepared, we could prepare for the experiment. The step were 1. Place sampleholder with sample inside MOI machine, 2. make vacuum, 3. cool down. 
+\begin{figure}[h]
+\centering
+\includegraphics[width=50mm]{rutherford1.jpg}
+\caption{General setup of MOI. \label{fig:rutherford1}}
+\end{figure}
 
 \section{bullshit} \label{Sec:bullshit}
 The experiments were implemented in the same way for both the samples, so unless there are reasonable differences, I will present the general approach
@@ -110,25 +124,25 @@ Take pictures
 \begin{figure}[h]
 \centering
 \includegraphics[width=100mm]{Bilde1.png}
-\caption{INSERT CAPTION \label{fig:MOI}}
+\caption{INSERT CAPTION \label{fig:multilayer1}}
 \end{figure}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=100mm]{Bilde2.png}
-\caption{INSERT CAPTION \label{fig:MOI}}
+\caption{INSERT CAPTION \label{fig:multilayer2}}
 \end{figure}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=100mm]{Bilde3.png}
-\caption{INSERT CAPTION \label{fig:MOI}}
+\caption{INSERT CAPTION \label{fig:multilayer3}}
 \end{figure}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=100mm]{Bilde4.png}
-\caption{INSERT CAPTION \label{fig:MOI}}
+\caption{INSERT CAPTION \label{fig:multilayer4}}
 \end{figure}
 
 \subsection{YBCMO single-layer}
