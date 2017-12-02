@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 %\usepackage[margin=0.5in]{geometry}
+\usepackage{float}
 \newcommand*\chem[1]{\ensuremath{\mathrm{#1}}}
 
 %% These two lines are needed to get the correct paper size
@@ -142,8 +143,23 @@ Also for this sample we did measurements both on the way down and on the way up,
 
 
 \section{Results}\label{Sec:Results}
+As section \ref{Sec:Experiments} indicates, we have studied Rutherford cable by transport measurements with a 4-point connection, and we also magneto-optical imaging has been used to reveal the superconducting properties of the sample. Additionally the YBCO multilayer has been investigated by transport measurements. The experiments are detailed in section \ref{Sec:Experiments}.
+
 \subsection{Rutherford cable}
 \subsubsection{Transport measurements}
+All the transport measurements done using liquid helium as cooling medium. In figure (\ref{fig:rutherfordRTallI}) and (\ref{fig:rutherfordRTlowI}) you can find resistance plotted as function of temperature for low currents in the temperature range 160K to 25K and around the critical temperature respectively. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=70mm]{Rutherford_RT_all_T_low_I.png}
+\caption{Resistance plotted as function of temperature from 160K to 25K. The dark graph is 0.2A, the blue graph is 0.5A and the pink graph is 0.7A. \label{fig:rutherfordRTallI}}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=70mm]{Rutherford_RT_low_I.png}
+\caption{Resistance plotted as function of temperature around critical temperature. The dark graph is 0.2A, the blue graph is 0.5A and the pink graph is 0.7A. \label{fig:rutherfordRTlowI}}
+\end{figure}
+As we can see in figure (\ref{fig:rutherfordRTallI}, all the curves seem to follow almost the same path, but with more spread for higher temperatures. We get transition at 37K, as expected, and on the zoomed-in plot in figure (\ref{fig:rutherfordRTlowI}) one can see that we got trasition for the highest temperature at 0.5A, followed by 0.7A and 0.2A. This is suspicious since higher currents should give us transition at highest temperature. 
+
 \subsubsection{Magneto-optical imaging}
 %\begin{figure}[h]
 %\centering
