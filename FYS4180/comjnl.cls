@@ -4,6 +4,7 @@
 \def\CJ@err#1{\ClassError{cj}{#1}\@eha}
 \def\CJ@warn#1{\ClassWarningNoLine{cj}{#1}}
 \DeclareOption{10pt}{}
+\DeclareOption{resmargin}{\@margintrue}
 \DeclareOption{11pt}{\CJ@warn{10pt used (not optional)}}
 \DeclareOption{12pt}{\CJ@warn{10pt used (not optional)}}
 \DeclareOption{twoside}{}

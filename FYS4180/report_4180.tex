@@ -131,13 +131,13 @@ First we investigated how the superconductive properties behaved in low temperat
 \end{figure}
 \begin{figure}[h]
 \centering
-\includegraphics[width=70mm]{nitrogen.jpg}
-\caption{Breaker with nitrogen. \label{fig:nitrogen}}
+\includegraphics[width=40mm]{nitrogen.jpg}
+\caption{Beaker with nitrogen. \label{fig:nitrogen}}
 \end{figure}
 Also for this sample we did measurements both on the way down and on the way up, but with this method it was difficult to increase the sample such that the temperature change was constant. Instead of moving it slowly upwards, we laid the sample on a table and did measurements when it approached room temperature. To keep smooth temperature changes, it was pushed into a thick, isolating glow, as shown in figure (\ref{fig:glow}).
 \begin{figure}[h]
 \centering
-\includegraphics[width=70mm]{glow.jpg}
+\includegraphics[width=40mm]{glow.jpg}
 \caption{A thick glow was used to heat the sample slowly. \label{fig:glow}}
 \end{figure}
 
@@ -148,60 +148,80 @@ As section \ref{Sec:Experiments} indicates, we have studied Rutherford cable by 
 \subsection{Rutherford cable}
 \subsubsection{Transport measurements}
 All the transport measurements done using liquid helium as cooling medium. In figure (\ref{fig:rutherfordRTallI}) and (\ref{fig:rutherfordRTlowI}) you can find resistance plotted as function of temperature for low currents in the temperature range 160K to 25K and around the critical temperature respectively. 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[width=70mm]{Rutherford_RT_all_T_low_I.png}
 \caption{Resistance plotted as function of temperature from 160K to 25K. The dark graph is 0.2A, the blue graph is 0.5A and the pink graph is 0.7A. \label{fig:rutherfordRTallI}}
 \end{figure}
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[width=70mm]{Rutherford_RT_low_I.png}
 \caption{Resistance plotted as function of temperature around critical temperature. The dark graph is 0.2A, the blue graph is 0.5A and the pink graph is 0.7A. \label{fig:rutherfordRTlowI}}
 \end{figure}
-As we can see in figure (\ref{fig:rutherfordRTallI}, all the curves seem to follow almost the same path, but with more spread for higher temperatures. We get transition at 37K, as expected, and on the zoomed-in plot in figure (\ref{fig:rutherfordRTlowI}) one can see that we got trasition for the highest temperature at 0.5A, followed by 0.7A and 0.2A. This is suspicious since higher currents should give us transition at highest temperature. 
+As we can see in figure (\ref{fig:rutherfordRTallI}, all the curves seem to follow almost the same path, but with more spread for higher temperatures. We get transition at 37K, as expected, and on the zoomed-in plot in figure (\ref{fig:rutherfordRTlowI}) one can see that we got trasition for the highest temperature at 0.5A, followed by 0.7A and 0.2A. This is suspicious since higher currents should give us transition at lower temperature. Furthermore we study the hysteresis in figure (\ref{fig:rutherfordRT}) where resistance is plotted against the temperature for 0.05A, 0.1A and 0.3A. We can immediately see that the graphs are ordered correctly in this care, with 0.05A as the graph with transistion at highest temperature.
+\begin{figure}[h]
+\centering
+\includegraphics[width=70mm]{Rutherford_RT.png}
+\caption{Resistance as function of temperature around critical temperature. The red graph corresponds to 0.05A, the black corresponds to 0.1A and the blue one corresponds to 0.3A. See text for futher description. \label{fig:rutherfordRT}}
+\end{figure}
+
 
 \subsubsection{Magneto-optical imaging}
-%\begin{figure}[h]
-%\centering
-%\includegraphics[width=100mm]{moi_2d.tif}
-%\caption{INSERT CAPTION \label{fig:moi2d}}
-%\end{figure}
-%\begin{figure}[h]
-%\centering
-%\includegraphics[width=100mm]{moi_3d.TIF}
-%\caption{INSERT CAPTION \label{fig:moi3d}}
-%\end{figure}
+We did magneto-optical imaging as described in section \ref{Sec:Experiments}, and we got the image presented in figure (\ref{fig:moi2d1}) when a current of 3.4A was sent through the sample. Unlike for the optical image, we can now clearly see the different layers, where the brighter area is \chem{MgB_2}, the dark layer covering the core is Niobium and the outermost layer is Cu10Ni. We can also spot a darker line in the Cu10Ni, which is the gap between two different cables. In section (\ref{Sec:Theory}) it was stated that the light should not be polarized in the area where we had superconductivity, and the magneto-optical image should therefore have dark areas where the sample is superconducting. In this figure (\ref{fig:moi2d1}) it is opposite, and the reason is that the image is negative. 
+\begin{figure}[h]
+\centering
+\includegraphics[width=80mm]{scale_no_79_d_I_3p4_V_0p6_A.png}
+\caption{MOI analyse of the Rutherford cable where the current was 3.4A and the temperature was 3.7K. The length of the scale bar is 0.1mm. \label{fig:moi2d1}}
+\end{figure}
+
+Furthermore we did the same, but with no current and with another polarization and with an 1x optical zoom instead of 10x. The result is presented in figure (\ref{fig:moi2d2}). 
+\begin{figure}[h]
+\centering
+\includegraphics[width=80mm]{scale_no_119_obj_2p5_pol_m3_grey.png}
+\caption{MOI analyse of the Rutherford cable with no current flowing through, temperature at 3.7K and 2.5 in polarization(?). The scale bar has length 1mm. \label{fig:moi2d2}}
+\end{figure}
+
+We also played with a 3D tool to transform a 2D magneto-optical image to a 3D image where the z-axis showed the conductivity rate. As we can see in figure (\ref{fig:moi3d}), all of the sample apart from the outermost layer is superconducting at 3.7K. Again we can spot the gap between the cables, which appears as red spikes in the nonsuperconducting area. 
+\begin{figure}[h]
+\centering
+\includegraphics[width=80mm]{3D_Diff_no_85_i_I_m1p0_V_m0p2_A_m0p4_A_sc.png}
+\caption{MOI analyse of the Rutherford cable with 1.0A and temperature at 3.7K transformed to 3D. The scale bar has length 0.1mm. The level of z-axis indicates where the sample is superconducting.\label{fig:moi3d}}
+\end{figure}
 
 \subsection{YBCO}
 \subsubsection{Transport measurements}
+In figure (\ref{fig:res_norm}) the resistance is plotted as function of the temperature for currents from 4.3mA to 37.0mA where the current flows parallel to the defect. We observe that the initial resistance is the same, no matter that the current is, but when cooling down, the resistance drops immediately for low currents and is more stable for higher currents. 
 \begin{figure}[h]
 \centering
 \includegraphics[width=100mm]{Bilde1.png}
-\caption{INSERT CAPTION \label{fig:res_norm}}
+\caption{Resistance as function of temperature from 298K (room temperature) to 80K with liquid nitrogen as the cooling medium. The black graph is the graph got from 4.3mA, the red graph corresponds to 10.6mA, the green graph is 17.0mA, the magenta is 23.8mA, the orange is 30.7mA and finally the blue one is 37.0mA. The resistance is normalized with respect to room temperature. \label{fig:res_norm}}
 \end{figure}
+Further we used the monogomery technique to turn the sample, and saw how the resistace was with current flowing perpendicular to the defect, and the result is plotted in figure (\ref{fig:res}). As we can see the initial resistance is higher when the current flows perpendicular to the defect than parallel to it. This is probably because the contacts are more resistive in this case, ideal (with the same contacts) the resistance should be the same. Therefore it is better to normalize all graphs with respect to the initial resistance to make the comparison easier. 
 \begin{figure}[h]
 \centering
 \includegraphics[width=100mm]{Bilde2.png}
-\caption{INSERT CAPTION \label{fig:res}}
+\caption{Resistance as function of temperature from 298K (room temperature) to 80K with liquid nitrogen as the cooling medium. The black graph is the graph got from 4.3mA, the red graph corresponds to 10.6mA, the green graph is 17.0mA, the magenta is 23.8mA, the orange is 30.7mA and finally the blue one is 37.0mA. \label{fig:res}}
 \end{figure}
+
+Moreover we studied how the current was changing as the temperature decreased for both the parallel and perpendicular case, and the result is shown in figure (\ref{fig:cur}). The legend indicated the initial current. We see that the currents are roughly the same in both cases, so there is enough to study one of them, but where the two higher currents increase for low temperatures, the lower current seems to decrease. It would therefore be interesting to see how the current graphs are behaving when we normalize them, and a plot of that is presented in figure (\ref{fig:cur_norm}). 
 \begin{figure}[h]
 \centering
 \includegraphics[width=100mm]{Bilde3.png}
-\caption{INSERT CAPTION \label{fig:cur}}
+\caption{The current as function of temperature with 4.3mA, 23.7mA and 30.7mA as the initial currents for both current flowing parallel and perpendicular to the defect.\label{fig:cur}}
 \end{figure}
 \begin{figure}[h]
 \centering
 \includegraphics[width=100mm]{Bilde4.png}
-\caption{INSERT CAPTION \label{fig:cur_norm}}
+\caption{The current as function of temperature with 4.3mA, 23.7mA and 30.7mA as the initial currents for the perpendicular case. The currents are normalizing with respect to the initial current.\label{fig:cur_norm}}
 \end{figure}
+As we can see, the lower current graph is actually decreasing for low temperatures, which makes no sense according to Ohm's law. This is discussed in section \ref{Sec:Discussion}.
+
+\section{Discussion} \label{Sec:Discussion}
+In figure (\ref{fig:rutherfordRTallI}) and (\ref{fig:rutherfordRTlowI}) we got transition at higher temperature when we had $I=$
 
 \section{Conclusion} \label{Sec:Conclusion}
 
-\ack{This research was undertaken as part of the ALADDIN
-(Autonomous Learning Agents for Decentralised Data and Information
-Networks) project and is jointly funded by a BAE Systems and EPSRC
-(Engineering and Physical Research Council) strategic partnership
-(EP/C548051/1).}
+\ack{This report was written as the final report in the course FYS4180 - Experimental methods in physics, fall 2017, University of Oslo.}
 
 \section{References}
 \begingroup
