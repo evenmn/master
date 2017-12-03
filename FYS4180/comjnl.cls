@@ -223,9 +223,9 @@
       \llap{#3}}%
     \hrule\@height.5pt}}
 \ps@cj
-\def\@volumeyear{????}
-\def\@volumenumber{??}
-\def\@issuenumber{??}
+\def\@volumeyear{Oslo}
+\def\@volumenumber{}
+\def\@issuenumber{}
 \def\@startpage{\pageref{FirstPage}}
 \def\@endpage{\pageref{LastPage}}
 \def\volumeyear#1{\gdef\@volumeyear{#1}}
@@ -427,12 +427,12 @@
     \def\@svsechd{#4{\hskip #1\relax #5}}%
   \fi
   \@xsect{#3}}
-\def\journalname{The Computer Journal}
+\def\journalname{FYS4180 - Experimenal methods in Physics}
 \def\copyrightname{Oxford University Press}
 \def\andname{and}
 \def\ppname{pp}
-\def\numbername{No.\@}
-\def\volumename{Vol.\@}
+\def\numbername{University of Oslo}
+\def\volumename{2017}
 
 %extra macros
 
