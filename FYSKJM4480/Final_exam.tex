@@ -1,15 +1,154 @@
-\documentclass{beamer}
+\documentclass[norsk,a4paper,12pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} %for å inkludere grafikk
+\usepackage{verbatim} %for å inkludere filer med tegn LaTeX ikke liker
+
 
 \begin{document}
   \begin{frame}
     \frametitle{Coupled-Cluster teori}
     \framesubtitle{Fra Schrodingers ligning til dataprogram}
-    ...
+    Coupled Cluster (CC) går ut på at man tilnærmer en mangepartikkelbølgefunksjon ved å si at funksjonen er
+    \begin{equation}
+    |\Psi\rangle=e^{\hat{T}}|\Phi\rangle
+    \end{equation}
+  hvor $\Phi$ er referansebølgefunksjonen. 
+    
   \end{frame}
   \begin{frame}
-    \frametitle{This is the second slide}
-    \framesubtitle{A bit more information about this}
-    %More content goes here
+    \frametitle{Motivasjon}
+    \framesubtitle{...}
+    Det kan virke som dette er tatt litt ut av intet, så vi skal nå se fort på ideene som ligger bak
+    Vi starter med Slaterdeterminanten for N partikler på Diracform
+    \begin{equation}
+    |\Phi\rangle=|\phi_i(x_1)\phi_j(x_2)\cdots\phi_o(x_N)\rangle
+    \end{equation}
+    som vi kan forbedre ved å innføre orbitalfunksjoner bestående av en lineærkombinasjon av alle enkeltpartikkel bølgefunksjoner, som
+    \begin{equation}
+    f_i(x_m)=\sum_a t_i^a\phi_a(x_m),\quad f_{ij}(x_m,x_n)=\sum_{a>b}t_{ij}^{ab}\phi_a(x_m)\phi_b(x_n)
+    \end{equation}
   \end{frame}
+  \begin{frame}
+    \frametitle{Motivasjon}
+    \framesubtitle{...}
+    Vi kunne også innført for eksempel funksjoner for tre orbitaler, men vi velger å se bort ifra dette ettersom vi antar at interaksjonen bare skjer parvis. Når vi har tatt med alle mulige kombinasjoner, vil vi stå igjen med en forbedre total bølgefunksjon bestående av 43 ledd for 4 elektroner, noe som er utrolig kostbart:
+    \begin{align}
+    |\Psi\rangle=|\phi_i\phi_j\phi_k\phi_l\rangle+\hdots
+    \end{align}
+    Jeg kommer ikke til å skrive den opp side det er et kaos, noe som er et problem. Vi kan forenkle dette uttrykket ved å introdusere annenkvantisering, noe jeg ikke vil forklare i detalj. Med dette kan vi introdusere orbitaloperatorer 
+  \end{frame}
+  \begin{frame}
+    \frametitle{Motivasjon}
+    \framesubtitle{...}
+    \begin{equation}
+    \hat{t}_i\equiv \sum_a t_i^a c_a^{\dagger}c_i,\quad \hat{t}_{ij}\equiv\sum_{a>b}t_{ij}^{ab}c_a^{\dagger}c_b^{\dagger}c_jc_i
+    \end{equation}
+    Som gir en total bølgefunksjon på 
+    \begin{align*}
+    |\Psi\rangle&=\bigg(1+\sum_i\hat{t}_i+\frac{1}{2}\sum_{ij}\hat{t}_i\hat{t}_j+\frac{1}{6}\sum_{ijk}\hat{t}_i\hat{t}_j\hat{t}_k\\
+    &\mathrel{\phantom{=}}+\frac{1}{2}\sum_{ij}\hat{t}_{ij}
+    +\frac{1}{8}\sum_{ijkl}\hat{t}_{ij}\hat{t}_{kl}+\frac{1}{24}\sum_{ijkl}\hat{t}_i\hat{t}_j\hat{t}_k\hat{t}_l\\
+    &\mathrel{\phantom{=}}+\frac{1}{2}\sum_{ijk}\hat{t}_{ij}\hat{t}_k+\frac{1}{4}\sum_{ijkl}\hat{t}_{ij}\hat{t}_k\hat{t}_l\bigg)|\Phi\rangle
+    \end{align*}
+    
+  \end{frame}
+  \begin{frame}
+    \frametitle{Motivasjon}
+    \framesubtitle{...}
+    Dette er mye bedre enn de 43 leddene vi hadde tidligere, men vi kan forenkle dette videre ved å innføre clusteroperatorer:
+    \begin{align*}
+    \hat{T}_1&=\sum_i\hat{t}_i=\sum_{ia}t_i^ac_a^{\dagger}c_i\\
+    \hat{T}_2&=\frac{1}{2}\sum_{ij}\hat{t}_{ij}=\frac{1}{4}\sum_{ijab}\hat{t}_{ij}^{ab}c_a^{\dagger}c_b^{\dagger}c_jc_i
+    \end{align*}
+    som gir
+    \begin{align*}
+    |\Psi\rangle=\bigg(&1+\hat{T}_1+\frac{1}{2!}\hat{T}_1^2+\frac{1}{3!}\hat{T}_1^3+\hat{T}_2\\
+    &+\frac{1}{2!}\hat{T}_2^2+\frac{1}{4!}\hat{T}_1^4+\hat{T}_2\hat{T}_1+\frac{1}{2!}\hat{T}_2\hat{T}_1^2\bigg)|\Phi\rangle
+    \end{align*}
+  \end{frame}
+  \begin{frame}
+    \frametitle{Motivasjon}
+    \framesubtitle{...}
+    Nå kan vi observere at dette er de første leddene i Taylorutviklingen av $e^{\hat{T}_1+\hat{T}_2}$, og vi definerer $\hat{T}=\hat{T}_1+\hat{T}_2$:
+    \begin{equation}
+    |\Psi\rangle=e^{\hat{T}_1+\hat{T}_2}|\Phi\rangle\equiv e^{\hat{T}}|\Phi\rangle
+    \end{equation}
+    hvor
+    \begin{equation}
+    e^{\hat{T}}=1+\hat{T}+\frac{\hat{T}^2}{2!}+\frac{\hat{T}^3}{3!}+\sum_{n=4}^{\infty}\frac{\hat{T}^n}{n!}
+    \end{equation}
+  \end{frame}
+  \begin{frame}
+    \frametitle{Ulinkede CC ligninger}
+    \framesubtitle{...}
+    Hvis vi nå legger til referansefunksjonen som en bra, får vi
+    \begin{equation}
+    \langle\Phi|\hat{T}e^{\hat{T}}|\Phi\rangle=E
+    \end{equation}
+    mens hvis vi derimot legger til ..., får vi
+    \begin{equation}
+    \langle\Phi_X|\hat{T}e^{\hat{T}}|\Phi\rangle=0.
+    \end{equation}
+    Disse ligningene kan ikke brukes direkte til databeregninger, og kalles derfor de ulinkede CC ligningene
+  \end{frame}
+  \begin{frame}
+    \frametitle{Linkede CC ligninger}
+    \framesubtitle{...}
+    Med samme argumentasjon, men litt annen tilnærming kan man finne de linkede CC ligningene
+    \begin{align}
+    \langle\Phi|e^{-\hat{T}}\hat{H}e^{\hat{T}}|\Phi\rangle&=E\\
+    \langle\Phi_X|e^{-\hat{T}}\hat{H}e^{\hat{T}}|\Phi\rangle&=0
+    \end{align}
+    hvor den første kalles energiligningen mens den andre er den såkalte amplitudeligningen. Tanken er at man først bruker ligning 2 til å finne amplitudene, og deretter regninger ut energien ved hjelp av ligning 1.
+  \end{frame}
+  \begin{frame}
+    \frametitle{Å regne med de linkede CC ligningene}
+    \framesubtitle{...}
+    Det er ikke helt intuitivt hvordan man skal gå løs på ligningene, men en god start er å skrive ut operatoren $\bar{H}$ ved hjelp av Hausdorffs ekspansjon:
+    \begin{equation*}
+    e^{-\hat{T}}\hat{H}e^{\hat{T}}=\hat{H}+[\hat{H},\hat{T}]+\frac{1}{2!}[[\hat{H},\hat{T}],\hat{T}]+\frac{1}{3!}[[[\hat{H},\hat{T}],\hat{T}],\hat{T}]+\hdots
+    \end{equation*}
+    Viser hvordan man kan forenkle andre ledd ved hjelp av Wick's generelle teorem på tavla
+  \end{frame}
+  \begin{frame}
+    \frametitle{Å regne med de linkede CC ligningene}
+    \framesubtitle{...}
+    Hvis vi gjør det samme med alle ledene, ender vi opp med
+    \begin{equation*}
+    e^{-\hat{T}}\hat{H}e^{\hat{T}}=\hat{H}+\{\hat{H}\hat{T}\}_c+\{\{\hat{H}\hat{T}\}_c\hat{T}\}_c+\hdots
+    \end{equation*}
+    Dette er generelt, og vi kan i prinsippet sette inn dette i de linkede ligningene. Før vi gjør dette, begrenser vi systemet til et elektronisk system bestående av 4 elektroner. 
+  \end{frame}
+  \begin{frame}
+    \frametitle{Hamiltonian}
+    \framesubtitle{...}
+    Den normaliserte Hamiltonoperatoren er da gitt ved
+    \begin{equation*}
+    \hat{H}=E_{ref}+\hat{F}_N+\hat{V}_N
+    \end{equation*}
+    med
+    \begin{align*}
+    \hat{F}_N=\sum_{pq}f_q^p\{c_p^{\dagger}c_q\},\quad \hat{V}_N=\frac{1}{4}\sum_{pqrs}W_{rs}^{pq}\{c_p^{\dagger}c_q^{\dagger}c_sc_r\}
+    \end{align*}
+    Slik at vi kan begrense oss til å regne ut 
+    \begin{align*}
+    e^{-\hat{T}}\hat{H}e^{\hat{T}}&=\hat{H}_N+\{\hat{F}_N\hat{T}_1\}_c+\{\hat{V}_N\hat{T}_1\}_c+\{\hat{F}_N\hat{T}_2\}_c\\
+    &\mathrel{\phantom{=}}+\{\hat{V}_N\hat{T}_2\}_c+\{\hat{F}_N\hat{T}_1^2\}_c+\{\hat{V}_N\hat{T}_1^2\}_c
+    \end{align*}
+  \end{frame}
+  \begin{frame}
+    \frametitle{Motivasjon}
+    \framesubtitle{...}
+    \begin{align*}
+    \langle\Phi|\hat{H}_N|\Phi\rangle=0
+    \end{align*}
+    
+  \end{frame}
+  \begin{frame}
+    \frametitle{Motivasjon}
+    \framesubtitle{...}
+    
+  \end{frame}
+  
 % etc
 \end{document}
