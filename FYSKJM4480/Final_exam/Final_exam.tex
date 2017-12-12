@@ -82,6 +82,9 @@
     \begin{equation}
     |\Psi\rangle=e^{\hat{T}_1+\hat{T}_2}|\Phi\rangle\equiv e^{\hat{T}}|\Phi\rangle
     \end{equation}
+    \begin{equation}
+    \hat{H}e^{\hat{T}}|\Phi\rangle=Ee^{\hat{T}}|\Phi\rangle
+    \end{equation}
     hvor
     \begin{equation}
     e^{\hat{T}}=1+\hat{T}+\frac{\hat{T}^2}{2!}+\frac{\hat{T}^3}{3!}+\sum_{n=4}^{\infty}\frac{\hat{T}^n}{n!}
@@ -154,8 +157,8 @@
     \frametitle{Finne amplitudene}
     Matriseelementene for amplitudeligningene (CCSD)
     \begin{align}
-    \langle\Phi_{i}^a|e^{-\hat{T}}\hat{H}e^{\hat{T}}|\Phi\rangle&=\langle\Phi|\{c_i^{\dagger}c_a\}e^{-\hat{T}}\hat{H}e^{\hat{T}}|\Phi\rangle=0\\
-    \langle\Phi_{ij}^{ab}|e^{-\hat{T}}\hat{H}e^{\hat{T}}|\Phi\rangle&=\langle\Phi|\{c_i^{\dagger}c_j^{\dagger}c_bc_a\}e^{-\hat{T}}\hat{H}e^{\hat{T}}|\Phi\rangle=0
+    \langle\Phi_{i}^a|e^{-\hat{T}}\hat{H}e^{\hat{T}}|\Phi\rangle&=\langle\Phi|(c_i^{\dagger}c_a)e^{-\hat{T}}\hat{H}e^{\hat{T}}|\Phi\rangle=0\\
+    \langle\Phi_{ij}^{ab}|e^{-\hat{T}}\hat{H}e^{\hat{T}}|\Phi\rangle&=\langle\Phi|(c_i^{\dagger}c_j^{\dagger}c_bc_a)e^{-\hat{T}}\hat{H}e^{\hat{T}}|\Phi\rangle=0
     \end{align}
     Finne amplitudene ved iterasjon
     \begin{align*}
