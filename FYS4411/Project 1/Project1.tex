@@ -46,7 +46,7 @@ Write the abstract here
 
 
 \begin{itemize}
-\item Github repository containing programs and results are in: \url{https://github.com/}
+\item Github repository containing programs and results are in: \url{https://github.com/evenmn/FYS4411/tree/master/Project%201}
 \end{itemize}
 
 
@@ -54,10 +54,43 @@ Write the abstract here
 Introduction
 
 \section{Theory}
+Describe the physics here, including wavefunction and Hamiltonian
+
+We study a system of $N$ bosons trapped in a harmonic oscillator with the Hamiltonian given by 
+\begin{equation}
+\hat{H}=\sum_i^N\bigg(-\frac{\hbar^2}{2m}\nabla_i^2+V_{ext}(\vec{r}_i)\bigg)+\sum_{i<j}^NV_{int}(\vec{r}_i,\vec{r}_j)
+\end{equation}
+with $V_{ext}$ as the external potential, given by the harmonic oscillator potential,
+and $V_{int}$ as the interaction term, which can be ignored when developing the benchmarks. 
+
+The wavefunction is on the form 
+\begin{equation}
+\Psi_T(\vec{r}_1, \vec{r}_2, ..., \vec{r}_N, \alpha, \beta)=\prod_i^Ng(\alpha, \beta, \vec{r}_i)\prod_{i<j}f(a,r_{ij})
+\end{equation}
+where $g$ is assumed to be an exponential
+\begin{equation}
+g(\alpha, \beta, \vec{r}_i)=\exp[-\alpha(x_i^2+y_i^2+\beta z_i^2)]
+\end{equation}
+which is practicle since
+\begin{equation}
+\prod_i^Ng(\alpha, \beta, \vec{r}_i)=\exp[-\alpha(x_1^2+y_1^2+\beta z_1^2+\cdots x_N^2+y_N^2+\beta z_N^2)]
+\end{equation}
+
+Present most important results form exercise a
+
+
 
 \section{Methods}
+\subsection{Variational Monte Carlo}
+
+\subsection{Metropolis algorithm}
+\subsubsection{Brute force}
+\subsubsection{Importance sampling}
+
+
 
 \section{Results}
+
 
 \section{Discussion}
 

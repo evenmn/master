@@ -1,0 +1,133 @@
+\documentclass[norsk,a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} %for å inkludere grafikk
+\usepackage{verbatim} %for å inkludere filer med tegn LaTeX ikke liker
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\lstset{language=c++}
+\lstset{basicstyle=\small}
+\lstset{backgroundcolor=\color{white}}
+\lstset{frame=single}
+\lstset{stringstyle=\ttfamily}
+\lstset{keywordstyle=\color{red}\bfseries}
+\lstset{commentstyle=\itshape\color{blue}}
+\lstset{showspaces=false}
+\lstset{showstringspaces=false}
+\lstset{showtabs=false}
+\lstset{breaklines}
+\lstset{postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}}
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+
+\title{INF5620 - Numerical methods for partial differential equations\\\vspace{2mm} \Large{Mandatory Exercise 1}}
+\author{\large Even Marius Nordhagen}
+\date\today
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+\item For the Github repository containing programs and results, follow this link: 
+\url{https://github.com/UiO-INF5620/INF5620-evenmn/tree/master/exercise_1}
+\end{itemize}
+
+\section*{Problem 1}
+We have the ODE problem
+\begin{equation}
+u''+\omega^2u=f(t)
+\label{ode}
+\end{equation}
+with initial conditions 
+\begin{equation}
+u(0)=I,\quad u'(0)=V
+\end{equation}
+and with $t\in(0,T]$. To solve this equation numerically we need to use an approximation for the second derivative, recall the \textbf{second symmetric derivative}
+\begin{equation}
+f''(x)=\lim_{h\rightarrow0}\frac{f(x+h)-2f(x)+f(x-h)}{h^2}.
+\label{ssd}
+\end{equation}
+This equation is only true when $h$ is infinitesimal, but we can make a good approximation for small $h$'s. We then get
+\begin{equation}
+u^{n+1}=2u^n-u^{n-1}+(F^n-\omega^2u^n)\Delta t^2
+\end{equation}
+by inserting equation (\ref{ssd}) into equation (\ref{ode}). We now have an equation that describes the ODE at a timestep when we have the two previous, and we already know $u^0$. The next step is to find $u^1$ and for that we need \textbf{the centred scheme}
+\begin{equation}
+f'(x)=\lim_{h\rightarrow0}\frac{f(x+h)-f(x-h)}{2h}.
+\end{equation}
+By using the second initial condition, we obtain
+\begin{equation}
+u^{-1}=u^1-2\Delta tV
+\end{equation}
+which again gives us the formula for $u^1$
+\begin{equation}
+u^1=u^0+\Delta tV+\frac{\Delta t^2}{2}(F^0-\omega^2u^0).
+\end{equation}
+
+An exact solution to this problem has the form $u_e(x,t)=ct+d$ where $c$ and $d$ are coefficients. We can easily see that $d=I$ and $c=I$ by applying the initial conditions. Furthermore $u''(t)=0$, which leads to
+\begin{equation}
+F(t)=\omega^2(Vt+I).
+\end{equation}
+Since this is a differential equation of second order, we can also find a solution of second order (quadratic), on the form $u_e(x,t)=bt^2+ct+d$, but a cubic solution will never fulfil the discrete equations. 
+
+\section*{Exercise 21}
+We now look at an elastic pendulum that is described by the ordinary differential equation
+\begin{equation}
+u'' + u = 0
+\label{classical}
+\end{equation}
+and therefore an exact solution $u=\Theta \cos(\tilde{t})$, which is good to have when we want to verify the numerical solution. The $\sim$ symbolizes a dimensionless quantity, but from now I will assume that all quantities are dimensionless and therefore skip it. The given differential equations are
+\begin{equation}
+\frac{d^2x}{dt^2}=-\frac{\beta}{1-\beta}\bigg(1-\frac{\beta}{L}\bigg)x\quad\text{and}
+\end{equation}
+\begin{equation}
+\frac{d^2y}{dt^2}=-\frac{\beta}{1-\beta}\bigg(1-\frac{\beta}{L}\bigg)(y-1)-\beta
+\end{equation}
+where $L=\sqrt{x^2+(y-1)^2}$ and $\beta$ is a constant. A method for finding the second derivative numerical, called \textbf{second symmetric derivative}, was introduced in Problem 1, and by using that we are able to reduce the differential equations to difference equations
+\begin{equation}
+x^{n+1}=2x^n-x^{n-1}-\Delta t^2\bigg(\frac{\beta}{1-\beta}\bigg)\bigg(1-\frac{\beta}{L}\bigg)x^n
+\end{equation}
+\begin{equation}
+y^{n+1}=2y^n-y^{n-1}-\Delta t^2\bigg(\frac{\beta}{1-\beta}\bigg)\bigg(1-\frac{\beta}{L}\bigg)(y^n-1)-\Delta t^2\beta
+\end{equation}
+We are given the two initial conditions $x(0)=(1+\epsilon)\sin(\Theta)$ and $y(0)=1-(1+\epsilon)\cos(\Theta)$, but to solve the difference equations we also need $x(1)$ and $y(1)$, which we again find applying the \textbf{centred scheme}. Using $\frac{dx}{dt}(0)=0$ and $\frac{dy}{dt}(0)=0$ we find
+\begin{equation}
+x^1=x^0-\frac{\Delta t^2}{2}\bigg(\frac{\beta}{1-\beta}\bigg)\bigg(1-\frac{\beta}{L}\bigg)x^0
+\end{equation}
+\begin{equation}
+y^1=y^0-\frac{\Delta t^2}{2}\bigg(\frac{\beta}{1-\beta}\bigg)\bigg(1-\frac{\beta}{L}\bigg)(y^0-1)-\Delta t^2\beta
+\end{equation}
+We are now able to simulate the trajectory of the elastic pendulum, and a plot can be find in figure (\ref{pen_tra}). It can also be appropriate to simulate the time evolution, especially as a function of the angle between a vertical axis and the pendulum. The angle as a function of $x$ and $y$ can be found graphically and is given by $\theta=\arctan(\frac{x}{1-y})$. The angle as a function of time is plotted in figure (\ref{ang_time}), with the classical solution of equation (\ref{classical}) as what we expect.
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=100mm]{figure_1.png}
+\caption{Trajectory of the pendulum in xy-direction with initial angle $\Theta=45^{\circ}$ and $\beta=0.9$ simulated over 3 periods with 600 timesteps per period. \label{pen_tra}}
+\end{figure}
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=100mm]{figure_2.png}
+\caption{Time evolution of the angle between pendulum and the y-axis where the numerical wave is calculated and the classical is the expected. The plot is made with an initial angle $\Theta=9^{\circ}$ and $\beta=0.9$, plotted over 3 periods with 600 timesteps per period.  \label{ang_time}}
+\end{figure}
+
+A classical non-elastic pendulum with angular frequency $\omega$ is described by the differential equation \begin{equation}
+u''-\omega^2u=0
+\end{equation}
+with exact solution $u=\Theta\cos(\omega t)$. In our case the angular frequency is given by the formula $\omega=\sqrt{\frac{\beta}{1-\beta}}$, and we can use this solution to compare our numerical solution in y-direction, see figure (\ref{y_time}).
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=100mm]{figure_3.png}
+\caption{Time evolution of the motion in y-direction, where both the numerical and classical solution are plotted. Plotted over 6 periods and 600 timesteps per period. \label{y_time}}
+\end{figure}
+\end{document}

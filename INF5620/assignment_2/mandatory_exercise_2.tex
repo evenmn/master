@@ -1,0 +1,259 @@
+\documentclass[norsk,a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} %for å inkludere grafikk
+\usepackage{verbatim} %for å inkludere filer med tegn LaTeX ikke liker
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{subfigure}
+%\usepackage{subcaption}
+
+\lstset{language=c++}
+\lstset{basicstyle=\small}
+\lstset{backgroundcolor=\color{white}}
+\lstset{frame=single}
+\lstset{stringstyle=\ttfamily}
+\lstset{keywordstyle=\color{red}\bfseries}
+\lstset{commentstyle=\itshape\color{blue}}
+\lstset{showspaces=false}
+\lstset{showstringspaces=false}
+\lstset{showtabs=false}
+\lstset{breaklines}
+\lstset{postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}}
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+
+\title{INF5620 - Numerical methods for partial differential equations\\\vspace{2mm} \Large{Mandatory Exercise 2}}
+\author{\large Even Marius Nordhagen}
+\date\today
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+\item For the Github repository containing programs and results, follow this link: 
+\url{https://github.com/UiO-INF5620/INF5620-evenmn/tree/master/assignment_2}
+\end{itemize}
+
+\section{Introduction}
+In this project we solve the wave equation with changing phase velocity numerically using Neumann condition. The wave equation is a Partial Differential Equation (PDE) described by
+\begin{equation}
+\frac{\partial^2 u}{\partial t^2}=\frac{\partial}{\partial x}\bigg(q(x)\frac{\partial u}{\partial x}\bigg) +f(x,t)
+\label{pde}
+\end{equation}
+where $b$ is a constant and $q$ is the velocity. The Neumann condition can be implemented in multiple ways. In this project we take a closer look at 4 of them, and then we compare the numerical solutions to the solution
+\begin{equation}
+u_e(x,t)=\cos(\pi x/L)\cos(\omega t).
+\end{equation}
+which can be considered as the exact solution after computing $f(x,t)$. A closer description of the methods are found in the section called "Theory and methods" section. Thereafter we compute the error. The results and conclusion are found in the respective sections. 
+
+\section{Theory and methods}
+We have the PDE problem
+\begin{equation*}
+\frac{\partial^2 u}{\partial t^2}=\frac{\partial}{\partial x}\bigg(q(x)\frac{\partial u}{\partial x}\bigg) +f(x,t)
+\label{pde}
+\end{equation*}
+which can be solved for a given $f(x,t)$ and $q(x)$. To solve this numerically we need to discretize it using the second derivative approximation and the centred scheme, and we get the formula
+\begin{equation}
+\begin{split}
+u_i^{n+1}=-u_i^{n-1}+2u_i^n+\frac{1}{2}\bigg(\frac{\Delta t}{\Delta x}\bigg)^2\Big((q_i+q_{i+1})(u_{i+1}^n-u_i^n)\\
+-(q_i+q_{i-1})(u_i^n-u_{i-1}^n)\Big)+\Delta t^2f_i^n
+\end{split}
+\end{equation}
+where an arithmetic approximation of the midpoints $q_{i+1/2}$ and $q_{i-1/2}$ is used. You might notice that we need 4 points to calculate a new point, including points from the two previous time points, which is not possible for neither $t=0$ nor $t=1$. To solve this problem we need a set of initial conditions.
+
+\subsection{Initial conditions}
+Initial conditions are either given or you have to find them yourself in a clever way. In our case the exact solution is given, so we can use this to find the initial conditions when $t=0$. We also observe that 
+\begin{equation}
+\frac{\partial u_e}{\partial t}=0\quad\text{for}\quad t=0
+\label{part_t}
+\end{equation}
+which gives us $u_i^{1}\approx u_i^{-1}$ using the centred scheme. This makes it possible to find a dedicated formula for the $t=1$-case:
+\begin{equation}
+\begin{split}
+u_i^{n+1}=u_i^n+\frac{1}{4}\bigg(\frac{\Delta t}{\Delta x}\bigg)^2\Big((q_i+q_{i+1})(u_{i+1}^n-u_i^n)\\
+-(q_i+q_{i-1})(u_i^n-u_{i-1}^n)\Big)+\frac{1}{2}\Delta t^2f_i^n. 
+\end{split}
+\end{equation}
+The formula above requires the points $u_{i+1}$ and $u_{i-1}$ when we want to find $u_i$, so it is useless on the edges. To calculate the points on the edges ($x=0$ and $x=Nx$ where $Nx$ in the number of spatial points) we need to introduce a boundary condition, and for this project the Neumann condition is appropriate.
+
+\subsection{Neumann condition}
+The Neumann boundary condition specifies the values of the derivative in the boundary points, in our case
+\begin{equation*}
+\frac{\partial u}{\partial x}=0 \quad\text{for}\quad x=0,Nx.
+\end{equation*}
+Similar as for $t$ (see equation (\ref{part_t})), this leads to $u_1^n=u_{-1}^n$, which gives
+\begin{equation}
+\begin{split}
+u_i^{n+1}=-u_i^{n-1}+2u_i^n+\bigg(\frac{\Delta t}{\Delta x}\bigg)^2(q_{i+1/2}+q_{i-1/2})(u_{i\pm1}^n-u_i^n)
++\Delta t^2f_i^n.
+\end{split}
+\label{general}
+\end{equation}
+
+\subsubsection{Method A}
+The first method, related to subproblem a), is to use the approximation
+\begin{equation*}
+q_{i+1/2}+q_{i-1/2}\approx2q_i
+\end{equation*}
+and we obtain
+\begin{equation}
+u_i^{n+1}=-u_i^{n-1}+2u_i^n+2\bigg(\frac{\Delta t}{\Delta x}\bigg)^2q_i(u_{i\pm1}^n-u_i^n)+\Delta t^2f_i^n
+\end{equation}
+for $x=0,Nx$ and $t=[2,Nt]$ where $Nt$ is the number of time points. Again use equation (\ref{part_t}) to find the equation when $t=1$:
+\begin{equation}
+u_i^1=u_i^0+\bigg(\frac{\Delta t}{\Delta x}\bigg)^2q_i(u_{i\pm1}^0-u_i^0)+\frac{1}{2}\Delta t^2f_i^0
+\end{equation}
+
+
+\subsubsection{Method B}
+In the second method, related to subproblem b), we use the approximation
+\begin{equation*}
+q_{i+1/2}(u_{i\pm1}^n-u_i^n)-q_{i-1/2}(u_i^n-u_{i\pm1}^n)\approx2q_{i\pm1/2}(u_{i\pm1}^n-u_i^n)
+\end{equation*}
+where we assume $dq/dx=0$. We get the equations:
+\begin{equation}
+u_i^{n+1}=-u_i^{n-1}+2u_i^n+2\bigg(\frac{\Delta t}{\Delta x}\bigg)^2q_{i\pm1/2}(u_{i\pm1}^n-u_i^n)+\Delta t^2f_i^n
+\end{equation}
+for $x=0,Nx$ and $t=[2,Nt]$, and
+\begin{equation}
+u_i^1=u_i^0+\bigg(\frac{\Delta t}{\Delta x}\bigg)^2q_{i\pm1/2}(u_{i\pm1}^0-u_i^0)+\frac{1}{2}\Delta t^2f_i^0
+\end{equation}
+for $x=0,Nx$ and $t=1$.
+
+\subsubsection{Method C}
+We are now studying the primitive approximations
+\begin{equation*}
+u_i-u_{i-1}=0\quad\text{at}\quad i=0
+\end{equation*}
+\begin{equation*}
+u_{i+1}-u_i=0\quad\text{at}\quad i=Nx
+\end{equation*}
+as described in subproblem c). Apply the arithmetic mean on equation (\ref{general}) ($q_{i+1/2}\approx1/2(q_i+q_{i+1})$), and insert the equations above. We then get
+\begin{equation}
+u_i^{n+1}=-u_i^{n-1}+2u_i^n+\frac{1}{2}\bigg(\frac{\Delta t}{\Delta x}\bigg)^2(q_i+q_{i\pm1})(u_{i\pm1}^n-u_i^n)+\Delta t^2f_i^n
+\end{equation}
+for $x=0,Nx$ and $t=[2,Nt]$, and
+\begin{equation}
+u_i^1=u_i^0+\frac{1}{4}\bigg(\frac{\Delta t}{\Delta x}\bigg)^2(q_i+q_{i\pm1})(u_{i\pm1}^0-u_i^0)+\frac{1}{2}\Delta t^2f_i^0
+\end{equation}
+for for $x=0,Nx$ and $t=1$.
+
+\subsubsection{Method D}
+The last method is about placing a boundary at $x_{1/2}$ and $x_{Nx-1/2}$ by using the formula
+\begin{equation}
+\frac{\partial^2 u_i^n}{\partial t^2}=\frac{1}{\Delta x}\bigg(q_{i+1/2}\frac{\partial u_{i+1/2}^n}{\partial x}-q_{i-1/2}\frac{\partial u_{i-1/2}^n}{\partial x}\bigg)+f_i^n
+\end{equation}
+with 
+\begin{equation*}
+q_{i+1/2}\frac{\partial u_{i+1/2}^n}{\partial x}=0 \quad\text{at}\quad x=Nx\quad\text{and}\quad q_{i-1/2}\frac{\partial u_{i-1/2}^n}{\partial x}=0 \quad\text{at}\quad x=0.
+\end{equation*}
+We can discretize using the centred scheme and the arithmetic mean:
+\begin{equation*}\frac{\partial u_{i+1/2}^n}{\partial x}\approx\frac{u_i+1^n-u_i^n}{\Delta x}\quad\text{v}\quad\frac{1}{2}(q_{i}+q_{i+1})
+\end{equation*}
+and similar for $\partial u_{i-1/2}^n/\partial x$ and $q_{i-1/2}$.
+This gives 
+\begin{equation}
+u_i^{n+1}=-u_i^{n-1}+2u_i^n+\frac{1}{2}\bigg(\frac{\Delta t}{\Delta x}\bigg)^2(q_i+q_{i\pm1})(u_{i\pm1}^n-u_i^n)+\Delta t^2f_i^n
+\end{equation}
+for $x=0,Nx$ and $t=[2,Nt]$, and
+\begin{equation}
+u_i^1=u_i^0+\frac{1}{4}\bigg(\frac{\Delta t}{\Delta x}\bigg)^2(q_i+q_{i\pm1})(u_{i\pm1}^0-u_i^0)+\frac{1}{2}\Delta t^2f_i^0
+\end{equation}
+for for $x=0,Nx$ and $t=1$.
+
+\subsection{Solve problem}
+We need to know what $f(x,t)$ is, and we can easily express it by inserting the exact solution to the wave equation. We obtain
+\begin{equation}
+\begin{split}
+f(x,t)=\Bigg(q(x)\bigg(\frac{\pi}{L}\bigg)^2-\omega^2\Bigg)\cos(\pi x/L)\cos(\omega t)\\
++\bigg(\frac{\partial q(x)}{\partial x}\bigg)\bigg(\frac{\pi}{L}\bigg)\sin(\pi x/L)\cos(\omega t)
+\end{split}
+\end{equation}
+
+The remaining part is to take a closer look at $q(x)$, which is the (phase) velocity of the wave. $q$ can be an arbitrary function of $x$, and in method A it's set to
+\begin{equation}
+q(x)=1+\bigg(x-\frac{L}{2}\bigg)^4.
+\end{equation}
+In method B we are told to use
+\begin{equation}
+q(x)=1+\cos(\pi x/L)
+\end{equation}
+and in method C and D we can choose which $q(x)$ we want to use ourself, but I in this project I have consistent used the first. 
+
+We now have a complete set of equations to solve the PDE problem, but there are still a few things that can go wrong. Firstly we need a stable solution, which is the case when Courant number is smaller than one:
+\begin{equation}
+C=c\frac{\Delta t}{\Delta x}<1.
+\end{equation}
+Secondly we need to implement the equations correctly, briefly explained solve separately for each $t$ and calculate the midpoints before the edge points (see the Github repository for exact implementation).
+
+\subsection{Error estimation}
+The error can be calculated and estimated in multiple ways, and in this problem I decided to find the mean absolute error. Since we have an exact solution, we can easily calculate the absolute error in each spatial point by $E_i=|ue_i-u_i|$ and a fixed $T$. The total absolute error is the sum of all $E_i$'s, so the mean absolute error is given by
+\begin{equation}
+\langle E\rangle = \frac{\sum_{i=0}^{Nx} E_i}{Nx}
+\end{equation}
+
+\section{Results}
+\subsection{Numerical vs. classical}
+Since we are given an exact solution, it can be both interesting and useful to plot the exact and the numerical solution in the same figure. A figure for each method is found in figure (\ref{fa}), (\ref{fb}), (\ref{fc}) and (\ref{fd}). To make the methods comparable, we have used $dt=0.001$, $dx=0.01$, $T=0.9$ and all other parameters are set to 1 inn all the 4 figures.
+\begin{figure}[ht] 
+  \label{numvsclas} 
+  \begin{minipage}[b]{0.6\linewidth}
+    %\centering
+    \includegraphics[width=.9\linewidth]{figure_a.png} 
+    \caption{Method A\label{fa}} 
+    \vspace{4ex}
+  \end{minipage}%%
+  \begin{minipage}[b]{0.6\linewidth}
+    %\centering
+    \includegraphics[width=.9\linewidth]{figure_b.png} 
+    \caption{Method B\label{fb}} 
+    \vspace{4ex}
+  \end{minipage} 
+  \begin{minipage}[b]{0.6\linewidth}
+    %\centering
+    \includegraphics[width=.9\linewidth]{figure_c.png} 
+    \caption{Method C\label{fc}} 
+    \vspace{4ex}
+  \end{minipage}%% 
+  \begin{minipage}[b]{0.6\linewidth}
+    %\centering
+    \includegraphics[width=.9\linewidth]{figure_d.png} 
+    \caption{Method D\label{fd}} 
+    \vspace{4ex}
+  \end{minipage} 
+\end{figure}
+
+\subsection{Benchmarks}
+We have now seen how it looks like when we plot the exact solution together with the numerical solutions, thus we are ready to do the benchmark test to see how good the methods really are. We choose $L=1$ and $dx=0.01$, so we get 100 spatial points. Due to Courant number, we then need $dt<0.001$ to get a stable solution, see table (\ref{tab:error}) for the numerical error values and figure (\ref{error}) for the corresponding plot.
+\begin{table} [H]
+\centering
+\caption{In this table you can find the mean error of the methods where $dt\in[0.001,0.001,0.0001]$. $T=0.9$, all other parameters set to 1.}
+\begin{tabularx}{\textwidth}{XXXX} \hline
+\label{tab:error}
+Methods & $dt=0.001$ & $dt=0.0001$ & $dt=0.00001$ \\ \hline
+A & 7.207809809e-05 & 7.067358205e-05 & 7.053349755e-05 \\
+B & 0.0001344343021 & 0.0001427880242 & 0.0001434920618 \\
+C & 0.02330151372 & 0.02331403437 & 0.02331528300 \\
+D & 0.02330151372 & 0.02331403437 & 0.02331528300 \\ \hline
+\end{tabularx}
+\end{table}
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=100mm]{error_plot.png}
+\caption{This figure is connected to table (\ref{tab:error}) and shows the mean error of the methods where $dt\in[0.001,0.001,0.0001]$. $T=0.9$, all other parameters set to 1. \label{error}}
+\end{figure}
+
+\section{Conclusion}
+From the result we can see that both method A and method B are really good approximations, but this is not the case for method C and D. Because of my choice of approximation method in D, I ended up with exact the same formulas as in C, which might be incorrect. The error is also roughly the same for different $dt$'s, which is not what we expect. Apart from that I am satisfied with my results, the implementation seems to be correct, but perhaps the error calculations are wrong. 
+\end{document}
