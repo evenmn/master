@@ -1,15 +1,97 @@
-\documentclass[]{uiophd}
-\usepackage[utf8]{inputenc}         % or whatever you use
+\documentclass[norsk,a4paper,12pt]{article}
+\renewcommand{\thesection}{\Roman{section}} 
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} %for å inkludere grafikk
+\usepackage{verbatim} %for å inkludere filer med tegn LaTeX ikke liker
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{hyperref}
 
-\title{My title}
-\author{My name}
+\lstset{language=c++}
+\lstset{basicstyle=\small}
+\lstset{backgroundcolor=\color{white}}
+\lstset{frame=single}
+\lstset{stringstyle=\ttfamily}
+\lstset{keywordstyle=\color{red}\bfseries}
+\lstset{commentstyle=\itshape\color{blue}}
+\lstset{showspaces=false}
+\lstset{showstringspaces=false}
+\lstset{showtabs=false}
+\lstset{breaklines}
+\lstset{postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}}
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
 \begin{document}
-\frontmatter
-\maketitle
-\tableofcontents
 
-\mainmatter
-\chapter{...}
-    :
+\begin{titlepage}
+	\centering
+	{\scshape\huge FYS4130 - Statistical Mechanics \par}
+	\vspace{1cm}
+	{\scshape\Large University of Oslo\par}
+	\vspace{1.5cm}
+	\includegraphics[width=0.25\textwidth]{uio.png}\par\vspace{1cm}
+	{\Large\bfseries Obligatory assignment\par}
+	\vspace{1.5cm}
+	{\large\itshape Even Marius Nordhagen\par}
+	\vfill
+	{\large \today\par}
+\end{titlepage}
+
+
+\section{CLUSTER SIZE}
+This problem aims an one dimensional lattice with $N$ sites at a given temperature. There is a atom at each site that can either have energy $+\epsilon$ or $-\epsilon$, and a chain of sites with energy $+\epsilon$ is called a cluster.
+
+\subsection{Onebody probabilities}
+Since each atom can be in two possible energy states, the one-particle partition function has two terms
+\begin{equation}
+Z_1=\sum_ie^{-\beta\epsilon_i}=e^{-\beta\epsilon}+e^{\beta\epsilon}
+\end{equation}
+and the probability of an atom having energy $+\epsilon$ and $-\epsilon$ is
+\begin{equation}
+P_+=\frac{e^{-\beta\epsilon}}{Z_1}=\frac{1}{1+e^{2\beta\epsilon}}\quad\text{and}\quad P_-=\frac{e^{\beta\epsilon}}{Z_1}=\frac{1}{1+e^{-2\beta\epsilon}}
+\end{equation}
+respectively.
+
+\subsection{Probability of finding site in cluster}
+
+
+\section{ELECTRON GAS IN A MAGNETIC FIELD}
+Here we study a ...
+
+\subsection{}
+
+
+\section{QUANTUM COULOMB GAS}
+Relativistic quantum gas with coulomb interaction
+
+\subsection{}
+
+
+\section{NON-INTERACTING FERMIONS}
+In this problem we study a non-interacting fermi gas with chemical potential $\mu$. The particle states are given by the vector $\vec{k}$, which is $d$-dimensional where $d$ is number of spatial dimensions, and the corresponding energy is $\epsilon(\vec{k})$.
+
+\subsection{Joint probability}
+The joint probability of finding a particle in a state given by the occupation numbers $\{n_{\vec{k}}\}$ is given by the general probability statement in a grand canonical ensemble
+\begin{equation}
+P(\{n_{k}\})=\frac{e^{-\beta n_k(\epsilon_k-\mu)}}{\Xi}
+\end{equation}
+
+\iffalse
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=100mm]{example}
+\caption{Time evolution of the motion in y-direction, where both the numerical and classical solution are plotted. Plotted over 6 periods and 600 timesteps per period. \label{y_time}}
+\end{figure}
+\fi
 \end{document}
