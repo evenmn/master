@@ -1,5 +1,5 @@
 \documentclass[norsk,a4paper,12pt]{article}
-\renewcommand{\thesection}{\Roman{section}} 
+%\renewcommand{\thesection}{\Roman{section}} 
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx} %for å inkludere grafikk
 \usepackage{verbatim} %for å inkludere filer med tegn LaTeX ikke liker
@@ -65,19 +65,42 @@ respectively.
 
 \subsection{Probability of finding site in cluster}
 
-
+\newpage
 \section{ELECTRON GAS IN A MAGNETIC FIELD}
 Here we study a ...
 
 \subsection{}
 
-
+\newpage
 \section{QUANTUM COULOMB GAS}
-Relativistic quantum gas with coulomb interaction
+We will look at a relativistic quantum gas of positive and negative charged particles with coulomb interaction. In addition we have an external box potential with walls of length $L$. Even though we cannot solve this analytically, we will get some results. The given Hamiltonian is as follows
+\begin{equation}
+{\cal H}=\sum_{i=1}^{2N}c|\boldsymbol{p}_i|+\sum_{i<j}^{2N}\frac{e_ie_j}{|\boldsymbol{r}_i - \boldsymbol{r}_j|}
+\end{equation}
 
-\subsection{}
+\subsection{Schrödinger equation}
+The general Schrödinger equation for a many-body system is 
+\begin{equation}
+H\Psi_n=E_n\Psi_n
+\end{equation}
+where $\Psi_n$ is the total wave function of state $n$ and $E_n$ is the corresponding total energy. The wave functions are position dependent and the energies are dependent on the box size,
+\begin{equation}
+{\cal H}\Psi_n(\{\boldsymbol{r}_i\})=\epsilon_n(L)\Psi_n(\{\boldsymbol{r}_i\}).
+\end{equation}
+The exact wave functions are unknown, but there are some constraints that apply in general. Since the particles are indistinguishable, all observable should be the same although we swap two coordinates. This results in
+\begin{equation}
+P(a,b)=P(b,a)\quad\Rightarrow\quad |\Psi(a,b)|^2=|\Psi(b,a)|^2
+\end{equation}
+and
+\begin{equation}
+\Psi(a,b)=e^{i\phi}\Psi(b,a).
+\end{equation}
+Swapping twice must give back the initial wave function, so there are two possible choices of $\phi$: 0 and $2\pi$. The first one gives a symmetric total wavefunction under exchange of two particles, which is antisymmetric for the second choice. We denote the former as bosons and the latter as fermions, where the Pauli principle is a consequence of antisymmetry.
 
+\subsection{Scaling}
+We will now scale the system with respect to $L$ such that the box gets size $1^d$ where $d$ is the number of dimensions. 
 
+\newpage
 \section{NON-INTERACTING FERMIONS}
 In this problem we study a non-interacting fermi gas with chemical potential $\mu$. The particle states are given by the vector $\vec{k}$, which is $d$-dimensional where $d$ is number of spatial dimensions, and the corresponding energy is $\epsilon(\vec{k})$.
 
@@ -86,6 +109,21 @@ The joint probability of finding a particle in a state given by the occupation n
 \begin{equation}
 P(\{n_{k}\})=\frac{e^{-\beta n_k(\epsilon_k-\mu)}}{\Xi}
 \end{equation}
+where $\Xi$ is the grand canonical partition function, given by
+\begin{equation}
+\Xi
+\end{equation}
+
+\subsection{}
+
+\subsection{Maximum entropy of random variable}
+A random variable has $l$ discrete outcomes with their own respective probabilities. Since the probabilities are independent, we can find the information entropy
+\begin{equation}
+S=H(p_1,\hdots,p_n)=-\sum_{n=1}^lp_n\log p_n
+\end{equation}
+where $p_i$ is the probability of outcome $i$. We cannot find the exact entropy without knowing the probabilities, but we can find which probabilities that give maximum entropy.
+
+\subsection{Entropy of fermi gas}
 
 \iffalse
 \begin{figure}[!htbp]
