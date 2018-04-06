@@ -122,9 +122,10 @@ We have a fixed number of particles and the energy cna fluctuate, so we are in t
 Z_1=\sum_{n=0}^{\infty}e^{-\beta\epsilon_n(L)}
 \end{equation}
 which in three dimensions is given by
-\begin{equation}
-Z_1(V,T)=\sum_{n_x,n_y,n_z=0}^{\infty}e^{-\beta\epsilon_{n_x}(L)\epsilon_{n_y}(L)\epsilon_{n_z}(L)}=\sum_{n_x,n_y,n_z=0}^{\infty}e^{-\frac{\epsilon_{n_x}(1)\epsilon_{n_y}(1)\epsilon_{n_z}(1)}{k^3T^3L^3}}.
-\end{equation}
+\begin{align}
+Z_1(V,T)&=\sum_{n_x,n_y,n_z=0}^{\infty}\exp{\big(-\beta\epsilon_{n_x}(L)\epsilon_{n_y}(L)\epsilon_{n_z}(L)}\big)\\
+&=\sum_{n_x,n_y,n_z=0}^{\infty}\exp\Big({-\frac{\epsilon_{n_x}(1)\epsilon_{n_y}(1)\epsilon_{n_z}(1)}{k^3T^3L^3}}\Big).
+\end{align}
 Since $L^3=V$, the one particle partition function is a function of $VT^3$. The total partition function is given by 
 \begin{equation}
 Z(N,V,T)=\frac{Z_1(V,T)^N}{N!}=\frac{1}{N!}\sum_{n_{\boldsymbol{k}}=0}^{\infty}e^{-N\frac{\epsilon_{n_{\boldsymbol{k}}}(1)}{k^3VT^3}}={\cal Z}(N,VT^3)
@@ -134,7 +135,7 @@ since the particles are indistinguishable.
 \subsection{Energy and pressure relation}
 The internal energy in this system is a sum over all energy levels times the probability of that level. Further we observe that we can differentiate the exponential with respect to $\beta$ to obtain the same expression,
 \begin{equation}
-E=\frac{1}{Z}\sum_n\epsilon_ne^{-\beta\epsilon_n}=-\frac{1}{Z}\sum_n\frac{\partial}{\partial\beta}e^{-\beta\epsilon_n}=\frac{1}{Z}\frac{\partial Z}{\partial\beta}.
+E=\frac{1}{Z}\sum_n\epsilon_ne^{-\beta\epsilon_n}=-\frac{1}{Z}\sum_n\frac{\partial}{\partial\beta}e^{-\beta\epsilon_n}=-\frac{1}{Z}\frac{\partial Z}{\partial\beta}.
 \end{equation}
 The pressure is given by the differential
 \begin{equation}
@@ -142,8 +143,50 @@ P(N,V)=-\Big(\frac{\partial F}{\partial V}\Big)_N
 \end{equation}
 where $F$ is Helmholtz free energy,
 \begin{equation}
-F=-kT\ln Z
+F=-kT\ln Z.
 \end{equation}
+We therefore end up with the expressions 
+\begin{align}
+E&=-\frac{1}{Z}\frac{\partial Z}{\partial\beta}\\
+P&=kT\frac{1}{Z}\frac{\partial Z}{\partial V}
+\end{align}
+such that they are related through the partition function. We use the same partition function as we found in the previous exercise, and obtain
+\begin{align}
+\frac{\partial Z}{\partial \beta}&=-3\frac{\beta^2\epsilon_{n_{\boldsymbol{k}}}(1)}{V}Z\\
+\frac{\partial Z}{\partial V}&=\frac{\beta^3\epsilon_{n_{\boldsymbol{k}}}(1)}{V^2}Z.
+\end{align}
+The energy then reads
+\begin{equation}
+E=3\frac{\beta^2\epsilon_{n_{\boldsymbol{k}}}(1)}{V}=3kT\frac{\beta^3\epsilon_{n_{\boldsymbol{k}}}(1)}{V^2}V=3PV.
+\end{equation}
+
+Notice that the calculations are done for the one particle partition function, but it is easy to imagine that the full partition function will give the same result. 
+
+\subsection{Non-relativistic gas}
+We now switch from a relativistic gas to a non-relativistic one and redo the exercises in four dimensions. The Hamiltonian is then given by
+\begin{equation}
+{\cal H}=\sum_{i=1}^{2N}\frac{\boldsymbol{p}_i^2}{2m}+\sum_{i<j}^{2N}\frac{e_ie_j}{|\boldsymbol{r}_i - \boldsymbol{r}_j|}.
+\end{equation}
+We then do a change of scale similarly as in exercise 3.2, and get the Schrödinger equation 
+\begin{equation}
+\frac{{\cal H}'}{L^2}\Psi_n(\{\boldsymbol{r}_i\})=\frac{\epsilon_n(1)}{L^2}\Psi_n(\{\boldsymbol{r}_i\})
+\end{equation}
+where  ${\cal H}'$ is the scaled Hamiltonian. Further the partition function is 
+\begin{align}
+Z_1&=\sum_{n_x,n_y,n_z,n_u=0}^{\infty}\exp\Big({-\beta^4\epsilon_{n_x}(L)\epsilon_{n_y}(L)\epsilon_{n_z}(L)\epsilon_{n_u}(L)}\Big)\\
+&=\sum_{n_x,n_y,n_z,n_u=0}^{\infty}\exp\Big({-\frac{\beta^4\epsilon_{n_x}(1)\epsilon_{n_y}(1)\epsilon_{n_z}(1)\epsilon_{n_u}(1)}{L^8}}\Big)
+\end{align}
+and since we are in 4D, the 4-volume is $V_4=L^4$. We can reuse the expressions for energy and pressure from above, and find a relation between the energy and pressure as we did in exercise 3.4. Again we calculate the differentials
+\begin{align}
+\frac{\partial Z}{\partial \beta}&=-4\frac{\beta^3\epsilon_{n_{\boldsymbol{k}}}(1)}{V_4^2}Z\\
+\frac{\partial Z}{\partial V_4}&=2\frac{\beta^4\epsilon_{n_{\boldsymbol{k}}}(1)}{V_4^3}Z.
+\end{align}
+and find the relation
+\begin{equation}
+E=4\frac{\beta^3\epsilon_{n_{\boldsymbol{k}}}(1)}{V_4^2}=4kT\frac{\beta^4\epsilon_{n_{\boldsymbol{k}}}(1)}{V_4^3}=2PV
+\end{equation}.
+
+Again this is results is found from the one particle partition function, but it is general for a non-relativistic interacting quantum gas in 4D.
 
 \newpage
 \section{NON-INTERACTING FERMIONS}
