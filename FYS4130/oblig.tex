@@ -73,7 +73,7 @@ Here we study a ...
 
 \newpage
 \section{QUANTUM COULOMB GAS}
-We will look at a relativistic quantum gas of positive and negative charged particles with coulomb interaction. In addition we have an external box potential with walls of length $L$. Even though we cannot solve this analytically, we will get some results. The given Hamiltonian is as follows
+We will look at a relativistic quantum gas of positive and negative charged particles with coulomb interaction. In addition we have an external box potential with walls of length $L$. Although we cannot solve this analytically, we will get some results. The given Hamiltonian is as follows
 \begin{equation}
 {\cal H}=\sum_{i=1}^{2N}c|\boldsymbol{p}_i|+\sum_{i<j}^{2N}\frac{e_ie_j}{|\boldsymbol{r}_i - \boldsymbol{r}_j|}
 \end{equation}
@@ -98,7 +98,52 @@ and
 Swapping twice must give back the initial wave function, so there are two possible choices of $\phi$: 0 and $2\pi$. The first one gives a symmetric total wavefunction under exchange of two particles, which is antisymmetric for the second choice. We denote the former as bosons and the latter as fermions, where the Pauli principle is a consequence of antisymmetry.
 
 \subsection{Scaling}
-We will now scale the system with respect to $L$ such that the box gets size $1^d$ where $d$ is the number of dimensions. 
+We will now scale the coordinates with respect to $L$ such that the box gets size $1^d$ where $d$ is the number of dimensions, matematically written as
+\begin{equation}
+\boldsymbol{r}_i'=\boldsymbol{r}_i/L.
+\end{equation}
+Using that the operator of linear momentum is given by 
+\begin{equation}
+\boldsymbol{p}_i=-i\hbar\nabla_i=-i\hbar\Big(\frac{\partial}{\partial x_1},\frac{\partial}{\partial x_2},\hdots,\frac{\partial}{\partial x_d}\Big),
+\end{equation}
+the corresponding scaled momentum operator is 
+\begin{equation}
+\boldsymbol{p}_i'=-i\hbar\Big(\frac{\partial}{\partial x_1'},\frac{\partial}{\partial x_2'},\hdots,\frac{\partial}{\partial x_d'}\Big)= \frac{\boldsymbol{p}_i}{L}
+\end{equation}
+which is the scaling of the first term of the Hamiltonian. The second term is scaled similarly, and by denoting the scaled Hamiltonian as ${\cal H}'$, we get ${\cal H}={\cal H}'/L$. We are now set to scale the Schrödinger equation, which becomes
+\begin{equation}
+\frac{{\cal H}'}{L}\Psi_n(\{\boldsymbol{r}_i\})=\frac{\epsilon_n(1)}{L}\Psi_n(\{\boldsymbol{r}_i\})
+\end{equation}
+where the scaled energy is a function of 1 since the length scale now is 1, such that $\epsilon_n(L)=\epsilon_n(1)/L$.
+
+\subsection{Collapse V + T}
+We have a fixed number of particles and the energy cna fluctuate, so we are in the canonical ensemble. The one particle partition function is given by
+\begin{equation}
+Z_1=\sum_{n=0}^{\infty}e^{-\beta\epsilon_n(L)}
+\end{equation}
+which in three dimensions is given by
+\begin{equation}
+Z_1(V,T)=\sum_{n_x,n_y,n_z=0}^{\infty}e^{-\beta\epsilon_{n_x}(L)\epsilon_{n_y}(L)\epsilon_{n_z}(L)}=\sum_{n_x,n_y,n_z=0}^{\infty}e^{-\frac{\epsilon_{n_x}(1)\epsilon_{n_y}(1)\epsilon_{n_z}(1)}{k^3T^3L^3}}.
+\end{equation}
+Since $L^3=V$, the one particle partition function is a function of $VT^3$. The total partition function is given by 
+\begin{equation}
+Z(N,V,T)=\frac{Z_1(V,T)^N}{N!}=\frac{1}{N!}\sum_{n_{\boldsymbol{k}}=0}^{\infty}e^{-N\frac{\epsilon_{n_{\boldsymbol{k}}}(1)}{k^3VT^3}}={\cal Z}(N,VT^3)
+\end{equation}
+since the particles are indistinguishable.
+
+\subsection{Energy and pressure relation}
+The internal energy in this system is a sum over all energy levels times the probability of that level. Further we observe that we can differentiate the exponential with respect to $\beta$ to obtain the same expression,
+\begin{equation}
+E=\frac{1}{Z}\sum_n\epsilon_ne^{-\beta\epsilon_n}=-\frac{1}{Z}\sum_n\frac{\partial}{\partial\beta}e^{-\beta\epsilon_n}=\frac{1}{Z}\frac{\partial Z}{\partial\beta}.
+\end{equation}
+The pressure is given by the differential
+\begin{equation}
+P(N,V)=-\Big(\frac{\partial F}{\partial V}\Big)_N
+\end{equation}
+where $F$ is Helmholtz free energy,
+\begin{equation}
+F=-kT\ln Z
+\end{equation}
 
 \newpage
 \section{NON-INTERACTING FERMIONS}
