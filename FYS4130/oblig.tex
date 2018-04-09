@@ -59,11 +59,76 @@ Z_1=\sum_ie^{-\beta\epsilon_i}=e^{-\beta\epsilon}+e^{\beta\epsilon}
 \end{equation}
 and the probability of an atom having energy $+\epsilon$ and $-\epsilon$ is
 \begin{equation}
-P_+=\frac{e^{-\beta\epsilon}}{Z_1}=\frac{1}{1+e^{2\beta\epsilon}}\quad\text{and}\quad P_-=\frac{e^{\beta\epsilon}}{Z_1}=\frac{1}{1+e^{-2\beta\epsilon}}
+P_+=\frac{e^{-\beta\epsilon}}{Z_1}=\frac{e^{-\beta\epsilon}}{e^{-\beta\epsilon}+e^{\beta\epsilon}}\quad\text{and}\quad P_-=\frac{e^{\beta\epsilon}}{Z_1}=\frac{e^{\beta\epsilon}}{e^{-\beta\epsilon}+e^{\beta\epsilon}}
 \end{equation}
 respectively.
 
-\subsection{Probability of finding site in cluster}
+\subsection{Cluster number density}
+The probability of finding a site at a specific position in a cluster of length $L$ is a function of the length and the occupation probability. For our purpose we denote the function as $n(L, P_+)$. Finding a site at a specific position in a cluster is just as probably as finding it in another cluster position, so the probability that a given site belongs to a cluster of length $L$ is 
+\begin{equation}
+P_L=Ln(L, P_+).
+\end{equation}
+$n(L, P_+)$ gives the probability of finding $L$ sites at energy $\epsilon$ and two sites at energy $-\epsilon$, 
+\begin{equation}
+n(L, P_+) = P_-^2\cdot P_+^L = (1-P_+)^2P_+^L
+\end{equation}
+because the site to the left of the cluster has energy $-\epsilon$ and so for the site to the right. We obtain 
+\begin{equation}
+P_L=L(1-P_+)^2P_+^L=L\bigg(\frac{e^{\beta\epsilon}}{e^{-\beta\epsilon}+e^{\beta\epsilon}}\bigg)^2\bigg(\frac{e^{-\beta\epsilon}}{e^{-\beta\epsilon}+e^{\beta\epsilon}}\bigg)^L
+\end{equation}
+
+\subsection{Normalization of the cluster number density}
+We will now ensure that the sum over all cluster probabilities $P_L$ is $P_+$, which is a criteria since the probability of finding a site in a cluster of any size should be $P_+$. 
+\begin{equation}
+\sum_{L=1}^{\infty}P_L=\sum_{L=1}^{\infty}L(1-P_+)^2P_+^L=(1-P_+)^2P_+\sum_{L=1}^{\infty}LP_+^{L-1}
+\label{PL}
+\end{equation}
+where $P_+^L$ is splitted up. We will now do a trick 
+\begin{equation}
+\sum_{x=1}^{\infty}xp^{x-1}=\frac{d}{dp}\sum_{x=0}^{\infty}p^x=\frac{d}{dp}\Big(\frac{1}{1-p}\Big)=\frac{1}{(1-p)^2}
+\end{equation}
+where we have used a common series. Setting back in equation [\ref{PL}], we find
+\begin{equation}
+(1-P_+)^2P_+\frac{1}{(1-P_+)^2}=P_+
+\end{equation}
+A cluster of length $L=0$ is not defined as a cluster, and the corresponding probability is therefore zero. 
+
+\subsection{Average length of a cluster}
+The average length of a cluster is given by
+\begin{equation}
+\langle L\rangle =\sum_{L=0}^{\infty}L^2(1-P_+)^2P_+^L
+\end{equation}
+from the general average statement for discrete values. We can let the sum run from $L=0$ because this just adds a zero term to the sum. 
+\begin{align}
+\langle L\rangle&=(1-P_+)^2\sum_{L=0}^{\infty}L^2P_+^L\\
+&=(1-P_+)^2\bigg(\frac{P_+(P_++1)}{(1-P_+)^3}\bigg)\\
+&=\frac{P_+(P_++1)}{1-P_+}\\
+\end{align}
+where we again have replaced the sum with the known answer. We can now insert the onebody probabilities. Observe that the denominator is  $P_-$ and $P_+/P_-=e^{-2\beta\epsilon}$, and get
+\begin{align}
+\langle L\rangle=e^{-2\beta\epsilon}\bigg(\frac{e^{\beta\epsilon}+2e^{-\beta\epsilon}}{e^{\beta\epsilon}+e^{-\beta\epsilon}}\bigg).
+\end{align}
+The average length is plotted as a function of the temperature in figure [\ref{y_time}], and we see that the average length decreases rapidly when $T\rightarrow0$. The low-temperature limit is not very informative when we already know that the average length goes to zero when the temperature approaches zero, but it is interesting to see what the high-temperature asymptote is. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=150mm]{1_4.png}
+\caption{Average length of cluster as a function of temperature. In this plot the temperature spans from 0 to 100 given in units of $\epsilon/k_B$ where $k_B$ is Boltzmanns constant. \label{y_time}}
+\end{figure}
+
+The high-temperature limit is
+\begin{equation}
+\lim_{T\rightarrow\infty}\langle L\rangle = 1\bigg(\frac{1+2}{1+1}\bigg)=\frac{3}{2}
+\end{equation}
+which matches the plot. The low-temperature limit is
+\begin{equation}
+\lim_{T\rightarrow\infty}\langle L\rangle = \lim_{T\rightarrow\infty} \frac{1+2e^{-2\epsilon/kT}}{1+e^{2\epsilon/kT}}=\frac{1+0}{1+\infty}=0.
+\end{equation}
+as expected. We can connect these numbers to the onebody probabilities, which can be rewritten as
+\begin{equation}
+P_+=\frac{1}{1+e^{2\beta\epsilon}}\quad\text{and}\quad P_-=\frac{1}{1+e^{-2\beta\epsilon}}.
+\end{equation}
+When $T\rightarrow 0$ all the sites will have energy $-\epsilon$, and we will not have any clusters (therefore the average cluster length goes to zero). On the other hand, when $T\rightarrow\infty$, an equal number of sites have energy $\epsilon$ as having $-\epsilon$, and the most likely configurations give an average cluster length between 1 and 2.
 
 \newpage
 \section{ELECTRON GAS IN A MAGNETIC FIELD}
@@ -213,11 +278,5 @@ where $p_i$ is the probability of outcome $i$. We cannot find the exact entropy 
 
 \subsection{Entropy of fermi gas}
 
-\iffalse
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=100mm]{example}
-\caption{Time evolution of the motion in y-direction, where both the numerical and classical solution are plotted. Plotted over 6 periods and 600 timesteps per period. \label{y_time}}
-\end{figure}
-\fi
+
 \end{document}
