@@ -274,7 +274,17 @@ since we only can have 0 or 1 fermion in each energy state according to the Paul
 P(\{n_{k}\})=\frac{\prod_ke^{-\beta n_k(\epsilon_k-\mu)}}{\prod_k\big(1+e^{-\beta(\epsilon_k-\mu)}\big)}=\prod_k\frac{e^{\beta n_k(\mu-\epsilon_k)}}{1+e^{\beta(\mu-\epsilon_k)}}
 \end{equation}
 
-\subsection{}
+\subsection{Average occupation number}
+The average occupation number of a state is given by Fermi-Dirac distribution
+\begin{equation}
+\langle n_k\rangle = \frac{1}{e^{\beta(\epsilon_k-\mu)}+1}.
+\end{equation}
+We can easily write the probability as a function of $\langle n_k\rangle$ ,
+\begin{align}
+P(\{n_{k}\})&=\prod_k\frac{e^{\beta(\epsilon_k-\mu)(1-n_k)}}{e^{\beta(\epsilon_k-\mu)}}\\
+&=\prod_k\langle n_k\rangle e^{\beta(\epsilon_k-\mu)(1-n_k)}\\
+&=\prod_k\langle n_k\rangle \frac{e^{\beta(\epsilon_k-\mu)}}{e^{\beta(\epsilon_k-\mu)n_k}}
+\end{align}
 
 \subsection{Maximum entropy of random variable}
 A random variable has $l$ discrete outcomes with their own respective probabilities. Since the probabilities are independent, we can find the information entropy
@@ -313,6 +323,37 @@ This also matches to the principle of maximum entropy, which states that
 The least-informative default is clearly when all probabilities are equal.
 
 \subsection{Entropy of fermi gas}
-
+We will now find the entropy of the gas discussed in exercises 4.1 and 4.2. Recall the average occupation number
+\begin{equation}
+\langle n_k\rangle = \frac{1}{e^{\beta(\epsilon_k-\mu)}+1}=\frac{n_k}{g_k}
+\label{entropy}
+\end{equation}
+where $n_k$ is the total number of particles and $g_k$ is the... WRITE HERE
+A fermi gas has in general a number of avaliable states given by
+\begin{equation}
+W=\prod_k\frac{g_k!}{n_k!(g_k-n_k)!}.
+\end{equation}
+We can then find the (Boltzmann) entropy by
+\begin{align}
+S&=k\log W\\
+&=k\sum_k\log\bigg(\frac{g_k!}{n_k!(g_k-n_k)!}\bigg)\\
+&=k\sum_kg_k\bigg(\log g_k-\frac{n_k}{g_k}\log n_k-\Big(1-\frac{n_k}{g_k}\Big)\Big(\log g_k + log\big(1-\frac{n_k}{g_k}\big)\Big)\bigg)\\
+&=k\sum_kg_k\Big(-\langle n_k\rangle\log\langle n_k\rangle+\big(1-\langle n_k\rangle\big)\log\big(1-\langle n_k\rangle\big)\Big)
+\end{align}
+where Sterling's approximation is applied. The avergae occupation number from equation [\ref{entropy}] can now be inserted, and we get
+\begin{equation*}
+S=k\sum_kg_k\bigg(\log(e^{-\beta(\epsilon_k-\mu)}+1)+\frac{\log(e^{\beta(\epsilon_k-\mu)}+1)-\log(e^{-\beta(\epsilon_k-\mu)}+1)}{e^{\beta(\epsilon_k -\mu)}+1}\bigg)
+\end{equation*}
+For the low-temperature limit some terms vanish and we are left with
+\begin{equation}
+\lim_{T\rightarrow 0}S=\frac{\log(e^{\beta(\epsilon_k-\mu)}+1)}{e^{\beta(\epsilon_k -\mu)}}
+\end{equation}
+which is a "$\infty/\infty$-expression". We solve it by L'Hôpital's rule:
+\begin{align}
+\lim_{T\rightarrow 0}S&=\frac{\frac{d}{dT}\log(e^{\beta(\epsilon_k-\mu)}+1)}{\frac{d}{dT}e^{\beta(\epsilon_k -\mu)}}\\
+&=\frac{(e^{\beta(\epsilon_k-\mu)}+1)^{-1}\cdot\big(-\frac{1}{kT^2}(\epsilon_k-\mu)\big)e^{\beta(\epsilon_k-\mu)}}{\big(-\frac{1}{kT^2}(\epsilon_k-\mu)\big)e^{\beta(\epsilon_k-\mu)}}\\
+&=\frac{1}{e^{\beta(\epsilon_k-\mu)}+1}
+\end{align}
+which again is the Fermi-Dirac distribution.
 
 \end{document}
