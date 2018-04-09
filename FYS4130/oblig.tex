@@ -258,13 +258,19 @@ Again this is results is found from the one particle partition function, but it 
 In this problem we study a non-interacting fermi gas with chemical potential $\mu$. The particle states are given by the vector $\vec{k}$, which is $d$-dimensional where $d$ is number of spatial dimensions, and the corresponding energy is $\epsilon(\vec{k})$.
 
 \subsection{Joint probability}
-The joint probability of finding a particle in a state given by the occupation numbers $\{n_{\vec{k}}\}$ is given by the general probability statement in a grand canonical ensemble
+The joint probability of finding a particle in a state given by the occupation numbers $\{n_{\vec{k}}\}$ is given by a product of the general probability statement in a grand canonical ensemble (hence joint),
 \begin{equation}
-P(\{n_{k}\})=\frac{e^{-\beta n_k(\epsilon_k-\mu)}}{\Xi}
+P(\{n_{k}\})=\frac{\prod_ke^{-\beta n_k(\epsilon_k-\mu)}}{\Xi},
 \end{equation}
 where $\Xi$ is the grand canonical partition function, given by
+\begin{align}
+\Xi&=\sum_{\{n_k\}}\prod_k\exp\big(-\beta(\epsilon_k-\mu)n_k\big)\\
+&=\prod_k\sum_{n_k=0}^1\exp\big(-\beta(\epsilon_k-\mu)n_k\big)\\
+&=\prod_k\Big(1+\exp\big(-\beta(\epsilon_k-\mu)\big)\Big)
+\end{align}
+since we only can have 0 or 1 fermion in each energy state according to the Pauli principle. 
 \begin{equation}
-\Xi
+P(\{n_{k}\})=\frac{\prod_ke^{-\beta n_k(\epsilon_k-\mu)}}{\prod_k\big(1+e^{-\beta(\epsilon_k-\mu)}\big)}=\prod_k\frac{e^{\beta n_k(\mu-\epsilon_k)}}{1+e^{\beta(\mu-\epsilon_k)}}
 \end{equation}
 
 \subsection{}
@@ -273,8 +279,11 @@ where $\Xi$ is the grand canonical partition function, given by
 A random variable has $l$ discrete outcomes with their own respective probabilities. Since the probabilities are independent, we can find the information entropy
 \begin{equation}
 S=H(p_1,\hdots,p_n)=-\sum_{n=1}^lp_n\log p_n
+\label{entropy}
 \end{equation}
-where $p_i$ is the probability of outcome $i$. We cannot find the exact entropy without knowing the probabilities, but we can find which probabilities that give maximum entropy.
+where $p_i$ is the probability of outcome $i$. We cannot find the exact entropy without knowing the probabilities, but we can find which probabilities that give maximum entropy. 
+
+This also corresponds to the principle of maximum entropy, 
 
 \subsection{Entropy of fermi gas}
 
