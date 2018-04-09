@@ -10,6 +10,7 @@
 \usepackage{color}
 \usepackage{listings}
 \usepackage{hyperref}
+\usepackage{csquotes}
 
 \lstset{language=c++}
 \lstset{basicstyle=\small}
@@ -281,9 +282,35 @@ A random variable has $l$ discrete outcomes with their own respective probabilit
 S=H(p_1,\hdots,p_n)=-\sum_{n=1}^lp_n\log p_n
 \label{entropy}
 \end{equation}
-where $p_i$ is the probability of outcome $i$. We cannot find the exact entropy without knowing the probabilities, but we can find which probabilities that give maximum entropy. 
-
-This also corresponds to the principle of maximum entropy, 
+where $p_i$ is the probability of outcome $i$. We cannot find the exact entropy without knowing the probabilities, but we can find which probabilities that give maximum entropy. For this we use Lagrange multipliers with the normalization condition as the constraint,
+\begin{equation}
+\sum_{n=1}^Lp_n=1\quad\Rightarrow\quad G(p_1,\hdots,p_l)=\sum_{n=1}^Lp_n-1=0.
+\end{equation}
+The Lagrangian is thus given by
+\begin{align}
+{\cal L}(p_1,\hdots,p_l,\lambda)&=H(p_1,\hdots,p_l)+\lambda\cdot G(p_1, \hdots,p_l)\\
+&=-\sum_{n=1}^lp_n\log p_n + \lambda\Big(\sum_{n=1}^lp_n-1\Big)
+\end{align}
+which we maximize to find the maximum entropy. The gradient with respect to all variables is
+\begin{equation}
+\nabla_{p_1,\hdots,p_l,\lambda}{\cal L}(p_1,\hdots,p_l,\lambda)=\bigg(\frac{\partial {\cal L}}{\partial p_1},\hdots,\frac{\partial {\cal L}}{\partial p_l},\frac{\partial {\cal L}}{\partial \lambda}\bigg)
+\end{equation}
+\begin{equation}
+\frac{\partial {\cal L}}{\partial p_j}=-\log p_j-1+\lambda,\quad\quad\quad \frac{\partial {\cal L}}{\partial \lambda}=\sum_{n=1}^lp_n-1
+\end{equation}
+which is maximized when $\nabla{\cal L}=\vec{0}$. This occur when 
+\begin{equation}
+p_j=e^{\lambda-1}=\frac{1}{l}=P
+\end{equation}
+such that all probabilities are equal and $P=1/l$ due to the normalization. The information entropy is therefore maximized as
+\begin{equation}
+S=-lP\log P=\log l
+\end{equation}
+This also matches to the principle of maximum entropy, which states that
+\begin{displayquote}
+"If nothing is known about a distribution except that it belongs to a certain class, then the distribution with the largest entropy should be chosen as the least-informative default".
+\end{displayquote}
+The least-informative default is clearly when all probabilities are equal.
 
 \subsection{Entropy of fermi gas}
 
