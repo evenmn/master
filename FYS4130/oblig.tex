@@ -133,9 +133,34 @@ When $T\rightarrow 0$ all the sites will have energy $-\epsilon$, and we will no
 
 \newpage
 \section{ELECTRON GAS IN A MAGNETIC FIELD}
-Here we study a ...
+Here we study an electron gas in a magnetic field, where each particular electron has energy $\varepsilon_T=\varepsilon\mp\mu_BH$ depending on whether its magnetic moment is parallel or antiparallel to the field. $\varepsilon_T$ is the total energy of an electron, $\varepsilon$ is its kinetic energy and $\mu_BH$ is the magnetic energy. 
 
-\subsection{}
+\subsection{Average number of particles}
+For continuous energies, the average number of fermions with infinitesimal energy $d\varepsilon$ is
+\begin{equation}
+dN(\varepsilon)=g(\varepsilon)\bar{n}(\varepsilon_T)d\varepsilon
+\end{equation}
+and the average total number of particles is 
+\begin{equation}
+\langle N\rangle=\int_0^{\infty}d\varepsilon g(\varepsilon)\bar{n}(\varepsilon_T).
+\end{equation}
+Notice that the density function $g(\varepsilon)$ takes the kinetic energy, while the distribution function $\bar{n}(\varepsilon_T)$ takes the total energy. The electrons are Fermi-Dirac distributed and in our case the density of states is
+$g(\varepsilon)=AV\varepsilon^{1/2}$ with $A=(2/\sqrt{\pi})(2\pi m/\hbar^2)^{3/2}$, such that 
+\begin{equation}
+\langle N\rangle=AV\int_0^{\infty}d\varepsilon\frac{\varepsilon^{1/2}}{e^{\beta(\varepsilon_T-\mu)+1}}.
+\end{equation}
+When inserting for the total energy, we need to seperate the average depending on whether the magnetic energy is positive or negative. We get
+\begin{equation}
+\langle N_{\pm}\rangle=AV\int_0^{\infty}d\varepsilon\frac{\varepsilon^{1/2}}{e^{\beta(\varepsilon\mp\mu_BH-\mu)+1}}
+\end{equation}
+where we can define $x=\mu\pm\mu_BH$. The integral is quite tricky, but we can express it in terms of the Sommerfeld expansion:
+\begin{equation}
+\int_0^{\infty}d\varepsilon\frac{\varepsilon^{1/2}}{e^{\beta(\varepsilon-x)+1}}\cong\frac{2}{3}x^{3/2}+\frac{\pi^2}{12}(kT)^2x^{-1/2}+\hdots
+\end{equation}
+shown in the appendix. We are left with
+\begin{equation}
+\langle N_{\pm}\rangle=\frac{2V}{\sqrt{\pi}}\bigg(\frac{2\pi m}{\hbar^2}\bigg)^{3/2}\bigg(\frac{2}{3}(\mu\pm\mu_BH)^{3/2}+\frac{\pi^2}{12}(kT)^2(\mu\pm\mu_BH)^{-1/2}\bigg)
+\end{equation}
 
 \newpage
 \section{QUANTUM COULOMB GAS}
@@ -350,10 +375,10 @@ For the low-temperature limit some terms vanish and we are left with
 \end{equation}
 which is a "$\infty/\infty$-expression". We solve it by L'Hôpital's rule:
 \begin{align}
-\lim_{T\rightarrow 0}S&=\frac{\frac{d}{dT}\log(e^{\beta(\epsilon_k-\mu)}+1)}{\frac{d}{dT}e^{\beta(\epsilon_k -\mu)}}\\
-&=\frac{(e^{\beta(\epsilon_k-\mu)}+1)^{-1}\cdot\big(-\frac{1}{kT^2}(\epsilon_k-\mu)\big)e^{\beta(\epsilon_k-\mu)}}{\big(-\frac{1}{kT^2}(\epsilon_k-\mu)\big)e^{\beta(\epsilon_k-\mu)}}\\
-&=\frac{1}{e^{\beta(\epsilon_k-\mu)}+1}
+\lim_{T\rightarrow 0}S&=k\sum_kg_k\frac{\frac{d}{dT}\log(e^{\beta(\epsilon_k-\mu)}+1)}{\frac{d}{dT}e^{\beta(\epsilon_k -\mu)}}\\
+&=k\sum_kg_k\frac{(e^{\beta(\epsilon_k-\mu)}+1)^{-1}\cdot\big(-\frac{1}{kT^2}(\epsilon_k-\mu)\big)e^{\beta(\epsilon_k-\mu)}}{\big(-\frac{1}{kT^2}(\epsilon_k-\mu)\big)e^{\beta(\epsilon_k-\mu)}}\\
+&=k\sum_k\frac{g_k}{e^{\beta(\epsilon_k-\mu)}+1}
 \end{align}
-which again is the Fermi-Dirac distribution.
+which again is the Fermi-Dirac distribution. At zero temperature this is a step function where there are no occupied states above the Fermi energy. 
 
 \end{document}
