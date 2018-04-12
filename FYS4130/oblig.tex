@@ -65,21 +65,17 @@ P_+=\frac{e^{-\beta\epsilon}}{Z_1}=\frac{e^{-\beta\epsilon}}{e^{-\beta\epsilon}+
 respectively.
 
 \subsection{Cluster number density}
-The probability of finding a site at a specific position in a cluster of length $L$ is a function of the length and the occupation probability. For our purpose we denote the function as $n(L, P_+)$. Finding a site at a specific position in a cluster is just as probably as finding it in another cluster position, so the probability that a given site belongs to a cluster of length $L$ is 
+Here we will find the cluster number density, i.e, the probability, $P_L$, that a site belongs to a cluster of length $L$. The probability that a cluster of length $L$ occurs is the joint probability consisting of the probabilities of each site in the chain that creates the cluster,
 \begin{equation}
-P_L=Ln(L, P_+).
+n(L, P_+) = P_-^2\cdot P_+^L = (1-P_+)^2P_+^L,
 \end{equation}
-$n(L, P_+)$ gives the probability of finding $L$ sites at energy $\epsilon$ and two sites at energy $-\epsilon$, 
-\begin{equation}
-n(L, P_+) = P_-^2\cdot P_+^L = (1-P_+)^2P_+^L
-\end{equation}
-because the site to the left of the cluster has energy $-\epsilon$ and so for the site to the right. We obtain 
+because the site to the left of the cluster has energy $-\epsilon$ and so for the site to the right. This is also the probability that a site is at a specific position in the cluster, and since that can happen in $L$ ways, we obtain 
 \begin{equation}
 P_L=L(1-P_+)^2P_+^L=L\bigg(\frac{e^{\beta\epsilon}}{e^{-\beta\epsilon}+e^{\beta\epsilon}}\bigg)^2\bigg(\frac{e^{-\beta\epsilon}}{e^{-\beta\epsilon}+e^{\beta\epsilon}}\bigg)^L
 \end{equation}
 
 \subsection{Normalization of the cluster number density}
-We will now ensure that the sum over all cluster probabilities $P_L$ is $P_+$, which is a criteria since the probability of finding a site in a cluster of any size should be $P_+$. 
+We will now ensure that the sum over all cluster probabilities $P_L$ is $P_+$, which is a criterion since the probability of finding a site in a cluster of any size should be $P_+$. 
 \begin{equation}
 \sum_{L=1}^{\infty}P_L=\sum_{L=1}^{\infty}L(1-P_+)^2P_+^L=(1-P_+)^2P_+\sum_{L=1}^{\infty}LP_+^{L-1}
 \label{PL}
@@ -88,7 +84,7 @@ where $P_+^L$ is splitted up. We will now do a trick
 \begin{equation}
 \sum_{x=1}^{\infty}xp^{x-1}=\frac{d}{dp}\sum_{x=0}^{\infty}p^x=\frac{d}{dp}\Big(\frac{1}{1-p}\Big)=\frac{1}{(1-p)^2}
 \end{equation}
-where we have used a common series. Setting back in equation [\ref{PL}], we find
+where we also have used a common series. Setting back in equation [\ref{PL}], we find
 \begin{equation}
 (1-P_+)^2P_+\frac{1}{(1-P_+)^2}=P_+
 \end{equation}
@@ -155,13 +151,19 @@ When inserting for the total energy, we need to seperate the average depending o
 \end{equation}
 where we can define $x=\mu\pm\mu_BH$. The integral is quite tricky, but we can express it in terms of the Sommerfeld expansion:
 \begin{equation}
-\int_0^{\infty}d\varepsilon\frac{\varepsilon^{1/2}}{e^{\beta(\varepsilon-x)+1}}\cong\frac{2}{3}x^{3/2}+\frac{\pi^2}{12}(kT)^2x^{-1/2}+\hdots
+\int_0^{\infty}d\varepsilon\frac{\varepsilon^{1/2}}{e^{\beta(\varepsilon-x)+1}}=\frac{2}{3}x^{3/2}+\frac{\pi^2}{12}(kT)^2x^{-1/2}+\hdots
 \end{equation}
 shown in the appendix. We are left with
 \begin{equation}
-\langle N_{\pm}\rangle=\frac{2V}{\sqrt{\pi}}\bigg(\frac{2\pi m}{\hbar^2}\bigg)^{3/2}\bigg(\frac{2}{3}(\mu\pm\mu_BH)^{3/2}+\frac{\pi^2}{12}(kT)^2(\mu\pm\mu_BH)^{-1/2}\bigg)
+\langle N_{\pm}\rangle\cong\frac{2V}{\sqrt{\pi}}\bigg(\frac{2\pi m}{\hbar^2}\bigg)^{3/2}\bigg(\frac{2}{3}(\mu\pm\mu_BH)^{3/2}+\frac{\pi^2}{12}(kT)^2(\mu\pm\mu_BH)^{-1/2}\bigg)
 \end{equation}
-MIGHT PLOT AVERAGES
+which is the average number of particles with magnetic moment parallel and antiparallel to the magnetic field at temperature T. As we can see in figure [\ref{avg}], both these averages increase rapidly when the temperature is increased, which is allowed in the grand-canonical ensemble. What is interesting is the difference we observe for really low temperatures, where we still have some electrons with magnetic moment antiparallel to the field. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=150mm]{2_1.png}
+\caption{Average number of electrons as a function of the temperature. In this plot the temperature ranges from 0 to 4, while $\mu=1.0$ and $\mu_BH=0.7$ just to get a illustration. The numbers should but be taken too serious, but the shape of the graphs should be correct. \label{avg}}
+\end{figure}
 
 \subsection{Average magnetization}
 The average magnetization is given by
@@ -173,11 +175,13 @@ The average magnetization is given by
 \frac{\pi^2}{12}(kT)^2&\Big((\mu+\mu_BH)^{-1/2}-(\mu-\mu_BH)^{-1/2}\Big)\bigg)
 \end{aligned}
 \end{align}
-inserted the expression from previous exercise. For small temperatures the second line vanishes, and we get
+inserted the expression from previous exercise. For low temperatures the second line vanishes, and we get
 
-\begin{equation}
-\langle M\rangle=\frac{2}{3}AV\mu_B\Big((\mu+\mu_BH)^{3/2}-(\mu-\mu_BH)^{3/2}\Big)
-\end{equation}
+\begin{align}
+\langle M\rangle&=\frac{2}{3}AV\mu_B\Big((\mu+\mu_BH)^{3/2}-(\mu-\mu_BH)^{3/2}\Big)\\
+&\cong2AV\mu^{1/2}\mu_B^2H
+\end{align}
+where the expression is expanded with $\mu<<\mu_BH$ as the condition.
 
 \subsection{Susceptibility}
 The susceptibility is defined as
@@ -185,9 +189,9 @@ The susceptibility is defined as
 \chi=\lim_{H\rightarrow0}\frac{\partial \langle M\rangle}{\partial H}
 \end{equation}
 which can now be found. The partial derivative is
-\begin{equation}
-\frac{\partial \langle M\rangle}{\partial H}=AV\mu_B^2\bigg((\mu+\mu_BH)^{1/2}+(\mu-\mu_BH)^{1/2}-\frac{\pi^2}{24}(kT)^2\Big((\mu+\mu_BH)^{-3/2} + (\mu-\mu_BH)^{-3/2}\Big)\bigg)
-\end{equation}
+\begin{align}
+\frac{\partial \langle M\rangle}{\partial H}=AV\mu_B^2\bigg(&(\mu+\mu_BH)^{1/2}+(\mu-\mu_BH)^{1/2}\notag\\-\frac{\pi^2}{24}(kT)^2\Big(&(\mu+\mu_BH)^{-3/2} + (\mu-\mu_BH)^{-3/2}\Big)\bigg)
+\end{align}
 and when we take the limit $\lim_{H\rightarrow 0}$ we get
 \begin{align}
 \chi&=AV\mu_B^2\bigg(2\mu^{1/2}-\frac{\pi^2}{24}(kT)^2\cdot2\mu^{-3/2}\bigg)\\
@@ -195,9 +199,9 @@ and when we take the limit $\lim_{H\rightarrow 0}$ we get
 \end{align}
 For low temperatures the second term vanishes, and we get
 \begin{equation}
-\lim_{T\rightarrow 0}\chi=2AV\mu_B^2\mu^{1/2}.
+\lim_{T\rightarrow 0}\chi=2AV\mu^{1/2}\mu_B^2.
 \end{equation}
-
+Firstly we observe that its positive, which is expected when we deal with a paramagnet. From figure [\ref{avg}] we know that we should only have electrons with magnetic moment antiparallel to the field at zero temperature, which causes this positive sign. Secondly this result is consistent with the expansion in the previous exercise.
 
 \newpage
 \section{QUANTUM COULOMB GAS}
@@ -251,7 +255,7 @@ Z_1=\sum_{n=0}^{\infty}e^{-\beta\epsilon_n(L)}
 \end{equation}
 which in three dimensions is given by
 \begin{align}
-Z_1(V,T)&=\sum_{n_x,n_y,n_z=0}^{\infty}\exp{\big(-\beta\epsilon_{n_x}(L)\epsilon_{n_y}(L)\epsilon_{n_z}(L)}\big)\\
+Z_1(V,T)&=\sum_{n_x,n_y,n_z=0}^{\infty}\exp{\big(-\beta^3\epsilon_{n_x}(L)\epsilon_{n_y}(L)\epsilon_{n_z}(L)}\big)\\
 &=\sum_{n_x,n_y,n_z=0}^{\infty}\exp\Big({-\frac{\epsilon_{n_x}(1)\epsilon_{n_y}(1)\epsilon_{n_z}(1)}{k^3T^3L^3}}\Big).
 \end{align}
 Since $L^3=V$, the one particle partition function is a function of $VT^3$. The total partition function is given by 
@@ -390,8 +394,7 @@ We will now find the entropy of the gas discussed in exercises 4.1 and 4.2. Reca
 \langle n_k\rangle = \frac{1}{e^{\beta(\epsilon_k-\mu)}+1}=\frac{n_k}{g_k}
 \label{entropy}
 \end{equation}
-where $n_k$ is the total number of particles and $g_k$ is the... WRITE HERE
-A fermi gas has in general a number of avaliable states given by
+where $n_k$ is the total number of particles and $g_k$ is the density function. A fermi gas has in general a number of avaliable states given by
 \begin{equation}
 W=\prod_k\frac{g_k!}{n_k!(g_k-n_k)!}.
 \end{equation}
@@ -399,10 +402,10 @@ We can then find the (Boltzmann) entropy by
 \begin{align}
 S&=k\log W\\
 &=k\sum_k\log\bigg(\frac{g_k!}{n_k!(g_k-n_k)!}\bigg)\\
-&=k\sum_kg_k\bigg(\log g_k-\frac{n_k}{g_k}\log n_k-\Big(1-\frac{n_k}{g_k}\Big)\Big(\log g_k + log\big(1-\frac{n_k}{g_k}\big)\Big)\bigg)\\
+&=k\sum_kg_k\bigg(\log g_k-\frac{n_k}{g_k}\log n_k-\Big(1-\frac{n_k}{g_k}\Big)\Big(\log g_k + \log\big(1-\frac{n_k}{g_k}\big)\Big)\bigg)\\
 &=k\sum_kg_k\Big(-\langle n_k\rangle\log\langle n_k\rangle+\big(1-\langle n_k\rangle\big)\log\big(1-\langle n_k\rangle\big)\Big)
 \end{align}
-where Sterling's approximation is applied. The avergae occupation number from equation [\ref{entropy}] can now be inserted, and we get
+where Sterling's approximation is applied. The average occupation number from equation [\ref{entropy}] can now be inserted, and we get
 \begin{equation*}
 S=k\sum_kg_k\bigg(\log(e^{-\beta(\epsilon_k-\mu)}+1)+\frac{\log(e^{\beta(\epsilon_k-\mu)}+1)-\log(e^{-\beta(\epsilon_k-\mu)}+1)}{e^{\beta(\epsilon_k -\mu)}+1}\bigg)
 \end{equation*}
