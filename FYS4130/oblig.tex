@@ -248,8 +248,8 @@ which is the scaling of the first term of the Hamiltonian. The second term is sc
 \end{equation}
 where the scaled energy is a function of 1 since the length scale now is 1, such that $\epsilon_n(L)=\epsilon_n(1)/L$.
 
-\subsection{Collapse V + T}
-We have a fixed number of particles and the energy cna fluctuate, so we are in the canonical ensemble. The one particle partition function is given by
+\subsection{Connection between $V$ and $T^3$}
+We have a fixed number of particles and the energy can fluctuate, so we are in the canonical ensemble. The one particle partition function is given by
 \begin{equation}
 Z_1=\sum_{n=0}^{\infty}e^{-\beta\epsilon_n(L)}
 \end{equation}
@@ -287,7 +287,7 @@ such that they are related through the partition function. We use the same parti
 \frac{\partial Z}{\partial \beta}&=-3\frac{\beta^2\epsilon_{n_{\boldsymbol{k}}}(1)}{V}Z\\
 \frac{\partial Z}{\partial V}&=\frac{\beta^3\epsilon_{n_{\boldsymbol{k}}}(1)}{V^2}Z.
 \end{align}
-The energy then reads
+where $\epsilon_{n_{\boldsymbol{k}}}(1)\equiv\epsilon_{n_x}(1)\epsilon_{n_y}(1)\epsilon_{n_z}(1)$. The energy then reads
 \begin{equation}
 E=3\frac{\beta^2\epsilon_{n_{\boldsymbol{k}}}(1)}{V}=3kT\frac{\beta^3\epsilon_{n_{\boldsymbol{k}}}(1)}{V^2}V=3PV.
 \end{equation}
@@ -419,6 +419,33 @@ which is a "$\infty/\infty$-expression". We solve it by L'Hôpital's rule:
 &=k\sum_kg_k\frac{(e^{\beta(\epsilon_k-\mu)}+1)^{-1}\cdot\big(-\frac{1}{kT^2}(\epsilon_k-\mu)\big)e^{\beta(\epsilon_k-\mu)}}{\big(-\frac{1}{kT^2}(\epsilon_k-\mu)\big)e^{\beta(\epsilon_k-\mu)}}\\
 &=k\sum_k\frac{g_k}{e^{\beta(\epsilon_k-\mu)}+1}
 \end{align}
-which again is the Fermi-Dirac distribution. At zero temperature this is a step function where there are no occupied states above the Fermi energy. 
+which is the average number of fermions times Boltzmann's constant. At zero temperature the energy levels are fully occupied up to the Fermi energy, and the distribution becomes a step function. 
 
+\newpage
+\section{Appendix}
+In this appendix we will study how to express the integral
+\begin{equation}
+\int_0^{\infty}d\varepsilon\frac{\varepsilon^{1/2}}{e^{\beta(\varepsilon-x)}+1}
+\end{equation}
+in terms of the Sommerfeld expansion. This is what we used in section 2. We start rewriting the Fermi-Dirac distribution as
+\begin{equation}
+\bar{n}(\epsilon)=\frac{1}{2}-\frac{1}{2}\tanh\big(\beta(\varepsilon-x)/2\big)
+\end{equation}
+which turns the integral into
+\begin{equation}
+\int_0^{\infty}d\varepsilon\varepsilon^{1/2}\bigg(\frac{1}{2}-\frac{1}{2}\tanh\big(\beta(\varepsilon-x)/2\big)\bigg).
+\end{equation}
+Thereafter we integrate by parts, and since
+\begin{equation}
+\bar{n}'(\varepsilon)=-\frac{\beta}{4}\frac{1}{\cosh^2\big(\beta(\varepsilon-x)/2\big)},
+\end{equation}
+the integral now goes like
+\begin{equation}
+\int_0^{\infty}d\varepsilon\bigg(\frac{2}{3}\varepsilon^{3/2}\frac{\beta}{4}\frac{1}{\cosh^2\big(\beta(\varepsilon-x)/2\big)}\bigg)
+\end{equation}
+where the constant term from integration by parts disappeared due to symmetry. The next step is to evaluate this integral around $\epsilon=x$, getting
+\begin{equation}
+\int_0^{\infty}d\varepsilon\frac{\varepsilon^{1/2}}{e^{\beta(\varepsilon-x)}+1}\cong x^{3/2}\bigg[1+\frac{\pi^2}{8}\Big(\frac{kT}{x}\Big)^2+\hdots\bigg]
+\end{equation}
+where the Sommerfeld expansion is applied, including the two largest terms. For further reading see compendium p.118.
 \end{document}
