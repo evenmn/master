@@ -166,14 +166,38 @@ MIGHT PLOT AVERAGES
 \subsection{Average magnetization}
 The average magnetization is given by
 \begin{align}
-\langle M\rangle&=\mu_B(\langle N_-\rangle-\langle N_+\rangle)\\
+\langle M\rangle&=\mu_B(\langle N_+\rangle-\langle N_-\rangle)\\
 &
 \begin{aligned}
-=AV\mu_B\bigg(\frac{2}{3}&\Big((\mu-\mu_BH)^{3/2}-(\mu+\mu_BH)^{3/2}\Big)+\\
-\frac{\pi^2}{12}(kT)^2&\Big((\mu-\mu_BH)^{-1/2}-(\mu+\mu_BH)^{-1/2}\Big)\bigg)
+=AV\mu_B\bigg(\frac{2}{3}&\Big((\mu+\mu_BH)^{3/2}-(\mu-\mu_BH)^{3/2}\Big)+\\
+\frac{\pi^2}{12}(kT)^2&\Big((\mu+\mu_BH)^{-1/2}-(\mu-\mu_BH)^{-1/2}\Big)\bigg)
 \end{aligned}
 \end{align}
-inserted the expression from previous exercise. For small temperatures the second line vanishes, and 
+inserted the expression from previous exercise. For small temperatures the second line vanishes, and we get
+
+\begin{equation}
+\langle M\rangle=\frac{2}{3}AV\mu_B\Big((\mu+\mu_BH)^{3/2}-(\mu-\mu_BH)^{3/2}\Big)
+\end{equation}
+
+\subsection{Susceptibility}
+The susceptibility is defined as
+\begin{equation}
+\chi=\lim_{H\rightarrow0}\frac{\partial \langle M\rangle}{\partial H}
+\end{equation}
+which can now be found. The partial derivative is
+\begin{equation}
+\frac{\partial \langle M\rangle}{\partial H}=AV\mu_B^2\bigg((\mu+\mu_BH)^{1/2}+(\mu-\mu_BH)^{1/2}-\frac{\pi^2}{24}(kT)^2\Big((\mu+\mu_BH)^{-3/2} + (\mu-\mu_BH)^{-3/2}\Big)\bigg)
+\end{equation}
+and when we take the limit $\lim_{H\rightarrow 0}$ we get
+\begin{align}
+\chi&=AV\mu_B^2\bigg(2\mu^{1/2}-\frac{\pi^2}{24}(kT)^2\cdot2\mu^{-3/2}\bigg)\\
+&=2AV\mu_B^2\mu^{1/2}\bigg(1-\frac{\pi^2}{24}\Big(\frac{kT}{\mu}\Big)^2\bigg).
+\end{align}
+For low temperatures the second term vanishes, and we get
+\begin{equation}
+\lim_{T\rightarrow 0}\chi=2AV\mu_B^2\mu^{1/2}.
+\end{equation}
+
 
 \newpage
 \section{QUANTUM COULOMB GAS}
