@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-T  = 1000
+T  = 10000
 dt = 0.1
 dx = 0.1
 N  = int(T/dt)
